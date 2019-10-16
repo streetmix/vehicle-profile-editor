@@ -1,6 +1,6 @@
 {
-  "name": "vehicle-profile-editor",
-  "version": "0.1.0",
+  "name": "@streetmix/vehicle-profile-editor",
+  "version": "0.1.0-alpha",
   "private": true,
   "dependencies": {
     "react": "^16.10.2",
@@ -27,5 +27,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "1.18.2"
   }
 }
