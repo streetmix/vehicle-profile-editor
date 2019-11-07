@@ -221,8 +221,12 @@ function Attributes ({ sendValues = () => {} }) {
             : defaultUnit
         }
         example={exampleValue}
-        onChange={value =>
-          setValues({ ...values, [id]: Number.parseInt(value, 10) })}
+        onChange={value => {
+          const num = Number.parseFloat(value)
+          if (!Number.isNaN(num)) {
+            setValues({ ...values, [id]: Number.parseFloat(value) })
+          }
+        }}
       />
     )
   )
@@ -254,6 +258,7 @@ function App () {
                   id="presets"
                   text="Load vehicle preset (optional)"
                   icon="bookmark outline"
+                  basic
                   fluid
                   search
                   labeled

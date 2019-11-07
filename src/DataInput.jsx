@@ -25,9 +25,21 @@ function DataInput (props) {
   const id = uniqueId('data-input_')
 
   function handleChange (event) {
-    console.log(event.target.value)
     setValue(event.target.value)
     onChange(event.target.value)
+  }
+
+  /**
+   * Is the input invalid?
+   * Returns true if NaN (cannot be parsed by parseFloat) or negative value
+   * Do not return false if the value hasn't been defined yet (or is null or empty string)
+   *
+   * @param {Any} value
+   */
+  function isInvalidInput (value) {
+    if (typeof value === 'undefined' || value === null || value.trim() === '') { return false }
+    const val = Number.parseFloat(value)
+    return Number.isNaN(val) || val < 0
   }
 
   return (
@@ -36,11 +48,12 @@ function DataInput (props) {
       <Input
         id={id}
         value={value}
+        error={isInvalidInput(value)}
         label={
           typeof units === 'string' ? (
             { basic: true, content: units }
           ) : (
-            <Dropdown defaultValue={units[0].value} options={units} />
+            <Dropdown defaultValue={units[0].value} options={units} basic />
             // There is a conflicting rule below here
             // eslint-disable-next-line
           )
