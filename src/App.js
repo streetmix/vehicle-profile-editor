@@ -247,7 +247,7 @@ function App () {
         <Grid.Row columns={2}>
           <Grid.Column width={9}>
             <div className="box">
-              <div className="input-row">
+              <div className="input-row" style={{ marginBottom: '1.5em' }}>
                 <Dropdown
                   button
                   className="icon"

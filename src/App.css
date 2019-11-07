@@ -1,8 +1,8 @@
 .box {
   background-color: white;
-  border-radius: 4px;
-  border: 1px solid rgba(34, 36, 38, 0.15);
-  padding: 1em;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px 0 rgba(14, 30, 37, 0.08);
+  padding: 1.5em;
 }
 
 .App {
