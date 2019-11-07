@@ -81,7 +81,7 @@ function App () {
 
   return (
     <div className="App">
-      <Grid>
+      <Grid stackable>
         <Grid.Row columns={1}>
           <Grid.Column>
             <h1>Vehicle profile editor</h1>
@@ -96,12 +96,9 @@ function App () {
                   className="icon"
                   id="presets"
                   text="Load vehicle preset (optional)"
-                  icon="bookmark outline"
                   basic
                   fluid
                   search
-                  labeled
-                  floating
                   options={VEHICLE_PROFILES}
                   onChange={handleDropdownChange}
                 />
