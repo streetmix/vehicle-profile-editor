@@ -32,7 +32,16 @@
   "devDependencies": {
     "husky": "^3.0.9",
     "lint-staged": "^9.4.2",
-    "prettier": "1.18.2"
+    "prettier": "1.18.2",
+    "eslint": "^6.5.1",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-config-standard-react": "^9.2.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.2.0",
+    "eslint-plugin-standard": "^4.0.1"
   },
   "husky": {
     "hooks": {
@@ -40,7 +49,12 @@
     }
   },
   "lint-staged": {
-    "*.{js,css,json,md}": [
+    "*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{json,scss,css,md}": [
       "prettier --write",
       "git add"
     ]
