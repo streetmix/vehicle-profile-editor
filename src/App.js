@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Dropdown } from 'semantic-ui-react'
+import { Grid, Dropdown, Button, Icon } from 'semantic-ui-react'
 import Radar from 'react-d3-radar'
 import find from 'lodash/find'
+// import downloadSvg, { downloadPng } from 'svg-crowbar'
+import downloadSvg from 'svg-crowbar'
 import DataInput from './DataInput'
 import UNITS from './data/units.json'
 import ATTRIBUTES from './data/attributes_numo.json'
@@ -42,6 +44,14 @@ function mapValuesToLevel (values) {
 
   return levels
 }
+
+function saveSVG () {
+  downloadSvg(document.querySelector('svg'), 'vehicle_profile')
+}
+
+// function savePNG () {
+//   downloadPng(document.querySelector('svg'), 'vehicle_profile')
+// }
 
 function Attributes ({ sendValues = () => {} }) {
   const [values, setValues] = useState({})
@@ -138,6 +148,23 @@ function App () {
                   ]
                 }}
               />
+              <div style={{ textAlign: 'right' }}>
+                {/* PNG download is broken */}
+                {/* <Button primary icon labelPosition="right" onClick={savePNG}>
+                  <Icon name="download" />
+                  Save diagram as PNG
+                </Button> */}
+                <Button
+                  primary
+                  basic
+                  icon
+                  labelPosition="right"
+                  onClick={saveSVG}
+                >
+                  <Icon name="download" />
+                  Download vector image (SVG)
+                </Button>
+              </div>
             </div>
           </Grid.Column>
         </Grid.Row>
