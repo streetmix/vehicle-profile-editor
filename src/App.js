@@ -1,206 +1,46 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, Dropdown } from 'semantic-ui-react'
 import Radar from 'react-d3-radar'
+import find from 'lodash/find'
 import DataInput from './DataInput'
 import UNITS from './data/units.json'
 import ATTRIBUTES from './data/attributes_numo.json'
+import VEHICLE_PROFILES from './data/vehicle_profiles.json'
 import './App.css'
-
-const VEHICLE_PRESETS = [
-  {
-    key: 'Pedestrian: adult',
-    text: 'Pedestrian: adult',
-    value: 'Pedestrian: adult',
-    weight: 1,
-    speed: 1,
-    footprint: 1,
-    emissions: 1,
-    health: 1
-  },
-  {
-    key: 'Pedestrian: children',
-    text: 'Pedestrian: children',
-    value: 'Pedestrian: children',
-    weight: 1,
-    speed: 1,
-    footprint: 1,
-    emissions: 1,
-    health: 1
-  },
-  {
-    key: 'Automobile: SUV',
-    text: 'Automobile: SUV',
-    value: 'Automobile: SUV',
-    weight: 3,
-    speed: 4,
-    footprint: 4,
-    emissions: 4,
-    health: 4
-  },
-  {
-    key: 'Automobile: compact',
-    text: 'Automobile: compact',
-    value: 'Automobile: compact',
-    weight: 3,
-    speed: 4,
-    footprint: 4,
-    emissions: 4,
-    health: 4
-  },
-  {
-    key: 'Automobile: luxury car',
-    text: 'Automobile: luxury car',
-    value: 'Automobile: luxury car',
-    weight: 3,
-    speed: 4,
-    footprint: 4,
-    emissions: 4,
-    health: 4
-  },
-  {
-    key: 'Automobile: Electric',
-    text: 'Automobile: Electric',
-    value: 'Automobile: Electric',
-    weight: 3,
-    speed: 4,
-    footprint: 4,
-    emissions: 1,
-    health: 4
-  },
-  {
-    key: 'Automobile: Hybrid',
-    text: 'Automobile: Hybrid',
-    value: 'Automobile: Hybrid',
-    weight: 3,
-    speed: 4,
-    footprint: 4,
-    emissions: 4,
-    health: 4
-  },
-  {
-    key: 'Ridesharing',
-    text: 'Ridesharing',
-    value: 'Ridesharing',
-    weight: 3,
-    speed: 4,
-    footprint: 4,
-    emissions: 4,
-    health: 4
-  },
-  {
-    key: 'Bicycle',
-    text: 'Bicycle',
-    value: 'Bicycle',
-    weight: 1,
-    speed: 2,
-    footprint: 2,
-    emissions: 1,
-    health: 1
-  },
-  {
-    key: 'Ebike',
-    text: 'Ebike',
-    value: 'Ebike',
-    weight: 2,
-    speed: 3,
-    footprint: 2,
-    emissions: 1,
-    health: 2
-  },
-  {
-    key: 'E-scooter',
-    text: 'E-scooter',
-    value: 'E-scooter',
-    weight: 1,
-    speed: 2,
-    footprint: 2,
-    emissions: 1,
-    health: 2
-  },
-  {
-    key: 'Bus: Diesel',
-    text: 'Bus: Diesel',
-    value: 'Bus: Diesel',
-    weight: 4,
-    speed: 4,
-    footprint: 2,
-    emissions: 4,
-    health: 2
-  },
-  {
-    key: 'Bus: Electric',
-    text: 'Bus: Electric',
-    value: 'Bus: Electric',
-    weight: 4,
-    speed: 4,
-    footprint: 2,
-    emissions: 1,
-    health: 2
-  },
-  {
-    key: 'Pogo stick',
-    text: 'Pogo stick',
-    value: 'Pogo stick',
-    weight: 1,
-    speed: 1,
-    footprint: 2,
-    emissions: 1,
-    health: 2
-  },
-  {
-    key: 'Low speed autonomous shuttles (Black Panther)',
-    text: 'Low speed autonomous shuttles (Black Panther)',
-    value: 'Low speed autonomous shuttles (Black Panther)',
-    weight: 3,
-    speed: 3,
-    footprint: 2,
-    emissions: 1,
-    health: 2
-  },
-  {
-    key: 'Aladdin’s magic carpet',
-    text: 'Aladdin’s magic carpet',
-    value: 'Aladdin’s magic carpet',
-    weight: 1,
-    speed: 4,
-    footprint: 3,
-    emissions: 1,
-    health: 4
-  },
-  {
-    key: 'Mobile lounge at Dulles',
-    text: 'Mobile lounge at Dulles',
-    value: 'Mobile lounge at Dulles',
-    weight: 4,
-    speed: 3,
-    footprint: 1,
-    emissions: 4,
-    health: 3
-  },
-  {
-    key: 'Nimbus 2000',
-    text: 'Nimbus 2000',
-    value: 'Nimbus 2000',
-    weight: 1,
-    speed: 4,
-    footprint: 2,
-    emissions: 1,
-    health: 4
-  },
-  {
-    key: 'Mars Rover',
-    text: 'Mars Rover',
-    value: 'Mars Rover',
-    weight: 3,
-    speed: 1,
-    footprint: 4,
-    emissions: 1,
-    health: 4
-  }
-]
 
 function handleDropdownChange (event) {
   console.log(event, event.nativeEvent)
+}
+
+function mapValuesToLevel (values) {
+  const levels = Object.entries(values).reduce((obj, [key, value]) => {
+    const attribute = find(ATTRIBUTES, { id: key })
+    let level = 0
+    if (attribute) {
+      const thresholds = attribute.thresholds
+      for (let i = 0; i < thresholds.length; i++) {
+        if (i === 0) {
+          // First level lower bound is inclusive
+          if (value >= thresholds[i][0] && value <= thresholds[i][1]) {
+            level = i + 1
+          }
+        } else if (i === thresholds.length - 1) {
+          // Last level does not have an upper bound
+          if (value > thresholds[i][0]) {
+            level = i + 1
+          }
+        } else {
+          if (value > thresholds[i][0] && value <= thresholds[i][1]) {
+            level = i + 1
+          }
+        }
+      }
+    }
+    obj[key] = level
+    return obj
+  }, {})
+
+  return levels
 }
 
 function Attributes ({ sendValues = () => {} }) {
@@ -236,7 +76,6 @@ function App () {
   const [values, setValues] = useState({})
 
   function sendValues (values) {
-    console.log(values)
     setValues(values)
   }
 
@@ -263,7 +102,7 @@ function App () {
                   search
                   labeled
                   floating
-                  options={VEHICLE_PRESETS}
+                  options={VEHICLE_PROFILES}
                   onChange={handleDropdownChange}
                 />
               </div>
@@ -297,7 +136,7 @@ function App () {
                     {
                       key: 'me',
                       label: 'My Scores',
-                      values
+                      values: mapValuesToLevel(values)
                     }
                   ]
                 }}

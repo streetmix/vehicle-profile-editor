@@ -6,21 +6,23 @@ import './DataInput.css'
 
 DataInput.propTypes = {
   label: PropTypes.string.isRequired,
-  example: PropTypes.string.isRequired,
-  units: PropTypes.oneOf([
+  example: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  units: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.arrayOf({
-      key: PropTypes.string,
-      text: PropTypes.string,
-      value: PropTypes.string
-    })
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.string,
+        text: PropTypes.string,
+        value: PropTypes.string
+      })
+    )
   ]).isRequired,
   onChange: PropTypes.func
 }
 
 function DataInput (props) {
   const { label, example, units, onChange = () => {} } = props
-  const [value, setValue] = useState(null)
+  const [value, setValue] = useState('')
 
   const id = uniqueId('data-input_')
 
@@ -37,7 +39,9 @@ function DataInput (props) {
    * @param {Any} value
    */
   function isInvalidInput (value) {
-    if (typeof value === 'undefined' || value === null || value.trim() === '') { return false }
+    if (typeof value === 'undefined' || value === null || value.trim() === '') {
+      return false
+    }
     const val = Number.parseFloat(value)
     return Number.isNaN(val) || val < 0
   }
