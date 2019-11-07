@@ -1,0 +1,14 @@
+{
+  "WEIGHT": [
+    { "key": "kg", "text": "kg", "value": "kg" },
+    { "key": "lb", "text": "lb", "value": "lb" }
+  ],
+  "SPEED": [
+    { "key": "km/h", "text": "km/h", "value": "km/h" },
+    { "key": "mph", "text": "mph", "value": "mph" }
+  ],
+  "AREA": [
+    { "key": "m²", "text": "m²", "value": "m²" },
+    { "key": "sq. ft.", "text": "sq. ft.", "value": "sq. ft." }
+  ]
+}

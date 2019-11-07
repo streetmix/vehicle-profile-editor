@@ -1,0 +1,53 @@
+.box .input {
+  width: 100%;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1em;
+}
+
+.input-row label {
+  margin-right: 0.5em;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  flex-basis: 40%;
+  justify-content: flex-end;
+  font-weight: bold;
+  text-align: right; /* kicks in when label is multi-line */
+}
+
+.input-row .ui.labeled.input > .label {
+  min-width: 100px;
+}
+
+.input-row .ui.dropdown > .dropdown.icon {
+  position: absolute;
+  right: 10px;
+}
+
+.input-row .ui.label.dropdown .menu {
+  margin-top: 3px;
+}
+
+.input-help {
+  /* display: none; */
+  margin-left: 1em;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 0.65em;
+  cursor: pointer;
+}
+
+.input-help i.icon {
+  margin-right: 0 !important;
+  transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
+}
+
+.input-help i.icon:hover {
+  background-color: #00b5ad;
+  color: white !important;
+}

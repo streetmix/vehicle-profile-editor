@@ -1,0 +1,45 @@
+[
+  {
+    "id": "weight",
+    "name": "Weight of vehicle and driver",
+    "description": "Total of driver and vehicle weight",
+    "definedUnits": "WEIGHT",
+    "defaultUnit": "kg",
+    "exampleValue": 1500,
+    "thresholds": [[0, 100], [100, 500], [500, 4000], [4000]]
+  },
+  {
+    "id": "speed",
+    "name": "Top speed",
+    "description": "Top speed attainable by the vehicle",
+    "definedUnits": "SPEED",
+    "defaultUnit": "km/h",
+    "exampleValue": 45,
+    "thresholds": [[0, 10], [10, 30], [30, 50], [50]]
+  },
+  {
+    "id": "footprint",
+    "name": "Footprint per max capacity",
+    "description": "footprint per person",
+    "definedUnits": "AREA",
+    "defaultUnit": "m²",
+    "exampleValue": 20,
+    "thresholds": [[0, 0.2], [0.2, 1], [1, 1.5], [1.5]]
+  },
+  {
+    "id": "emissions",
+    "name": "CO2 per max capacity",
+    "description": "co2 per person in max capacity",
+    "defaultUnit": "CO₂ g/km",
+    "exampleValue": 5,
+    "thresholds": [[0, 0], [0, 20], [20, 50], [50]]
+  },
+  {
+    "id": "health",
+    "name": "Health benefits",
+    "description": "10 minus MET",
+    "defaultUnit": "inv. MET",
+    "exampleValue": 5.6,
+    "thresholds": [[0, 5.5], [5.5, 8.5], [8.5, 8.7], [8.7]]
+  }
+]
