@@ -1,9 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import * as Sentry from '@sentry/browser'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import 'semantic-ui-css/semantic.min.css'
 import './index.css'
+
+Sentry.init({
+  dsn: 'https://9bb4132c927040928b7a43610c1bd2f4@sentry.io/1813605'
+})
 
 ReactDOM.render(<App />, document.getElementById('root'))
 
