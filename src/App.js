@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Dropdown, Button, Icon } from 'semantic-ui-react'
+import { Grid, Dropdown, Button, Icon, Input } from 'semantic-ui-react'
 import Radar from 'react-d3-radar'
 import find from 'lodash/find'
 import downloadSvg, { downloadPng } from 'svg-crowbar'
@@ -83,6 +83,7 @@ function Attributes ({ sendValues = () => {} }) {
 
 function App () {
   const [values, setValues] = useState({})
+  const [name, setName] = useState('')
 
   function sendValues (values) {
     setValues(values)
@@ -110,6 +111,18 @@ function App () {
                   search
                   options={VEHICLE_PROFILES}
                   onChange={handleDropdownChange}
+                  style={{
+                    margin: 0 /* Override a right margin from Semantic-UI */
+                  }}
+                />
+              </div>
+              <div className="input-row">
+                <label htmlFor="input-name">Vehicle name (optional)</label>
+                <Input
+                  id="input-name"
+                  value={name}
+                  placeholder="My vehicle"
+                  onChange={event => setName(event.target.value)}
                 />
               </div>
               <Attributes sendValues={sendValues} />

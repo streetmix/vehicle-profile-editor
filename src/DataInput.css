@@ -1,5 +1,5 @@
 .box .input {
-  width: 100%;
+  flex-grow: 1;
 }
 
 .input-row {
@@ -13,10 +13,16 @@
   display: inline-flex;
   flex-direction: row;
   align-items: center;
-  flex-basis: 40%;
+  flex-basis: 120px;
   justify-content: flex-end;
   font-weight: bold;
   text-align: right; /* kicks in when label is multi-line */
+  line-height: 1.2;
+}
+
+/* Help align inputs better at mid-size viewport width */
+.input-row .ui.input > input {
+  width: 120px;
 }
 
 .input-row .ui.labeled.input > .label {
@@ -29,21 +35,46 @@
 }
 
 .input-help {
-  /* display: none; */
-  margin-left: 1em;
   display: inline-flex;
   flex-direction: row;
+  flex-basis: 36px;
   align-items: center;
+  justify-content: center;
   font-size: 0.65em;
-  cursor: pointer;
 }
 
 .input-help i.icon {
   margin-right: 0 !important;
   transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
+  cursor: pointer;
 }
 
 .input-help i.icon:hover {
   background-color: #00b5ad;
   color: white !important;
+}
+
+@media only screen and (max-width: 500px) {
+  .input-row {
+    display: block;
+    position: relative;
+  }
+
+  .input-row label {
+    width: 100%;
+    display: block;
+    text-align: left;
+    margin-bottom: 0.25em;
+    padding-right: 40px;
+  }
+
+  .ui.input {
+    width: 100%;
+  }
+
+  .input-help {
+    position: absolute;
+    top: 0;
+    right: 2px;
+  }
 }
