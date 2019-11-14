@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Grid, Dropdown, Button, Icon, Input } from 'semantic-ui-react'
 import Radar from 'react-d3-radar'
 import find from 'lodash/find'
@@ -8,10 +8,6 @@ import UNITS from './data/units.json'
 import ATTRIBUTES from './data/attributes_numo.json'
 import VEHICLE_PROFILES from './data/vehicle_profiles.json'
 import './App.css'
-
-function handleDropdownChange (event) {
-  console.log(event, event.nativeEvent)
-}
 
 function mapValuesToLevel (values) {
   const levels = Object.entries(values).reduce((obj, [key, value]) => {
@@ -52,13 +48,7 @@ function savePNG () {
   downloadPng(document.querySelector('svg'), 'vehicle_profile')
 }
 
-function Attributes ({ sendValues = () => {} }) {
-  const [values, setValues] = useState({})
-
-  useEffect(() => {
-    sendValues(values)
-  }, [values, sendValues])
-
+function Attributes ({ values, sendValues = () => {} }) {
   return ATTRIBUTES.map(
     ({ id, name, description, definedUnits, defaultUnit, exampleValue }) => (
       <DataInput
@@ -69,12 +59,10 @@ function Attributes ({ sendValues = () => {} }) {
             ? UNITS[definedUnits]
             : defaultUnit
         }
+        value={values[id]}
         example={exampleValue}
         onChange={value => {
-          const num = Number.parseFloat(value)
-          if (!Number.isNaN(num)) {
-            setValues({ ...values, [id]: Number.parseFloat(value) })
-          }
+          sendValues({ ...values, [id]: value })
         }}
       />
     )
@@ -87,6 +75,12 @@ function App () {
 
   function sendValues (values) {
     setValues(values)
+  }
+
+  function handleDropdownChange (event, data) {
+    const vehicle = find(VEHICLE_PROFILES, { value: data.value })
+    setValues(vehicle.attributes)
+    setName(vehicle.text)
   }
 
   return (
@@ -102,13 +96,12 @@ function App () {
             <div className="box">
               <div className="input-row" style={{ marginBottom: '1.5em' }}>
                 <Dropdown
-                  button
                   className="icon"
                   id="presets"
-                  text="Load vehicle preset (optional)"
-                  basic
+                  placeholder="Load vehicle preset (optional)"
                   fluid
                   search
+                  selection
                   options={VEHICLE_PROFILES}
                   onChange={handleDropdownChange}
                   style={{
@@ -125,7 +118,7 @@ function App () {
                   onChange={event => setName(event.target.value)}
                 />
               </div>
-              <Attributes sendValues={sendValues} />
+              <Attributes values={values} sendValues={sendValues} />
             </div>
           </Grid.Column>
           <Grid.Column width={7}>

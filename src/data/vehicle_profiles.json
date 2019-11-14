@@ -3,190 +3,228 @@
     "key": "Pedestrian: adult",
     "text": "Pedestrian: adult",
     "value": "Pedestrian: adult",
-    "weight": 88,
-    "speed": 9,
-    "footprint": 0,
-    "emissions": 0,
-    "health": 5.39
+    "attributes": {
+      "weight": 88,
+      "speed": 9,
+      "footprint": 0,
+      "emissions": 0,
+      "health": 5.39
+    }
   },
   {
     "key": "Pedestrian: children",
     "text": "Pedestrian: children",
     "value": "Pedestrian: children",
-    "weight": 32,
-    "speed": 5,
-    "footprint": 0,
-    "emissions": 0,
-    "health": 5.39
+    "attributes": {
+      "weight": 32,
+      "speed": 5,
+      "footprint": 0,
+      "emissions": 0,
+      "health": 5.39
+    }
   },
   {
     "key": "Automobile: SUV",
     "text": "Automobile: SUV",
     "value": "Automobile: SUV",
-    "weight": 1789,
-    "speed": 200,
-    "footprint": 2,
-    "emissions": 36,
-    "health": 8.72
+    "attributes": {
+      "weight": 1789,
+      "speed": 200,
+      "footprint": 2,
+      "emissions": 36,
+      "health": 8.72
+    }
   },
   {
     "key": "Automobile: compact",
     "text": "Automobile: compact",
     "value": "Automobile: compact",
-    "weight": 1676,
-    "speed": 214,
-    "footprint": 2,
-    "emissions": 18,
-    "health": 8.72
+    "attributes": {
+      "weight": 1676,
+      "speed": 214,
+      "footprint": 2,
+      "emissions": 18,
+      "health": 8.72
+    }
   },
   {
     "key": "Automobile: luxury car",
     "text": "Automobile: luxury car",
     "value": "Automobile: luxury car",
-    "weight": 2129,
-    "speed": 200,
-    "footprint": 2,
-    "emissions": 28,
-    "health": 8.72
+    "attributes": {
+      "weight": 2129,
+      "speed": 200,
+      "footprint": 2,
+      "emissions": 28,
+      "health": 8.72
+    }
   },
   {
     "key": "Automobile: Electric",
     "text": "Automobile: Electric",
     "value": "Automobile: Electric",
-    "weight": 2016,
-    "speed": 209,
-    "footprint": 2,
-    "emissions": 0,
-    "health": 8.72
+    "attributes": {
+      "weight": 2016,
+      "speed": 209,
+      "footprint": 2,
+      "emissions": 0,
+      "health": 8.72
+    }
   },
   {
     "key": "Automobile: Hybrid",
     "text": "Automobile: Hybrid",
     "value": "Automobile: Hybrid",
-    "weight": 1619,
-    "speed": 180,
-    "footprint": 2,
-    "emissions": 15,
-    "health": 8.72
+    "attributes": {
+      "weight": 1619,
+      "speed": 180,
+      "footprint": 2,
+      "emissions": 15,
+      "health": 8.72
+    }
   },
   {
     "key": "Ridesharing",
     "text": "Ridesharing",
     "value": "Ridesharing",
-    "weight": 1676,
-    "speed": 187,
-    "footprint": 2,
-    "emissions": 33,
-    "health": 8.72
+    "attributes": {
+      "weight": 1676,
+      "speed": 187,
+      "footprint": 2,
+      "emissions": 33,
+      "health": 8.72
+    }
   },
   {
     "key": "Bicycle",
     "text": "Bicycle",
     "value": "Bicycle",
-    "weight": 98,
-    "speed": 24,
-    "footprint": 1,
-    "emissions": 0,
-    "health": 3.56
+    "attributes": {
+      "weight": 98,
+      "speed": 24,
+      "footprint": 1,
+      "emissions": 0,
+      "health": 3.56
+    }
   },
   {
     "key": "Ebike",
     "text": "Ebike",
     "value": "Ebike",
-    "weight": 106,
-    "speed": 45,
-    "footprint": 1,
-    "emissions": 0,
-    "health": 6
+    "attributes": {
+      "weight": 106,
+      "speed": 45,
+      "footprint": 1,
+      "emissions": 0,
+      "health": 6
+    }
   },
   {
     "key": "E-scooter",
     "text": "E-scooter",
     "value": "E-scooter",
-    "weight": 100,
-    "speed": 25,
-    "footprint": 0,
-    "emissions": 0,
-    "health": 8
+    "attributes": {
+      "weight": 100,
+      "speed": 25,
+      "footprint": 0,
+      "emissions": 0,
+      "health": 8
+    }
   },
   {
     "key": "Bus: Diesel",
     "text": "Bus: Diesel",
     "value": "Bus: Diesel",
-    "weight": 13696,
-    "speed": 145,
-    "footprint": 1,
-    "emissions": 52,
-    "health": 8.33
+    "attributes": {
+      "weight": 13696,
+      "speed": 145,
+      "footprint": 1,
+      "emissions": 52,
+      "health": 8.33
+    }
   },
   {
     "key": "Bus: Electric",
     "text": "Bus: Electric",
     "value": "Bus: Electric",
-    "weight": 13696,
-    "speed": 105,
-    "footprint": 1,
-    "emissions": 0,
-    "health": 8.33
+    "attributes": {
+      "weight": 13696,
+      "speed": 105,
+      "footprint": 1,
+      "emissions": 0,
+      "health": 8.33
+    }
   },
   {
     "key": "Pogo stick",
     "text": "Pogo stick",
     "value": "Pogo stick",
-    "weight": 92,
-    "speed": 10,
-    "footprint": 0,
-    "emissions": 0,
-    "health": 6
+    "attributes": {
+      "weight": 92,
+      "speed": 10,
+      "footprint": 0,
+      "emissions": 0,
+      "health": 6
+    }
   },
   {
     "key": "Low speed autonomous shuttles (Black Panther)",
     "text": "Low speed autonomous shuttles (Black Panther)",
     "value": "Low speed autonomous shuttles (Black Panther)",
-    "weight": 2838,
-    "speed": 40,
-    "footprint": 1,
-    "emissions": 0,
-    "health": 8.33
+    "attributes": {
+      "weight": 2838,
+      "speed": 40,
+      "footprint": 1,
+      "emissions": 0,
+      "health": 8.33
+    }
   },
   {
     "key": "Aladdin’s magic carpet",
     "text": "Aladdin’s magic carpet",
     "value": "Aladdin’s magic carpet",
-    "weight": 98,
-    "speed": 161,
-    "footprint": 1,
-    "emissions": 0,
-    "health": 9
+    "attributes": {
+      "weight": 98,
+      "speed": 161,
+      "footprint": 1,
+      "emissions": 0,
+      "health": 9
+    }
   },
   {
     "key": "Mobile lounge at Dulles",
     "text": "Mobile lounge at Dulles",
     "value": "Mobile lounge at Dulles",
-    "weight": 34779,
-    "speed": 42,
-    "footprint": 0.009803921569,
-    "emissions": 20.19607843,
-    "health": 8.7
+    "attributes": {
+      "weight": 34779,
+      "speed": 42,
+      "footprint": 0.009803921569,
+      "emissions": 20.19607843,
+      "health": 8.7
+    }
   },
   {
     "key": "Nimbus 2000",
     "text": "Nimbus 2000",
     "value": "Nimbus 2000",
-    "weight": 94,
-    "speed": 165,
-    "footprint": 0.354,
-    "emissions": 0,
-    "health": 9
+    "attributes": {
+      "weight": 94,
+      "speed": 165,
+      "footprint": 0.354,
+      "emissions": 0,
+      "health": 9
+    }
   },
   {
     "key": "Mars Rover",
     "text": "Mars Rover",
     "value": "Mars Rover",
-    "weight": 900,
-    "speed": 0,
-    "footprint": 8.4,
-    "emissions": 0,
-    "health": 9
+    "attributes": {
+      "weight": 900,
+      "speed": 0,
+      "footprint": 8.4,
+      "emissions": 0,
+      "health": 9
+    }
   }
 ]

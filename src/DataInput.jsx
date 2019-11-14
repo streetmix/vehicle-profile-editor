@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Input, Dropdown, Icon } from 'semantic-ui-react'
 import uniqueId from 'lodash/uniqueId'
@@ -7,6 +7,7 @@ import './DataInput.css'
 DataInput.propTypes = {
   label: PropTypes.string.isRequired,
   example: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   units: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(
@@ -21,13 +22,10 @@ DataInput.propTypes = {
 }
 
 function DataInput (props) {
-  const { label, example, units, onChange = () => {} } = props
-  const [value, setValue] = useState('')
-
+  const { label, example, value, units, onChange = () => {} } = props
   const id = uniqueId('data-input_')
 
   function handleChange (event) {
-    setValue(event.target.value)
     onChange(event.target.value)
   }
 
@@ -39,7 +37,11 @@ function DataInput (props) {
    * @param {Any} value
    */
   function isInvalidInput (value) {
-    if (typeof value === 'undefined' || value === null || value.trim() === '') {
+    if (
+      typeof value === 'undefined' ||
+      value === null ||
+      (typeof value === 'string' && value.trim() === '')
+    ) {
       return false
     }
     const val = Number.parseFloat(value)
@@ -57,7 +59,7 @@ function DataInput (props) {
           typeof units === 'string' ? (
             { basic: true, content: units }
           ) : (
-            <Dropdown defaultValue={units[0].value} options={units} basic />
+            <Dropdown defaultValue={units[0].value} options={units} selection />
             // There is a conflicting rule below here
             // eslint-disable-next-line
           )
