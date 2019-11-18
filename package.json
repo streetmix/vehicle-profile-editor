@@ -30,7 +30,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@sentry/browser": "^5.9.0",
     "@types/jest": "^24.0.23",
-    "@types/node": "^12.7.1",
+    "@types/node": "^12.12.8",
     "@types/react": "^16.8.24",
     "@types/react-dom": "^16.8.5",
     "@types/react-router-dom": "^5.1.2",
