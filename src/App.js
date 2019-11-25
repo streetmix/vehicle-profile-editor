@@ -61,6 +61,7 @@ function Attributes ({ values, sendValues = () => {} }) {
         }
         value={values[id]}
         example={exampleValue}
+        description={description}
         onChange={value => {
           sendValues({ ...values, [id]: value })
         }}

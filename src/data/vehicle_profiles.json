@@ -4,9 +4,18 @@
     "text": "Pedestrian: adult",
     "value": "Pedestrian: adult",
     "attributes": {
-      "weight": 88,
-      "speed": 9,
-      "footprint": 0,
+      "weight": {
+        "value": 88,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 9,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 0,
+        "units": "m²"
+      },
       "emissions": 0,
       "health": 5.39
     }
@@ -16,9 +25,18 @@
     "text": "Pedestrian: children",
     "value": "Pedestrian: children",
     "attributes": {
-      "weight": 32,
-      "speed": 5,
-      "footprint": 0,
+      "weight": {
+        "value": 32,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 5,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 0,
+        "units": "m²"
+      },
       "emissions": 0,
       "health": 5.39
     }
@@ -28,9 +46,18 @@
     "text": "Automobile: SUV",
     "value": "Automobile: SUV",
     "attributes": {
-      "weight": 1789,
-      "speed": 200,
-      "footprint": 2,
+      "weight": {
+        "value": 1789,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 200,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 2,
+        "units": "m²"
+      },
       "emissions": 36,
       "health": 8.72
     }
@@ -40,9 +67,18 @@
     "text": "Automobile: compact",
     "value": "Automobile: compact",
     "attributes": {
-      "weight": 1676,
-      "speed": 214,
-      "footprint": 2,
+      "weight": {
+        "value": 1676,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 214,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 2,
+        "units": "m²"
+      },
       "emissions": 18,
       "health": 8.72
     }
@@ -52,9 +88,18 @@
     "text": "Automobile: luxury car",
     "value": "Automobile: luxury car",
     "attributes": {
-      "weight": 2129,
-      "speed": 200,
-      "footprint": 2,
+      "weight": {
+        "value": 2129,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 200,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 2,
+        "units": "m²"
+      },
       "emissions": 28,
       "health": 8.72
     }
@@ -64,9 +109,18 @@
     "text": "Automobile: Electric",
     "value": "Automobile: Electric",
     "attributes": {
-      "weight": 2016,
-      "speed": 209,
-      "footprint": 2,
+      "weight": {
+        "value": 2016,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 209,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 2,
+        "units": "m²"
+      },
       "emissions": 0,
       "health": 8.72
     }
@@ -76,9 +130,18 @@
     "text": "Automobile: Hybrid",
     "value": "Automobile: Hybrid",
     "attributes": {
-      "weight": 1619,
-      "speed": 180,
-      "footprint": 2,
+      "weight": {
+        "value": 1619,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 180,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 2,
+        "units": "m²"
+      },
       "emissions": 15,
       "health": 8.72
     }
@@ -88,9 +151,18 @@
     "text": "Ridesharing",
     "value": "Ridesharing",
     "attributes": {
-      "weight": 1676,
-      "speed": 187,
-      "footprint": 2,
+      "weight": {
+        "value": 1676,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 187,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 2,
+        "units": "m²"
+      },
       "emissions": 33,
       "health": 8.72
     }
@@ -100,9 +172,18 @@
     "text": "Bicycle",
     "value": "Bicycle",
     "attributes": {
-      "weight": 98,
-      "speed": 24,
-      "footprint": 1,
+      "weight": {
+        "value": 98,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 24,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 1,
+        "units": "m²"
+      },
       "emissions": 0,
       "health": 3.56
     }
@@ -112,9 +193,18 @@
     "text": "Ebike",
     "value": "Ebike",
     "attributes": {
-      "weight": 106,
-      "speed": 45,
-      "footprint": 1,
+      "weight": {
+        "value": 106,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 45,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 1,
+        "units": "m²"
+      },
       "emissions": 0,
       "health": 6
     }
@@ -124,9 +214,18 @@
     "text": "E-scooter",
     "value": "E-scooter",
     "attributes": {
-      "weight": 100,
-      "speed": 25,
-      "footprint": 0,
+      "weight": {
+        "value": 100,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 25,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 0,
+        "units": "m²"
+      },
       "emissions": 0,
       "health": 8
     }
@@ -136,9 +235,18 @@
     "text": "Bus: Diesel",
     "value": "Bus: Diesel",
     "attributes": {
-      "weight": 13696,
-      "speed": 145,
-      "footprint": 1,
+      "weight": {
+        "value": 13696,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 145,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 1,
+        "units": "m²"
+      },
       "emissions": 52,
       "health": 8.33
     }
@@ -148,9 +256,18 @@
     "text": "Bus: Electric",
     "value": "Bus: Electric",
     "attributes": {
-      "weight": 13696,
-      "speed": 105,
-      "footprint": 1,
+      "weight": {
+        "value": 13696,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 105,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 1,
+        "units": "m²"
+      },
       "emissions": 0,
       "health": 8.33
     }
@@ -160,9 +277,18 @@
     "text": "Pogo stick",
     "value": "Pogo stick",
     "attributes": {
-      "weight": 92,
-      "speed": 10,
-      "footprint": 0,
+      "weight": {
+        "value": 92,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 10,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 0,
+        "units": "m²"
+      },
       "emissions": 0,
       "health": 6
     }
@@ -172,9 +298,18 @@
     "text": "Low speed autonomous shuttles (Black Panther)",
     "value": "Low speed autonomous shuttles (Black Panther)",
     "attributes": {
-      "weight": 2838,
-      "speed": 40,
-      "footprint": 1,
+      "weight": {
+        "value": 2838,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 40,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 1,
+        "units": "m²"
+      },
       "emissions": 0,
       "health": 8.33
     }
@@ -184,9 +319,18 @@
     "text": "Aladdin’s magic carpet",
     "value": "Aladdin’s magic carpet",
     "attributes": {
-      "weight": 98,
-      "speed": 161,
-      "footprint": 1,
+      "weight": {
+        "value": 98,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 161,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 1,
+        "units": "m²"
+      },
       "emissions": 0,
       "health": 9
     }
@@ -196,9 +340,18 @@
     "text": "Mobile lounge at Dulles",
     "value": "Mobile lounge at Dulles",
     "attributes": {
-      "weight": 34779,
-      "speed": 42,
-      "footprint": 0.009803921569,
+      "weight": {
+        "value": 34779,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 42,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 0.009803921569,
+        "units": "m²"
+      },
       "emissions": 20.19607843,
       "health": 8.7
     }
@@ -208,9 +361,18 @@
     "text": "Nimbus 2000",
     "value": "Nimbus 2000",
     "attributes": {
-      "weight": 94,
-      "speed": 165,
-      "footprint": 0.354,
+      "weight": {
+        "value": 94,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 165,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 0.354,
+        "units": "m²"
+      },
       "emissions": 0,
       "health": 9
     }
@@ -220,9 +382,18 @@
     "text": "Mars Rover",
     "value": "Mars Rover",
     "attributes": {
-      "weight": 900,
-      "speed": 0,
-      "footprint": 8.4,
+      "weight": {
+        "value": 900,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 0,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 8.4,
+        "units": "m²"
+      },
       "emissions": 0,
       "health": 9
     }

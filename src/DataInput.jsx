@@ -7,7 +7,14 @@ import './DataInput.css'
 DataInput.propTypes = {
   label: PropTypes.string.isRequired,
   example: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.shape({
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      units: PropTypes.string
+    })
+  ]),
   units: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(
@@ -65,18 +72,26 @@ function DataInput (props) {
     return Number.isNaN(val) || val < 0
   }
 
+  const actualValue = typeof value === 'object' ? value.value : value
+
   return (
     <div className="input-row">
       <label htmlFor={id}>{label}</label>
       <Input
         id={id}
-        value={value}
-        error={isInvalidInput(value)}
+        value={actualValue}
+        error={isInvalidInput(actualValue)}
         label={
           typeof units === 'string' ? (
             { basic: true, content: units }
           ) : (
-            <Dropdown defaultValue={units[0].value} options={units} selection />
+            <Dropdown
+              value={
+                (typeof value === 'object' && value.units) || units[0].value
+              }
+              options={units}
+              selection
+            />
             // There is a conflicting rule below here
             // eslint-disable-next-line
           )
@@ -110,7 +125,7 @@ function DataInput (props) {
           <Modal.Content>
             <Modal.Description>
               {description || (
-                <p>No information is available for this characteristic.</p>
+                <p>No information is available for this attribute.</p>
               )}
             </Modal.Description>
           </Modal.Content>
