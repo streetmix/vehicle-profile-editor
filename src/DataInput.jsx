@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Input, Dropdown, Icon } from 'semantic-ui-react'
+import { Input, Dropdown, Icon, Modal, Button } from 'semantic-ui-react'
 import uniqueId from 'lodash/uniqueId'
 import './DataInput.css'
 
@@ -18,15 +18,32 @@ DataInput.propTypes = {
       })
     )
   ]).isRequired,
+  description: PropTypes.string,
   onChange: PropTypes.func
 }
 
 function DataInput (props) {
-  const { label, example, value, units, onChange = () => {} } = props
+  const {
+    label,
+    example,
+    value,
+    units,
+    description,
+    onChange = () => {}
+  } = props
+  const [isModalOpen, setModalOpen] = useState(false)
   const id = uniqueId('data-input_')
 
   function handleChange (event) {
     onChange(event.target.value)
+  }
+
+  function handleModalOpen (event) {
+    setModalOpen(true)
+  }
+
+  function handleCloseModal (event) {
+    setModalOpen(false)
   }
 
   /**
@@ -69,7 +86,40 @@ function DataInput (props) {
         onChange={handleChange}
       />
       <div className="input-help">
-        <Icon circular color="teal" name="help" />
+        <Icon circular color="teal" name="help" onClick={handleModalOpen} />
+        <Modal
+          open={isModalOpen}
+          onClose={handleCloseModal}
+          size="tiny"
+          closeIcon
+        >
+          <Modal.Header>
+            <Icon
+              circular
+              color="teal"
+              name="help"
+              size="tiny"
+              style={{
+                position: 'relative',
+                top: '-3px',
+                marginRight: '1em'
+              }}
+            />
+            {label}
+          </Modal.Header>
+          <Modal.Content>
+            <Modal.Description>
+              {description || (
+                <p>No information is available for this characteristic.</p>
+              )}
+            </Modal.Description>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button color="green" onClick={handleCloseModal}>
+              OK
+            </Button>
+          </Modal.Actions>
+        </Modal>
       </div>
     </div>
   )
