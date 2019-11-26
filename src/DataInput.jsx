@@ -1,12 +1,21 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Input, Dropdown, Icon, Modal, Button } from 'semantic-ui-react'
+import { Input, Dropdown, Icon, Modal, Button, Table } from 'semantic-ui-react'
 import uniqueId from 'lodash/uniqueId'
+import UNITS from './data/units.json'
 import './DataInput.css'
 
 DataInput.propTypes = {
-  label: PropTypes.string.isRequired,
-  example: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  attribute: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    definedUnits: PropTypes.string,
+    defaultUnit: PropTypes.string.isRequired,
+    exampleValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      .isRequired,
+    thresholds: PropTypes.arrayOf(PropTypes.array).isRequired
+  }),
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -15,35 +24,27 @@ DataInput.propTypes = {
       units: PropTypes.string
     })
   ]),
-  // Either a single unit or list of units
-  units: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        key: PropTypes.string,
-        text: PropTypes.string,
-        value: PropTypes.string
-      })
-    )
-  ]).isRequired,
-  description: PropTypes.string,
   onChange: PropTypes.func
 }
 
 function DataInput (props) {
+  const { attribute, value, onChange = () => {} } = props
   const {
-    label,
-    example,
-    value,
-    units,
+    name,
     description,
-    onChange = () => {}
-  } = props
+    definedUnits,
+    defaultUnit,
+    exampleValue,
+    thresholds
+  } = attribute
+  const units =
+    typeof definedUnits !== 'undefined' ? UNITS[definedUnits] : defaultUnit
+
   const [isModalOpen, setModalOpen] = useState(false)
   const inputValue = typeof value === 'object' ? value.value : value
   const unitsValue =
     (typeof value === 'object' && value.units) || units[0].value
-  const id = uniqueId('data-input_')
+  const htmlId = uniqueId('data-input_')
 
   function handleInputChange (event) {
     onChange({
@@ -69,9 +70,9 @@ function DataInput (props) {
 
   return (
     <div className="input-row">
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={htmlId}>{name}</label>
       <Input
-        id={id}
+        id={htmlId}
         value={inputValue}
         error={isInvalidInput(inputValue)}
         label={
@@ -89,7 +90,7 @@ function DataInput (props) {
           )
         }
         labelPosition="right"
-        placeholder={`example: ${example}`}
+        placeholder={`example: ${exampleValue}`}
         onChange={handleInputChange}
       />
       <div className="input-help">
@@ -112,7 +113,7 @@ function DataInput (props) {
                 marginRight: '1em'
               }}
             />
-            {label}
+            {name}
           </Modal.Header>
           <Modal.Content>
             <Modal.Description>
@@ -120,6 +121,29 @@ function DataInput (props) {
                 <p>No information is available for this attribute.</p>
               )}
             </Modal.Description>
+            <h4>Thresholds</h4>
+            <Table basic="very">
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Level</Table.HeaderCell>
+                  <Table.HeaderCell>Minimum</Table.HeaderCell>
+                  <Table.HeaderCell>Maximum</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {thresholds.map((row, index) => (
+                  <Table.Row key={index}>
+                    <Table.Cell>{index + 1}</Table.Cell>
+                    <Table.Cell>
+                      {row[0]} {defaultUnit}
+                    </Table.Cell>
+                    <Table.Cell>
+                      {(index !== 3 && `${row[1]} ${defaultUnit}`) || '∞'}
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table>
           </Modal.Content>
           <Modal.Actions>
             <Button color="green" onClick={handleCloseModal}>

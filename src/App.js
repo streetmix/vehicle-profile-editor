@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Dropdown, Button, Icon, Input } from 'semantic-ui-react'
-import Radar from 'react-d3-radar'
+import { Grid, Dropdown, Button, Icon, Input, Header } from 'semantic-ui-react'
 import find from 'lodash/find'
-import downloadSvg, { downloadPng } from 'svg-crowbar'
 import DataInput from './DataInput'
-import { convertUnits } from './utils/conversions'
-import UNITS from './data/units.json'
+import RadarChart from './RadarChart'
 import ATTRIBUTES from './data/attributes_numo.json'
 import './App.css'
+
+function Attributes ({ values, sendValues = () => {} }) {
+  return ATTRIBUTES.map(attribute => (
+    <DataInput
+      key={attribute.id}
+      attribute={attribute}
+      value={values[attribute.id]}
+      onChange={value => {
+        sendValues({ ...values, [attribute.id]: value })
+      }}
+    />
+  ))
+}
 
 function getNewVehicleId () {
   return (
@@ -18,90 +28,14 @@ function getNewVehicleId () {
   )
 }
 
-function mapAttributeValuesToLevel (attributes) {
-  const levels = Object.entries(attributes).reduce((obj, [key, attribute]) => {
-    const definition = find(ATTRIBUTES, { id: key })
-
-    const inputValue = Number.parseFloat(
-      typeof attribute === 'object' ? attribute.value : attribute
-    )
-
-    // Convert to units if they don't match; if no conversion method is found, log it but use default
-    let value = inputValue
-    if (
-      (typeof attribute === 'object'
-        ? attribute.units
-        : definition.defaultUnit) !== definition.defaultUnit
-    ) {
-      value = convertUnits(inputValue, attribute.units, definition.defaultUnit)
-    }
-
-    let level = 0
-    if (definition) {
-      const thresholds = definition.thresholds
-      for (let i = 0; i < thresholds.length; i++) {
-        if (i === 0) {
-          // First level lower bound is inclusive
-          if (value >= thresholds[i][0] && value <= thresholds[i][1]) {
-            level = i + 1
-          }
-        } else if (i === thresholds.length - 1) {
-          // Last level does not have an upper bound
-          if (value > thresholds[i][0]) {
-            level = i + 1
-          }
-        } else {
-          if (value > thresholds[i][0] && value <= thresholds[i][1]) {
-            level = i + 1
-          }
-        }
-      }
-    }
-    obj[key] = level
-    return obj
-  }, {})
-
-  return levels
-}
-
-function saveSVG () {
-  downloadSvg(document.querySelector('svg'), 'vehicle_profile')
-}
-
-function savePNG () {
-  downloadPng(document.querySelector('svg'), 'vehicle_profile')
-}
-
-function Attributes ({ values, sendValues = () => {} }) {
-  return ATTRIBUTES.map(
-    ({ id, name, description, definedUnits, defaultUnit, exampleValue }) => (
-      <DataInput
-        key={id}
-        label={name}
-        units={
-          typeof definedUnits !== 'undefined'
-            ? UNITS[definedUnits]
-            : defaultUnit
-        }
-        value={values[id]}
-        example={exampleValue}
-        description={description}
-        onChange={value => {
-          sendValues({ ...values, [id]: value })
-        }}
-      />
-    )
-  )
-}
-
-const mapToVehicleProfile = ({
+function mapToVehicleProfile ({
   weight,
   speed,
   footprint,
   emissions,
   health,
   ...others
-}) => {
+}) {
   return {
     attributes: { weight, speed, footprint, emissions, health },
     ...others
@@ -118,6 +52,7 @@ function App () {
   const [selectedVehicle, setSelectedVehicle] = useState({})
   const url =
     'https://lwh6oxm5db.execute-api.us-east-1.amazonaws.com/dev/vehicles'
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch(url).catch(err => {
@@ -147,9 +82,9 @@ function App () {
     saveToApi('POST', clone)
   }
 
-  async function updateToApi () {
-    saveToApi('PUT', selectedVehicle)
-  }
+  // async function updateToApi () {
+  //   saveToApi('PUT', selectedVehicle)
+  // }
 
   async function saveToApi (method, selected) {
     setPending(true)
@@ -183,9 +118,7 @@ function App () {
     })
 
     if (!result) return
-    console.log('!!! yes')
-    const { data } = result
-    console.log({ data, result })
+
     setLastUpdate(new Date().toISOString())
     setSuccess('Saved vehicle to google sheets.')
     setPending(false)
@@ -197,8 +130,8 @@ function App () {
 
   function handleDropdownChange (event, data) {
     const vehicle = find(vehicles, { key: data.value })
+
     setValues(vehicle.attributes)
-    console.log({ vehicle })
     setSelectedVehicle(vehicle)
   }
 
@@ -208,7 +141,7 @@ function App () {
       text: event.target.value,
       value: event.target.value
     }
-    console.log({ newVehicle })
+
     setSelectedVehicle(newVehicle)
   }
 
@@ -223,25 +156,9 @@ function App () {
         <Grid.Row columns={2}>
           <Grid.Column width={9}>
             <div className="box">
-              <div className="input-row" style={{ marginBottom: '1.5em' }}>
-                <Dropdown
-                  className="icon"
-                  id="presets"
-                  placeholder="Load vehicle preset (optional)"
-                  fluid
-                  search
-                  selection
-                  value={selectedVehicle && selectedVehicle.key}
-                  options={vehicles.map(item => ({
-                    text: item.text,
-                    value: item.key
-                  }))}
-                  onChange={handleDropdownChange}
-                  style={{
-                    margin: 0 /* Override a right margin from Semantic-UI */
-                  }}
-                />
-              </div>
+              <Header as="h3" dividing style={{ marginBottom: '1.5em' }}>
+                Vehicle attributes
+              </Header>
               <div className="input-row">
                 <label htmlFor="input-name">Vehicle name (optional)</label>
                 <Input
@@ -252,88 +169,58 @@ function App () {
                 />
               </div>
               <Attributes values={values} sendValues={sendValues} />
+              <Grid style={{ marginTop: '1em' }}>
+                <Grid.Row columns={2}>
+                  <Grid.Column>
+                    <Dropdown
+                      className="icon"
+                      id="presets"
+                      placeholder="Load profile"
+                      fluid
+                      search
+                      selection
+                      value=""
+                      options={vehicles.map(item => ({
+                        text: item.text,
+                        value: item.key
+                      }))}
+                      onChange={handleDropdownChange}
+                    />
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Button
+                      fluid
+                      color="teal"
+                      icon
+                      labelPosition="left"
+                      onClick={createToApi}
+                      disabled={
+                        pending || (selectedVehicle && !selectedVehicle.text)
+                      }
+                    >
+                      <Icon name="save" />
+                      {pending ? 'Saving ...' : 'Save profile'}
+                    </Button>
+                    {/*
+                      <Button
+                        primary
+                        basic
+                        icon
+                        labelPosition="left"
+                        onClick={updateToApi}
+                      >
+                        <Icon name="download" />
+                        Save as new vehicle
+                      </Button>
+                    */}
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
             </div>
           </Grid.Column>
           <Grid.Column width={7}>
             <div className="box">
-              <Radar
-                width={500}
-                height={500}
-                padding={70}
-                domainMax={5}
-                highlighted={null}
-                onHover={point => {
-                  if (point) {
-                    console.log('hovered over a data point')
-                  } else {
-                    console.log('not over anything')
-                  }
-                }}
-                data={{
-                  variables: [
-                    { key: 'weight', label: 'Weight' },
-                    { key: 'speed', label: 'Top speed' },
-                    { key: 'footprint', label: 'Footprint' },
-                    { key: 'emissions', label: 'Emissions' },
-                    { key: 'health', label: 'Health' }
-                  ],
-                  sets: [
-                    {
-                      key: 'me',
-                      label: 'My Scores',
-                      values: mapAttributeValuesToLevel(values)
-                    }
-                  ]
-                }}
-              />
-              <div className="download-buttons">
-                <Button
-                  primary
-                  basic
-                  icon
-                  labelPosition="left"
-                  onClick={savePNG}
-                >
-                  <Icon name="download" />
-                  Download image (PNG)
-                </Button>
-                <Button
-                  primary
-                  basic
-                  icon
-                  labelPosition="left"
-                  onClick={saveSVG}
-                >
-                  <Icon name="download" />
-                  Download vector image (SVG)
-                </Button>
-
-                {!pending && selectedVehicle && selectedVehicle.key && (
-                  <Button
-                    primary
-                    basic
-                    icon
-                    labelPosition="left"
-                    onClick={updateToApi}
-                  >
-                    <Icon name="download" />
-                    Save vehicle attributes
-                  </Button>
-                )}
-                {!pending && selectedVehicle && selectedVehicle.key && (
-                  <Button
-                    primary
-                    basic
-                    icon
-                    labelPosition="left"
-                    onClick={createToApi}
-                  >
-                    <Icon name="download" />
-                    Save as new vehicle
-                  </Button>
-                )}
-                {pending && <div>Updating vehicle data...</div>}
-              </div>
+              <RadarChart values={values} />
             </div>
           </Grid.Column>
         </Grid.Row>
