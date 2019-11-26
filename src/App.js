@@ -29,15 +29,41 @@ function getNewVehicleId () {
 }
 
 function mapToVehicleProfile ({
-  weight,
-  speed,
-  footprint,
-  emissions,
-  health,
+  attributesweight,
+  attributesspeed,
+  attributesfootprint,
+  attributesemissions,
+  attributeshealth,
+  metricsweight,
+  metricsspeed,
+  metricsfootprint,
+  metricsemissions,
+  metricshealth,
   ...others
 }) {
   return {
-    attributes: { weight, speed, footprint, emissions, health },
+    attributes: {
+      weight: {
+        value: attributesweight,
+        units: metricsweight
+      },
+      speed: {
+        value: attributesspeed,
+        units: metricsspeed
+      },
+      footprint: {
+        value: attributesfootprint,
+        units: metricsfootprint
+      },
+      emissions: {
+        value: attributesemissions,
+        units: metricsemissions
+      },
+      health: {
+        value: attributeshealth,
+        units: metricshealth
+      }
+    },
     ...others
   }
 }
@@ -102,9 +128,11 @@ function App () {
     const meta = ['id', 'app:edited', 'save', 'del', '_xml']
     Object.keys(values).forEach(vehicleAttribute => {
       if (meta.includes(vehicleAttribute)) return
-      finalVehicle[`attributes${vehicleAttribute}`] = values[vehicleAttribute]
+      finalVehicle[`attributes${vehicleAttribute}`] =
+        values[vehicleAttribute].value
+      finalVehicle[`metrics${vehicleAttribute}`] =
+        values[vehicleAttribute].units
     })
-    console.log({ finalVehicle })
 
     const result = await fetch(url, {
       method,
