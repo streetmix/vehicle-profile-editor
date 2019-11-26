@@ -15,6 +15,7 @@ DataInput.propTypes = {
       units: PropTypes.string
     })
   ]),
+  // Either a single unit or list of units
   units: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(
@@ -39,10 +40,23 @@ function DataInput (props) {
     onChange = () => {}
   } = props
   const [isModalOpen, setModalOpen] = useState(false)
+  const inputValue = typeof value === 'object' ? value.value : value
+  const unitsValue =
+    (typeof value === 'object' && value.units) || units[0].value
   const id = uniqueId('data-input_')
 
-  function handleChange (event) {
-    onChange(event.target.value)
+  function handleInputChange (event) {
+    onChange({
+      value: event.target.value,
+      units: unitsValue
+    })
+  }
+
+  function handleUnitChange (event, data) {
+    onChange({
+      value: inputValue,
+      units: data.value
+    })
   }
 
   function handleModalOpen (event) {
@@ -53,44 +67,22 @@ function DataInput (props) {
     setModalOpen(false)
   }
 
-  /**
-   * Is the input invalid?
-   * Returns true if NaN (cannot be parsed by parseFloat) or negative value
-   * Do not return false if the value hasn't been defined yet (or is null or empty string)
-   *
-   * @param {Any} value
-   */
-  function isInvalidInput (value) {
-    if (
-      typeof value === 'undefined' ||
-      value === null ||
-      (typeof value === 'string' && value.trim() === '')
-    ) {
-      return false
-    }
-    const val = Number.parseFloat(value)
-    return Number.isNaN(val) || val < 0
-  }
-
-  const actualValue = typeof value === 'object' ? value.value : value
-
   return (
     <div className="input-row">
       <label htmlFor={id}>{label}</label>
       <Input
         id={id}
-        value={actualValue}
-        error={isInvalidInput(actualValue)}
+        value={inputValue}
+        error={isInvalidInput(inputValue)}
         label={
           typeof units === 'string' ? (
             { basic: true, content: units }
           ) : (
             <Dropdown
-              value={
-                (typeof value === 'object' && value.units) || units[0].value
-              }
+              value={unitsValue}
               options={units}
               selection
+              onChange={handleUnitChange}
             />
             // There is a conflicting rule below here
             // eslint-disable-next-line
@@ -98,7 +90,7 @@ function DataInput (props) {
         }
         labelPosition="right"
         placeholder={`example: ${example}`}
-        onChange={handleChange}
+        onChange={handleInputChange}
       />
       <div className="input-help">
         <Icon circular color="teal" name="help" onClick={handleModalOpen} />
@@ -138,6 +130,25 @@ function DataInput (props) {
       </div>
     </div>
   )
+}
+
+/**
+ * Is the input invalid?
+ * Returns true if NaN (cannot be parsed by parseFloat) or negative value
+ * Do not return false if the value hasn't been defined yet (or is null or empty string)
+ *
+ * @param {Any} value
+ */
+function isInvalidInput (value) {
+  if (
+    typeof value === 'undefined' ||
+    value === null ||
+    (typeof value === 'string' && value.trim() === '')
+  ) {
+    return false
+  }
+  const val = Number.parseFloat(value)
+  return Number.isNaN(val) || val < 0
 }
 
 export default DataInput

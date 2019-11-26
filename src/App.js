@@ -4,17 +4,33 @@ import Radar from 'react-d3-radar'
 import find from 'lodash/find'
 import downloadSvg, { downloadPng } from 'svg-crowbar'
 import DataInput from './DataInput'
+import { convertUnits } from './utils/conversions'
 import UNITS from './data/units.json'
 import ATTRIBUTES from './data/attributes_numo.json'
 import VEHICLE_PROFILES from './data/vehicle_profiles.json'
 import './App.css'
 
-function mapValuesToLevel (values) {
-  const levels = Object.entries(values).reduce((obj, [key, value]) => {
-    const attribute = find(ATTRIBUTES, { id: key })
+function mapAttributeValuesToLevel (attributes) {
+  const levels = Object.entries(attributes).reduce((obj, [key, attribute]) => {
+    const definition = find(ATTRIBUTES, { id: key })
+
+    const inputValue = Number.parseFloat(
+      typeof attribute === 'object' ? attribute.value : attribute
+    )
+
+    // Convert to units if they don't match; if no conversion method is found, log it but use default
+    let value = inputValue
+    if (
+      (typeof attribute === 'object'
+        ? attribute.units
+        : definition.defaultUnit) !== definition.defaultUnit
+    ) {
+      value = convertUnits(inputValue, attribute.units, definition.defaultUnit)
+    }
+
     let level = 0
-    if (attribute) {
-      const thresholds = attribute.thresholds
+    if (definition) {
+      const thresholds = definition.thresholds
       for (let i = 0; i < thresholds.length; i++) {
         if (i === 0) {
           // First level lower bound is inclusive
@@ -149,7 +165,7 @@ function App () {
                     {
                       key: 'me',
                       label: 'My Scores',
-                      values: mapValuesToLevel(values)
+                      values: mapAttributeValuesToLevel(values)
                     }
                   ]
                 }}
