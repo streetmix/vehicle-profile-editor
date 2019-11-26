@@ -6,15 +6,6 @@ import RadarChart from './RadarChart'
 import ATTRIBUTES from './data/attributes_numo.json'
 import './App.css'
 
-function getNewVehicleId () {
-  return (
-    'vehicle_' +
-    Math.random()
-      .toString(36)
-      .substr(2, 9)
-  )
-}
-
 function Attributes ({ values, sendValues = () => {} }) {
   return ATTRIBUTES.map(attribute => (
     <DataInput
@@ -28,14 +19,23 @@ function Attributes ({ values, sendValues = () => {} }) {
   ))
 }
 
-const mapToVehicleProfile = ({
+function getNewVehicleId () {
+  return (
+    'vehicle_' +
+    Math.random()
+      .toString(36)
+      .substr(2, 9)
+  )
+}
+
+function mapToVehicleProfile ({
   weight,
   speed,
   footprint,
   emissions,
   health,
   ...others
-}) => {
+}) {
   return {
     attributes: { weight, speed, footprint, emissions, health },
     ...others
@@ -52,6 +52,7 @@ function App () {
   const [selectedVehicle, setSelectedVehicle] = useState({})
   const url =
     'https://lwh6oxm5db.execute-api.us-east-1.amazonaws.com/dev/vehicles'
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch(url).catch(err => {
@@ -81,9 +82,9 @@ function App () {
     saveToApi('POST', clone)
   }
 
-  async function updateToApi () {
-    saveToApi('PUT', selectedVehicle)
-  }
+  // async function updateToApi () {
+  //   saveToApi('PUT', selectedVehicle)
+  // }
 
   async function saveToApi (method, selected) {
     setPending(true)
@@ -117,9 +118,7 @@ function App () {
     })
 
     if (!result) return
-    console.log('!!! yes')
-    const { data } = result
-    console.log({ data, result })
+
     setLastUpdate(new Date().toISOString())
     setSuccess('Saved vehicle to google sheets.')
     setPending(false)
@@ -131,8 +130,8 @@ function App () {
 
   function handleDropdownChange (event, data) {
     const vehicle = find(vehicles, { key: data.value })
+
     setValues(vehicle.attributes)
-    console.log({ vehicle })
     setSelectedVehicle(vehicle)
   }
 
@@ -142,7 +141,7 @@ function App () {
       text: event.target.value,
       value: event.target.value
     }
-    console.log({ newVehicle })
+
     setSelectedVehicle(newVehicle)
   }
 
@@ -173,15 +172,14 @@ function App () {
               <Grid style={{ marginTop: '1em' }}>
                 <Grid.Row columns={2}>
                   <Grid.Column>
-                    {/* <Button fluid>Load preset</Button> */}
                     <Dropdown
                       className="icon"
                       id="presets"
-                      placeholder="Load preset"
+                      placeholder="Load profile"
                       fluid
                       search
                       selection
-                      value={selectedVehicle && selectedVehicle.key}
+                      value=""
                       options={vehicles.map(item => ({
                         text: item.text,
                         value: item.key
@@ -190,9 +188,31 @@ function App () {
                     />
                   </Grid.Column>
                   <Grid.Column>
-                    <Button fluid color="teal">
-                      Save profile
+                    <Button
+                      fluid
+                      color="teal"
+                      icon
+                      labelPosition="left"
+                      onClick={createToApi}
+                      disabled={
+                        pending || (selectedVehicle && !selectedVehicle.text)
+                      }
+                    >
+                      <Icon name="save" />
+                      {pending ? 'Saving ...' : 'Save profile'}
                     </Button>
+                    {/*
+                      <Button
+                        primary
+                        basic
+                        icon
+                        labelPosition="left"
+                        onClick={updateToApi}
+                      >
+                        <Icon name="download" />
+                        Save as new vehicle
+                      </Button>
+                    */}
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
@@ -201,31 +221,6 @@ function App () {
           <Grid.Column width={7}>
             <div className="box">
               <RadarChart values={values} />
-              {!pending && selectedVehicle && selectedVehicle.key && (
-                <Button
-                  primary
-                  basic
-                  icon
-                  labelPosition="left"
-                  onClick={updateToApi}
-                >
-                  <Icon name="download" />
-                  Save vehicle attributes
-                </Button>
-              )}
-              {!pending && selectedVehicle && selectedVehicle.key && (
-                <Button
-                  primary
-                  basic
-                  icon
-                  labelPosition="left"
-                  onClick={createToApi}
-                >
-                  <Icon name="download" />
-                  Save as new vehicle
-                </Button>
-              )}
-              {pending && <div>Updating vehicle data...</div>}
             </div>
           </Grid.Column>
         </Grid.Row>
