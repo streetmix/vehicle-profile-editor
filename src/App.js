@@ -101,8 +101,8 @@ function App () {
     const clone = {
       ...selectedVehicle,
       key: getNewVehicleId(),
-      text: `${selectedVehicle.text} copy`,
-      value: `${selectedVehicle.text} copy`
+      text: `${selectedVehicle.text}`,
+      value: `${selectedVehicle.text}`
     }
     setSelectedVehicle(clone)
     saveToApi('POST', clone)
