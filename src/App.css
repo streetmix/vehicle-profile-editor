@@ -18,6 +18,14 @@
   margin-bottom: 0.5em;
 }
 
+.error {
+  color: #dc1414;
+}
+
+.success {
+  color: #4caf50;
+}
+
 @media only screen and (max-width: 768px) {
   h1 {
     margin-top: 0.5em;
