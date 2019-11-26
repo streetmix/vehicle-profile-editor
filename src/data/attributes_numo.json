@@ -11,7 +11,7 @@
   {
     "id": "speed",
     "name": "Top speed",
-    "description": "Top speed attainable by the vehicle",
+    "description": "The faster the vehicle, the more risk it poses to public health. For manufactured vehicles, its top speed should be its maximum allowable speed as limited by the factory.",
     "definedUnits": "SPEED",
     "defaultUnit": "km/h",
     "exampleValue": 45,
@@ -20,7 +20,7 @@
   {
     "id": "footprint",
     "name": "Footprint per max capacity",
-    "description": "footprint per person",
+    "description": "Area footprint occupied by the vehicle, per person, based on maximum passenger capacity. For instance, for a vehicle that occupies 10m² with a maximum capacity of 5 people, this value should be 2m².",
     "definedUnits": "AREA",
     "defaultUnit": "m²",
     "exampleValue": 0.5,
@@ -29,7 +29,7 @@
   {
     "id": "emissions",
     "name": "CO2 per max capacity",
-    "description": "co2 per person in max capacity",
+    "description": "Carbon dioxide (CO₂) emissions generated per person when the vehicle is filled to its maximum capacity.",
     "defaultUnit": "CO₂ g/km",
     "exampleValue": 5,
     "thresholds": [[0, 0], [0, 20], [20, 50], [50]]
