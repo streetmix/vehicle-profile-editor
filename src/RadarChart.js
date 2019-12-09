@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Button, Icon } from 'semantic-ui-react'
 import Radar from 'react-d3-radar'
 import downloadSvg, { downloadPng } from 'svg-crowbar'
+import { ATTR_TYPE_DEPENDENT } from './constants'
 import { mapAttributeValuesToLevel } from './utils/binning'
 import ATTRIBUTES from './data/attributes_numo.json'
 
@@ -52,10 +53,12 @@ function RadarChart ({ values }) {
 }
 
 function attributesToChartLabels (attributes) {
-  return attributes.map(attribute => ({
-    key: attribute.id,
-    label: attribute.name
-  }))
+  return attributes
+    .filter(attribute => attribute.type === ATTR_TYPE_DEPENDENT)
+    .map(attribute => ({
+      key: attribute.id,
+      label: attribute.name
+    }))
 }
 
 function saveSVG () {

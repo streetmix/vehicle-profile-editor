@@ -1,10 +1,16 @@
 import find from 'lodash/find'
 import { convertUnits } from './conversions'
+import { ATTR_TYPE_DEPENDENT } from '../constants'
 import ATTRIBUTES from '../data/attributes_numo.json'
 
 export function mapAttributeValuesToLevel (attributes) {
   const levels = Object.entries(attributes).reduce((obj, [key, attribute]) => {
     const definition = find(ATTRIBUTES, { id: key })
+
+    // Only map dependent variables
+    if (definition.type !== ATTR_TYPE_DEPENDENT) {
+      return obj
+    }
 
     const inputValue = Number.parseFloat(
       typeof attribute === 'object' ? attribute.value : attribute

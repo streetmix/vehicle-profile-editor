@@ -20,10 +20,10 @@ DataInput.propTypes = {
     name: PropTypes.string.isRequired,
     description: PropTypes.string,
     definedUnits: PropTypes.string,
-    defaultUnit: PropTypes.string.isRequired,
+    defaultUnit: PropTypes.string,
     exampleValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
       .isRequired,
-    thresholds: PropTypes.arrayOf(PropTypes.array).isRequired
+    thresholds: PropTypes.arrayOf(PropTypes.array)
   }),
   value: PropTypes.oneOfType([
     PropTypes.string,
@@ -52,7 +52,9 @@ function DataInput (props) {
   const [isModalOpen, setModalOpen] = useState(false)
   const inputValue = typeof value === 'object' ? value.value : value
   const unitsValue =
-    (typeof value === 'object' && value.units) || units[0].value
+    (typeof value === 'object' && value.units) ||
+    (Array.isArray(units) && units[0].value) ||
+    null
   const htmlId = uniqueId('data-input_')
 
   function handleInputChange (event) {
@@ -77,6 +79,20 @@ function DataInput (props) {
     setModalOpen(false)
   }
 
+  const unitLabel =
+    (typeof units === 'string' && { basic: true, content: units }) ||
+    (Array.isArray(units) && (
+      <Dropdown
+        value={unitsValue}
+        options={units}
+        selection
+        onChange={handleUnitChange}
+      />
+      // There is a conflicting rule below here
+      // eslint-disable-next-line
+    )) ||
+    null
+
   return (
     <div className="input-row">
       <label htmlFor={htmlId}>{name}</label>
@@ -84,21 +100,8 @@ function DataInput (props) {
         id={htmlId}
         value={inputValue}
         error={isInvalidInput(inputValue)}
-        label={
-          typeof units === 'string' ? (
-            { basic: true, content: units }
-          ) : (
-            <Dropdown
-              value={unitsValue}
-              options={units}
-              selection
-              onChange={handleUnitChange}
-            />
-            // There is a conflicting rule below here
-            // eslint-disable-next-line
-          )
-        }
-        labelPosition="right"
+        label={unitLabel}
+        labelPosition={unitLabel ? 'right' : undefined}
         placeholder={`example: ${exampleValue}`}
         onChange={handleInputChange}
       />
@@ -140,37 +143,41 @@ function DataInput (props) {
                 <p>No information is available for this attribute.</p>
               )}
             </Modal.Description>
-            <h4>Thresholds</h4>
-            <Table attached="top" compact>
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell>Level</Table.HeaderCell>
-                  <Table.HeaderCell>Minimum</Table.HeaderCell>
-                  <Table.HeaderCell>Maximum</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {thresholds.map((row, index) => (
-                  <Table.Row key={index}>
-                    <Table.Cell>{index + 1}</Table.Cell>
-                    <Table.Cell>
-                      {row[0]} {defaultUnit}
-                    </Table.Cell>
-                    <Table.Cell>
-                      {(index !== 3 && `${row[1]} ${defaultUnit}`) || '∞'}
-                    </Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table>
-            <Message info size="tiny" attached="bottom">
-              <p>
-                <strong>Note:</strong> The thresholds used for this attribute
-                are based on literature and expert feedback collected by NUMO. A
-                future version of this platform will include the ability to
-                adjust these thresholds.
-              </p>
-            </Message>
+            {thresholds && (
+              <>
+                <h4>Thresholds</h4>
+                <Table attached="top" compact>
+                  <Table.Header>
+                    <Table.Row>
+                      <Table.HeaderCell>Level</Table.HeaderCell>
+                      <Table.HeaderCell>Minimum</Table.HeaderCell>
+                      <Table.HeaderCell>Maximum</Table.HeaderCell>
+                    </Table.Row>
+                  </Table.Header>
+                  <Table.Body>
+                    {thresholds.map((row, index) => (
+                      <Table.Row key={index}>
+                        <Table.Cell>{index + 1}</Table.Cell>
+                        <Table.Cell>
+                          {row[0]} {defaultUnit}
+                        </Table.Cell>
+                        <Table.Cell>
+                          {(index !== 3 && `${row[1]} ${defaultUnit}`) || '∞'}
+                        </Table.Cell>
+                      </Table.Row>
+                    ))}
+                  </Table.Body>
+                </Table>
+                <Message info size="tiny" attached="bottom">
+                  <p>
+                    <strong>Note:</strong> The thresholds used for this
+                    attribute are based on literature and expert feedback
+                    collected by NUMO. A future version of this platform will
+                    include the ability to adjust these thresholds.
+                  </p>
+                </Message>
+              </>
+            )}
           </Modal.Content>
           <Modal.Actions>
             <Button color="green" onClick={handleCloseModal}>
