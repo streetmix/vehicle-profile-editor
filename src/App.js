@@ -187,7 +187,19 @@ function App () {
       <Grid stackable>
         <Grid.Row columns={1}>
           <Grid.Column>
-            <h1>Vehicle profile editor</h1>
+            <Header as="h1">
+              Vehicle profiles
+              <Header.Subheader>
+                A policy guidance tool by NUMO
+              </Header.Subheader>
+            </Header>
+            <p>
+              This platform presents guidance towards the level or
+              sustainability of any (existing or hypothetical) vehicle depending
+              on its attributes. There are pre-loaded values that you can choose
+              to learn the policy implications of existing vehicles, and you can
+              also add characteristics for any other vehicle and get a result.
+            </p>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row columns={2}>
@@ -196,6 +208,10 @@ function App () {
               <Header as="h3" dividing style={{ marginBottom: '1.5em' }}>
                 Vehicle attributes
               </Header>
+              <p>
+                Please choose from the drop-down menu at the bottom or input
+                specific vehicle attributes.
+              </p>
               <div className="input-row">
                 <label htmlFor="input-name">Vehicle name (optional)</label>
                 <Input
