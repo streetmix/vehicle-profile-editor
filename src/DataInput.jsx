@@ -1,6 +1,14 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Input, Dropdown, Icon, Modal, Button, Table } from 'semantic-ui-react'
+import {
+  Input,
+  Dropdown,
+  Icon,
+  Modal,
+  Button,
+  Table,
+  Message
+} from 'semantic-ui-react'
 import uniqueId from 'lodash/uniqueId'
 import ReactMarkdown from 'react-markdown'
 import UNITS from './data/units.json'
@@ -133,7 +141,7 @@ function DataInput (props) {
               )}
             </Modal.Description>
             <h4>Thresholds</h4>
-            <Table basic="very">
+            <Table attached="top" compact>
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>Level</Table.HeaderCell>
@@ -155,6 +163,14 @@ function DataInput (props) {
                 ))}
               </Table.Body>
             </Table>
+            <Message info size="tiny" attached="bottom">
+              <p>
+                <strong>Note:</strong> The thresholds used for this attribute
+                are based on literature and expert feedback collected by NUMO. A
+                future version of this platform will include the ability to
+                adjust these thresholds.
+              </p>
+            </Message>
           </Modal.Content>
           <Modal.Actions>
             <Button color="green" onClick={handleCloseModal}>
