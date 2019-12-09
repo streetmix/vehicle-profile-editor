@@ -15,6 +15,7 @@
     "definedUnits": "WEIGHT",
     "defaultUnit": "kg",
     "exampleValue": 1500,
+    "calc": "x + 80",
     "thresholds": [[0, 100], [100, 500], [500, 4000], [4000]]
   },
   {

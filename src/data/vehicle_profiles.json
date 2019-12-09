@@ -4,8 +4,11 @@
     "text": "Pedestrian: adult",
     "value": "Pedestrian: adult",
     "attributes": {
+      "capacity": {
+        "value": 1
+      },
       "weight": {
-        "value": 88,
+        "value": 0,
         "units": "kg"
       },
       "speed": {
@@ -21,31 +24,13 @@
     }
   },
   {
-    "key": "Pedestrian: children",
-    "text": "Pedestrian: children",
-    "value": "Pedestrian: children",
-    "attributes": {
-      "weight": {
-        "value": 32,
-        "units": "kg"
-      },
-      "speed": {
-        "value": 5,
-        "units": "km/h"
-      },
-      "footprint": {
-        "value": 0,
-        "units": "m²"
-      },
-      "emissions": 0,
-      "health": 5.39
-    }
-  },
-  {
     "key": "Automobile: SUV",
     "text": "Automobile: SUV",
     "value": "Automobile: SUV",
     "attributes": {
+      "capacity": {
+        "value": 5
+      },
       "weight": {
         "value": 1789,
         "units": "kg"
@@ -67,6 +52,9 @@
     "text": "Automobile: compact",
     "value": "Automobile: compact",
     "attributes": {
+      "capacity": {
+        "value": 5
+      },
       "weight": {
         "value": 1676,
         "units": "kg"
@@ -88,6 +76,9 @@
     "text": "Automobile: luxury car",
     "value": "Automobile: luxury car",
     "attributes": {
+      "capacity": {
+        "value": 5
+      },
       "weight": {
         "value": 2129,
         "units": "kg"
@@ -109,6 +100,9 @@
     "text": "Automobile: Electric",
     "value": "Automobile: Electric",
     "attributes": {
+      "capacity": {
+        "value": 5
+      },
       "weight": {
         "value": 2016,
         "units": "kg"
@@ -130,6 +124,9 @@
     "text": "Automobile: Hybrid",
     "value": "Automobile: Hybrid",
     "attributes": {
+      "capacity": {
+        "value": 5
+      },
       "weight": {
         "value": 1619,
         "units": "kg"
@@ -151,6 +148,9 @@
     "text": "Ridesharing",
     "value": "Ridesharing",
     "attributes": {
+      "capacity": {
+        "value": 5
+      },
       "weight": {
         "value": 1676,
         "units": "kg"
@@ -172,6 +172,9 @@
     "text": "Bicycle",
     "value": "Bicycle",
     "attributes": {
+      "capacity": {
+        "value": 1
+      },
       "weight": {
         "value": 98,
         "units": "kg"
@@ -193,6 +196,9 @@
     "text": "Ebike",
     "value": "Ebike",
     "attributes": {
+      "capacity": {
+        "value": 1
+      },
       "weight": {
         "value": 106,
         "units": "kg"
@@ -214,6 +220,9 @@
     "text": "E-scooter",
     "value": "E-scooter",
     "attributes": {
+      "capacity": {
+        "value": 1
+      },
       "weight": {
         "value": 100,
         "units": "kg"
@@ -235,6 +244,9 @@
     "text": "Bus: Diesel",
     "value": "Bus: Diesel",
     "attributes": {
+      "capacity": {
+        "value": 39
+      },
       "weight": {
         "value": 13696,
         "units": "kg"
@@ -256,6 +268,9 @@
     "text": "Bus: Electric",
     "value": "Bus: Electric",
     "attributes": {
+      "capacity": {
+        "value": 39
+      },
       "weight": {
         "value": 13696,
         "units": "kg"
@@ -277,6 +292,9 @@
     "text": "Pogo stick",
     "value": "Pogo stick",
     "attributes": {
+      "capacity": {
+        "value": 1
+      },
       "weight": {
         "value": 92,
         "units": "kg"
@@ -298,6 +316,9 @@
     "text": "Low speed autonomous shuttles (Black Panther)",
     "value": "Low speed autonomous shuttles (Black Panther)",
     "attributes": {
+      "capacity": {
+        "value": 12
+      },
       "weight": {
         "value": 2838,
         "units": "kg"
@@ -319,6 +340,9 @@
     "text": "Aladdin’s magic carpet",
     "value": "Aladdin’s magic carpet",
     "attributes": {
+      "capacity": {
+        "value": 10
+      },
       "weight": {
         "value": 98,
         "units": "kg"
@@ -340,6 +364,9 @@
     "text": "Mobile lounge at Dulles",
     "value": "Mobile lounge at Dulles",
     "attributes": {
+      "capacity": {
+        "value": 102
+      },
       "weight": {
         "value": 34779,
         "units": "kg"
@@ -357,10 +384,13 @@
     }
   },
   {
-    "key": "Nimbus 2000",
-    "text": "Nimbus 2000",
-    "value": "Nimbus 2000",
+    "key": "Nimbus 2000 Broomstick",
+    "text": "Nimbus 2000 Broomstick",
+    "value": "Nimbus 2000 Broomstick",
     "attributes": {
+      "capacity": {
+        "value": 1
+      },
       "weight": {
         "value": 94,
         "units": "kg"
@@ -382,6 +412,9 @@
     "text": "Mars Rover",
     "value": "Mars Rover",
     "attributes": {
+      "capacity": {
+        "value": 1
+      },
       "weight": {
         "value": 900,
         "units": "kg"
