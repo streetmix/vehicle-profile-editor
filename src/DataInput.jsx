@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Input, Dropdown, Icon, Modal, Button, Table } from 'semantic-ui-react'
 import uniqueId from 'lodash/uniqueId'
+import ReactMarkdown from 'react-markdown'
 import UNITS from './data/units.json'
 import './DataInput.css'
 
@@ -117,7 +118,17 @@ function DataInput (props) {
           </Modal.Header>
           <Modal.Content>
             <Modal.Description>
-              {description || (
+              {description ? (
+                // Markdown is used to parse links in descriptions
+                // We may gradually relax `allowedTypes` as time goes on,
+                // but for now, keep it to only the bare minimum needed
+                <ReactMarkdown
+                  source={description}
+                  unwrapDisallowed
+                  linkTarget={(url, text, title) => '_blank'}
+                  allowedTypes={['root', 'text', 'paragraph', 'link']}
+                />
+              ) : (
                 <p>No information is available for this attribute.</p>
               )}
             </Modal.Description>
