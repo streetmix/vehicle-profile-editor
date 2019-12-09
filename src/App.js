@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Dropdown, Button, Icon, Input, Header } from 'semantic-ui-react'
+import {
+  Grid,
+  Dropdown,
+  Button,
+  Icon,
+  Input,
+  Header,
+  Divider
+} from 'semantic-ui-react'
 import find from 'lodash/find'
 import DataInput from './DataInput'
 import RadarChart from './RadarChart'
+import Footer from './Footer'
 import ATTRIBUTES from './data/attributes_numo.json'
 import './App.css'
 
@@ -266,6 +275,13 @@ function App () {
             </Grid.Column>
           </Grid.Row>
         )}
+        {/* Branding / credits. Leave this at the bottom! */}
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            <Divider />
+            <Footer />
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
     </div>
   )

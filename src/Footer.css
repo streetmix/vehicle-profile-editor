@@ -1,0 +1,20 @@
+footer {
+  text-align: center;
+  font-size: 0.8em;
+  color: #666;
+  text-shadow: 0 1px white;
+}
+
+@media only screen and (min-width: 768px) {
+  footer {
+    text-align: right;
+  }
+}
+
+footer img {
+  vertical-align: middle;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  max-height: 2.5em;
+  opacity: 0.65;
+}
