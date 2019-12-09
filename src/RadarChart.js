@@ -17,7 +17,7 @@ function RadarChart ({ values }) {
         width={500}
         height={500}
         padding={70}
-        domainMax={5}
+        domainMax={4}
         highlighted={null}
         onHover={point => {
           if (point) {
