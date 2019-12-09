@@ -205,7 +205,7 @@ function App () {
         <Grid.Row columns={2}>
           <Grid.Column width={9}>
             <div className="box">
-              <Header as="h3" dividing style={{ marginBottom: '1.5em' }}>
+              <Header as="h3" dividing>
                 Vehicle attributes
               </Header>
               <p>
