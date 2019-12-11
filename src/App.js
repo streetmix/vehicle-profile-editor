@@ -47,16 +47,21 @@ function App () {
   const [success, setSuccess] = useState('')
   const [lastUpdate, setLastUpdate] = useState(new Date().toISOString())
   const [pending, setPending] = useState(false)
+  const [isLoadingProfiles, setLoadingProfiles] = useState(false)
   const [selectedVehicle, setSelectedVehicle] = useState({})
 
   useEffect(() => {
     async function fetchVehicleProfiles () {
+      setLoadingProfiles(true)
+
       try {
         const vehicles = await fetchData()
         setVehicles(vehicles)
       } catch (err) {
         setError(err)
       }
+
+      setLoadingProfiles(false)
     }
 
     fetchVehicleProfiles()
@@ -163,23 +168,6 @@ function App () {
               <Grid style={{ marginTop: '1em' }}>
                 <Grid.Row columns={2}>
                   <Grid.Column>
-                    <Dropdown
-                      className="icon"
-                      id="presets"
-                      placeholder="Load profile"
-                      fluid
-                      search
-                      selection
-                      value=""
-                      // options={VEHICLE_PROFILES}
-                      options={vehicles.map(item => ({
-                        text: item.text,
-                        value: item.key
-                      }))}
-                      onChange={handleDropdownChange}
-                    />
-                  </Grid.Column>
-                  <Grid.Column>
                     <Button
                       fluid
                       color="teal"
@@ -206,16 +194,32 @@ function App () {
                       </Button>
                     */}
                   </Grid.Column>
+                  <Grid.Column>
+                    <Dropdown
+                      className="icon"
+                      id="presets"
+                      placeholder={
+                        isLoadingProfiles
+                          ? 'Retrieving profiles...'
+                          : 'Load profile'
+                      }
+                      fluid
+                      search
+                      selection
+                      value=""
+                      loading={isLoadingProfiles}
+                      // options={VEHICLE_PROFILES}
+                      options={vehicles.map(item => ({
+                        text: item.text,
+                        value: item.key
+                      }))}
+                      onChange={handleDropdownChange}
+                    />
+                  </Grid.Column>
                 </Grid.Row>
-                {(error || success) && (
-                  <Grid.Row>
-                    <Grid.Column>
-                      {error && <Message error>{error}</Message>}
-                      {success && <Message success>{success}</Message>}
-                    </Grid.Column>
-                  </Grid.Row>
-                )}
               </Grid>
+              {error && <Message error>{error}</Message>}
+              {success && <Message success>{success}</Message>}
             </div>
           </Grid.Column>
           <Grid.Column width={7}>
