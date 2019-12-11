@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import {
   Grid,
   Dropdown,
@@ -7,7 +8,8 @@ import {
   Input,
   Header,
   Divider,
-  Message
+  Message,
+  Image
 } from 'semantic-ui-react'
 import find from 'lodash/find'
 import DataInput from './DataInput'
@@ -37,6 +39,29 @@ function getNewVehicleId () {
     Math.random()
       .toString(36)
       .substr(2, 9)
+  )
+}
+
+VehicleImage.propTypes = {
+  vehicle: PropTypes.object
+}
+
+function VehicleImage ({ vehicle }) {
+  if (!vehicle.image) return null
+
+  return (
+    <Image
+      src={`/images/${vehicle.image}`}
+      alt={`Image: ${vehicle.text}`}
+      bordered
+      fluid
+      rounded
+      style={{
+        padding: '20px',
+        maxHeight: '200px',
+        marginBottom: '1em'
+      }}
+    />
   )
 }
 
@@ -109,6 +134,8 @@ function App () {
 
     setValues(vehicle.attributes)
     setSelectedVehicle(vehicle)
+
+    console.log(vehicle)
 
     // Reset error state.
     setSuccess('')
@@ -224,6 +251,7 @@ function App () {
           </Grid.Column>
           <Grid.Column width={7}>
             <div className="box">
+              <VehicleImage vehicle={selectedVehicle} />
               <RadarChart values={values} />
             </div>
           </Grid.Column>
