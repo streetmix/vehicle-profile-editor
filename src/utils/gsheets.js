@@ -36,8 +36,8 @@ export async function saveData (method, data, values) {
 
   Object.keys(values).forEach(attribute => {
     if (meta.includes(attribute)) return
-    vehicle[`attr_${attribute}`] = values[attribute].value
-    vehicle[`units_${attribute}`] = values[attribute].units || ''
+    vehicle[`attr${attribute}`] = values[attribute].value
+    vehicle[`units${attribute}`] = values[attribute].units || ''
   })
 
   return fetch(GSHEET_URL, {
