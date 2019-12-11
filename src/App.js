@@ -13,6 +13,7 @@ import DataInput from './DataInput'
 import RadarChart from './RadarChart'
 import Footer from './Footer'
 import ATTRIBUTES from './data/attributes_numo.json'
+// import VEHICLE_PROFILES from './data/vehicle_profiles.json'
 import './App.css'
 
 function Attributes ({ values, sendValues = () => {} }) {
@@ -37,43 +38,28 @@ function getNewVehicleId () {
   )
 }
 
-function mapToVehicleProfile ({
-  attributesweight,
-  attributesspeed,
-  attributesfootprint,
-  attributesemissions,
-  attributeshealth,
-  metricsweight,
-  metricsspeed,
-  metricsfootprint,
-  metricsemissions,
-  metricshealth,
-  ...others
-}) {
+function mapToVehicleProfile (row) {
+  // Grab every column beginning with the string `attr`
+  // To add new attributes, just make a new column in the spreadsheet.
+  // The spreadsheet uses column names beginning with `attr_`, but
+  // the sheets API conversion process strips out the underscore.
+  const ids = Object.keys(row).filter(key => key.startsWith('attr'))
+
+  // For each corresponding attribute id, find the units column (if present)
+  // and build an attribute value object
+  const attributes = ids.reduce((obj, id) => {
+    const name = id.replace(/^attr/, '')
+    obj[name] = {
+      value: row[id],
+      units: row['units' + name] || null
+    }
+    return obj
+  }, {})
+
+  // Return all the attributes, including other properties in the row
   return {
-    attributes: {
-      weight: {
-        value: attributesweight,
-        units: metricsweight
-      },
-      speed: {
-        value: attributesspeed,
-        units: metricsspeed
-      },
-      footprint: {
-        value: attributesfootprint,
-        units: metricsfootprint
-      },
-      emissions: {
-        value: attributesemissions,
-        units: metricsemissions
-      },
-      health: {
-        value: attributeshealth,
-        units: metricshealth
-      }
-    },
-    ...others
+    ...row,
+    attributes
   }
 }
 
@@ -166,6 +152,7 @@ function App () {
   }
 
   function handleDropdownChange (event, data) {
+    // const vehicle = find(VEHICLE_PROFILES, { value: data.value })
     const vehicle = find(vehicles, { key: data.value })
 
     setValues(vehicle.attributes)
@@ -233,6 +220,7 @@ function App () {
                       search
                       selection
                       value=""
+                      // options={VEHICLE_PROFILES}
                       options={vehicles.map(item => ({
                         text: item.text,
                         value: item.key
