@@ -13,6 +13,7 @@ import find from 'lodash/find'
 import DataInput from './DataInput'
 import RadarChart from './RadarChart'
 import Footer from './Footer'
+import { fetchData, saveData } from './utils/gsheets'
 import ATTRIBUTES from './data/attributes_numo.json'
 // import VEHICLE_PROFILES from './data/vehicle_profiles.json'
 import './App.css'
@@ -39,31 +40,6 @@ function getNewVehicleId () {
   )
 }
 
-function mapToVehicleProfile (row) {
-  // Grab every column beginning with the string `attr`
-  // To add new attributes, just make a new column in the spreadsheet.
-  // The spreadsheet uses column names beginning with `attr_`, but
-  // the sheets API conversion process strips out the underscore.
-  const ids = Object.keys(row).filter(key => key.startsWith('attr'))
-
-  // For each corresponding attribute id, find the units column (if present)
-  // and build an attribute value object
-  const attributes = ids.reduce((obj, id) => {
-    const name = id.replace(/^attr/, '')
-    obj[name] = {
-      value: row[id],
-      units: row['units' + name] || null
-    }
-    return obj
-  }, {})
-
-  // Return all the attributes, including other properties in the row
-  return {
-    ...row,
-    attributes
-  }
-}
-
 function App () {
   const [values, setValues] = useState({})
   const [vehicles, setVehicles] = useState([])
@@ -72,28 +48,21 @@ function App () {
   const [lastUpdate, setLastUpdate] = useState(new Date().toISOString())
   const [pending, setPending] = useState(false)
   const [selectedVehicle, setSelectedVehicle] = useState({})
-  const url =
-    'https://lwh6oxm5db.execute-api.us-east-1.amazonaws.com/dev/vehicles'
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch(url).catch(err => {
-        if (err) {
-          console.error(err)
-        }
-        setError('Unable to fetch vehicle profiles')
-      })
-
-      if (!result) return
-      const myJson = await result.json()
-
-      const vehicles = myJson.map(mapToVehicleProfile)
-      setVehicles(vehicles)
+    async function fetchVehicleProfiles () {
+      try {
+        const vehicles = await fetchData()
+        setVehicles(vehicles)
+      } catch (err) {
+        setError(err)
+      }
     }
-    fetchData()
+
+    fetchVehicleProfiles()
   }, [lastUpdate])
 
-  async function createToApi () {
+  function handleSaveProfile (event) {
     const clone = {
       ...selectedVehicle,
       key: getNewVehicleId(),
@@ -108,43 +77,20 @@ function App () {
   //   saveToApi('PUT', selectedVehicle)
   // }
 
-  async function saveToApi (method, selected) {
+  async function saveToApi (method, vehicle) {
+    setSuccess('')
+    setError('')
     setPending(true)
-    console.log('saving', { values, vehicles })
 
-    if (!selected) {
-      console.log('no vehicle selected?')
-      return
+    try {
+      const result = await saveData('POST', vehicle, values)
+      if (!result) return
+      setLastUpdate(new Date().toISOString())
+      setSuccess('Saved vehicle to google sheets.')
+    } catch (err) {
+      setError('Unable to save vehicle profile.')
     }
-    const finalVehicle = {
-      key: selected.key,
-      text: selected.text,
-      value: selected.value
-    }
-    const meta = ['id', 'app:edited', 'save', 'del', '_xml']
-    Object.keys(values).forEach(vehicleAttribute => {
-      if (meta.includes(vehicleAttribute)) return
-      finalVehicle[`attributes${vehicleAttribute}`] =
-        values[vehicleAttribute].value
-      finalVehicle[`metrics${vehicleAttribute}`] =
-        values[vehicleAttribute].units
-    })
 
-    const result = await fetch(url, {
-      method,
-      body: JSON.stringify({ vehicle: finalVehicle })
-    }).catch(err => {
-      if (err) {
-        console.error(err)
-      }
-      setError('Unable to save vehicle profile')
-      setPending(false)
-    })
-
-    if (!result) return
-
-    setLastUpdate(new Date().toISOString())
-    setSuccess('Saved vehicle to google sheets.')
     setPending(false)
   }
 
@@ -239,7 +185,7 @@ function App () {
                       color="teal"
                       icon
                       labelPosition="left"
-                      onClick={createToApi}
+                      onClick={handleSaveProfile}
                       disabled={
                         pending || (selectedVehicle && !selectedVehicle.text)
                       }
