@@ -3,6 +3,7 @@
     "key": "Pedestrian: adult",
     "text": "Pedestrian: adult",
     "value": "Pedestrian: adult",
+    "image": "pedestrian1.svg",
     "attributes": {
       "capacity": {
         "value": 1
