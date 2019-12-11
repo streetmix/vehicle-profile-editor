@@ -6,7 +6,8 @@ import {
   Icon,
   Input,
   Header,
-  Divider
+  Divider,
+  Message
 } from 'semantic-ui-react'
 import find from 'lodash/find'
 import DataInput from './DataInput'
@@ -157,6 +158,10 @@ function App () {
 
     setValues(vehicle.attributes)
     setSelectedVehicle(vehicle)
+
+    // Reset error state.
+    setSuccess('')
+    setError('')
   }
 
   function handleNameChange (event, data) {
@@ -256,6 +261,14 @@ function App () {
                     */}
                   </Grid.Column>
                 </Grid.Row>
+                {(error || success) && (
+                  <Grid.Row>
+                    <Grid.Column>
+                      {error && <Message error>{error}</Message>}
+                      {success && <Message success>{success}</Message>}
+                    </Grid.Column>
+                  </Grid.Row>
+                )}
               </Grid>
             </div>
           </Grid.Column>
@@ -265,20 +278,7 @@ function App () {
             </div>
           </Grid.Column>
         </Grid.Row>
-        {error && (
-          <Grid.Row columns={1}>
-            <Grid.Column>
-              <h2 className="error">{error}</h2>
-            </Grid.Column>
-          </Grid.Row>
-        )}
-        {success && (
-          <Grid.Row columns={1}>
-            <Grid.Column>
-              <h2 className="success">{success}</h2>
-            </Grid.Column>
-          </Grid.Row>
-        )}
+
         {/* Branding / credits. Leave this at the bottom! */}
         <Grid.Row columns={1}>
           <Grid.Column>
