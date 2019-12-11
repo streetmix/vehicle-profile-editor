@@ -27,6 +27,7 @@
     "key": "Automobile: SUV",
     "text": "Automobile: SUV",
     "value": "Automobile: SUV",
+    "image": "suv.svg",
     "attributes": {
       "capacity": {
         "value": 5
@@ -51,6 +52,7 @@
     "key": "Automobile: compact",
     "text": "Automobile: compact",
     "value": "Automobile: compact",
+    "image": "car.svg",
     "attributes": {
       "capacity": {
         "value": 5
@@ -75,6 +77,7 @@
     "key": "Automobile: luxury car",
     "text": "Automobile: luxury car",
     "value": "Automobile: luxury car",
+    "image": "car.svg",
     "attributes": {
       "capacity": {
         "value": 5
@@ -99,6 +102,7 @@
     "key": "Automobile: Electric",
     "text": "Automobile: Electric",
     "value": "Automobile: Electric",
+    "image": "car.svg",
     "attributes": {
       "capacity": {
         "value": 5
@@ -123,6 +127,7 @@
     "key": "Automobile: Hybrid",
     "text": "Automobile: Hybrid",
     "value": "Automobile: Hybrid",
+    "image": "car.svg",
     "attributes": {
       "capacity": {
         "value": 5
@@ -147,6 +152,7 @@
     "key": "Ridesharing",
     "text": "Ridesharing",
     "value": "Ridesharing",
+    "image": "tnc.svg",
     "attributes": {
       "capacity": {
         "value": 5
@@ -171,6 +177,7 @@
     "key": "Bicycle",
     "text": "Bicycle",
     "value": "Bicycle",
+    "image": "bicycle.svg",
     "attributes": {
       "capacity": {
         "value": 1
@@ -195,6 +202,7 @@
     "key": "Ebike",
     "text": "Ebike",
     "value": "Ebike",
+    "image": "e-bike.svg",
     "attributes": {
       "capacity": {
         "value": 1
@@ -219,6 +227,7 @@
     "key": "E-scooter",
     "text": "E-scooter",
     "value": "E-scooter",
+    "image": "scooter.svg",
     "attributes": {
       "capacity": {
         "value": 1
@@ -243,6 +252,7 @@
     "key": "Bus: Diesel",
     "text": "Bus: Diesel",
     "value": "Bus: Diesel",
+    "image": "local_bus.svg",
     "attributes": {
       "capacity": {
         "value": 39
@@ -267,6 +277,7 @@
     "key": "Bus: Electric",
     "text": "Bus: Electric",
     "value": "Bus: Electric",
+    "image": "local_bus.svg",
     "attributes": {
       "capacity": {
         "value": 39
@@ -315,6 +326,7 @@
     "key": "Low speed autonomous shuttles (Black Panther)",
     "text": "Low speed autonomous shuttles (Black Panther)",
     "value": "Low speed autonomous shuttles (Black Panther)",
+    "image": "av_shuttle.svg",
     "attributes": {
       "capacity": {
         "value": 12

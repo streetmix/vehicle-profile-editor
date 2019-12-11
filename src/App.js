@@ -58,7 +58,7 @@ function VehicleImage ({ vehicle }) {
       rounded
       style={{
         padding: '20px',
-        maxHeight: '200px',
+        maxHeight: '150px',
         marginBottom: '1em'
       }}
     />
