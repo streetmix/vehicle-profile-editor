@@ -18,14 +18,6 @@
   margin-bottom: 0.5em;
 }
 
-.error {
-  color: #dc1414;
-}
-
-.success {
-  color: #4caf50;
-}
-
 /* Override Semantic UI removing the paragraph margin after a Header */
 h1 + p {
   margin-top: 1em;

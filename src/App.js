@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import {
   Grid,
   Dropdown,
@@ -6,13 +7,17 @@ import {
   Icon,
   Input,
   Header,
-  Divider
+  Divider,
+  Message,
+  Image
 } from 'semantic-ui-react'
 import find from 'lodash/find'
 import DataInput from './DataInput'
 import RadarChart from './RadarChart'
 import Footer from './Footer'
+import { fetchData, saveData } from './utils/gsheets'
 import ATTRIBUTES from './data/attributes_numo.json'
+// import VEHICLE_PROFILES from './data/vehicle_profiles.json'
 import './App.css'
 
 function Attributes ({ values, sendValues = () => {} }) {
@@ -37,44 +42,27 @@ function getNewVehicleId () {
   )
 }
 
-function mapToVehicleProfile ({
-  attributesweight,
-  attributesspeed,
-  attributesfootprint,
-  attributesemissions,
-  attributeshealth,
-  metricsweight,
-  metricsspeed,
-  metricsfootprint,
-  metricsemissions,
-  metricshealth,
-  ...others
-}) {
-  return {
-    attributes: {
-      weight: {
-        value: attributesweight,
-        units: metricsweight
-      },
-      speed: {
-        value: attributesspeed,
-        units: metricsspeed
-      },
-      footprint: {
-        value: attributesfootprint,
-        units: metricsfootprint
-      },
-      emissions: {
-        value: attributesemissions,
-        units: metricsemissions
-      },
-      health: {
-        value: attributeshealth,
-        units: metricshealth
-      }
-    },
-    ...others
-  }
+VehicleImage.propTypes = {
+  vehicle: PropTypes.object
+}
+
+function VehicleImage ({ vehicle }) {
+  if (!vehicle.image) return null
+
+  return (
+    <Image
+      src={`/images/${vehicle.image}`}
+      alt={`Image: ${vehicle.text}`}
+      bordered
+      fluid
+      rounded
+      style={{
+        padding: '20px',
+        maxHeight: '200px',
+        marginBottom: '1em'
+      }}
+    />
+  )
 }
 
 function App () {
@@ -84,29 +72,27 @@ function App () {
   const [success, setSuccess] = useState('')
   const [lastUpdate, setLastUpdate] = useState(new Date().toISOString())
   const [pending, setPending] = useState(false)
+  const [isLoadingProfiles, setLoadingProfiles] = useState(false)
   const [selectedVehicle, setSelectedVehicle] = useState({})
-  const url =
-    'https://lwh6oxm5db.execute-api.us-east-1.amazonaws.com/dev/vehicles'
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch(url).catch(err => {
-        if (err) {
-          console.error(err)
-        }
-        setError('Unable to fetch vehicle profiles')
-      })
+    async function fetchVehicleProfiles () {
+      setLoadingProfiles(true)
 
-      if (!result) return
-      const myJson = await result.json()
+      try {
+        const vehicles = await fetchData()
+        setVehicles(vehicles)
+      } catch (err) {
+        setError(err)
+      }
 
-      const vehicles = myJson.map(mapToVehicleProfile)
-      setVehicles(vehicles)
+      setLoadingProfiles(false)
     }
-    fetchData()
+
+    fetchVehicleProfiles()
   }, [lastUpdate])
 
-  async function createToApi () {
+  function handleSaveProfile (event) {
     const clone = {
       ...selectedVehicle,
       key: getNewVehicleId(),
@@ -121,43 +107,20 @@ function App () {
   //   saveToApi('PUT', selectedVehicle)
   // }
 
-  async function saveToApi (method, selected) {
+  async function saveToApi (method, vehicle) {
+    setSuccess('')
+    setError('')
     setPending(true)
-    console.log('saving', { values, vehicles })
 
-    if (!selected) {
-      console.log('no vehicle selected?')
-      return
+    try {
+      const result = await saveData('POST', vehicle, values)
+      if (!result) return
+      setLastUpdate(new Date().toISOString())
+      setSuccess('Saved vehicle to google sheets.')
+    } catch (err) {
+      setError('Unable to save vehicle profile.')
     }
-    const finalVehicle = {
-      key: selected.key,
-      text: selected.text,
-      value: selected.value
-    }
-    const meta = ['id', 'app:edited', 'save', 'del', '_xml']
-    Object.keys(values).forEach(vehicleAttribute => {
-      if (meta.includes(vehicleAttribute)) return
-      finalVehicle[`attributes${vehicleAttribute}`] =
-        values[vehicleAttribute].value
-      finalVehicle[`metrics${vehicleAttribute}`] =
-        values[vehicleAttribute].units
-    })
 
-    const result = await fetch(url, {
-      method,
-      body: JSON.stringify({ vehicle: finalVehicle })
-    }).catch(err => {
-      if (err) {
-        console.error(err)
-      }
-      setError('Unable to save vehicle profile')
-      setPending(false)
-    })
-
-    if (!result) return
-
-    setLastUpdate(new Date().toISOString())
-    setSuccess('Saved vehicle to google sheets.')
     setPending(false)
   }
 
@@ -166,10 +129,17 @@ function App () {
   }
 
   function handleDropdownChange (event, data) {
+    // const vehicle = find(VEHICLE_PROFILES, { value: data.value })
     const vehicle = find(vehicles, { key: data.value })
 
     setValues(vehicle.attributes)
     setSelectedVehicle(vehicle)
+
+    console.log(vehicle)
+
+    // Reset error state.
+    setSuccess('')
+    setError('')
   }
 
   function handleNameChange (event, data) {
@@ -225,28 +195,12 @@ function App () {
               <Grid style={{ marginTop: '1em' }}>
                 <Grid.Row columns={2}>
                   <Grid.Column>
-                    <Dropdown
-                      className="icon"
-                      id="presets"
-                      placeholder="Load profile"
-                      fluid
-                      search
-                      selection
-                      value=""
-                      options={vehicles.map(item => ({
-                        text: item.text,
-                        value: item.key
-                      }))}
-                      onChange={handleDropdownChange}
-                    />
-                  </Grid.Column>
-                  <Grid.Column>
                     <Button
                       fluid
                       color="teal"
                       icon
                       labelPosition="left"
-                      onClick={createToApi}
+                      onClick={handleSaveProfile}
                       disabled={
                         pending || (selectedVehicle && !selectedVehicle.text)
                       }
@@ -267,30 +221,42 @@ function App () {
                       </Button>
                     */}
                   </Grid.Column>
+                  <Grid.Column>
+                    <Dropdown
+                      className="icon"
+                      id="presets"
+                      placeholder={
+                        isLoadingProfiles
+                          ? 'Retrieving profiles...'
+                          : 'Load profile'
+                      }
+                      fluid
+                      search
+                      selection
+                      value=""
+                      loading={isLoadingProfiles}
+                      // options={VEHICLE_PROFILES}
+                      options={vehicles.map(item => ({
+                        text: item.text,
+                        value: item.key
+                      }))}
+                      onChange={handleDropdownChange}
+                    />
+                  </Grid.Column>
                 </Grid.Row>
               </Grid>
+              {error && <Message error>{error}</Message>}
+              {success && <Message success>{success}</Message>}
             </div>
           </Grid.Column>
           <Grid.Column width={7}>
             <div className="box">
+              <VehicleImage vehicle={selectedVehicle} />
               <RadarChart values={values} />
             </div>
           </Grid.Column>
         </Grid.Row>
-        {error && (
-          <Grid.Row columns={1}>
-            <Grid.Column>
-              <h2 className="error">{error}</h2>
-            </Grid.Column>
-          </Grid.Row>
-        )}
-        {success && (
-          <Grid.Row columns={1}>
-            <Grid.Column>
-              <h2 className="success">{success}</h2>
-            </Grid.Column>
-          </Grid.Row>
-        )}
+
         {/* Branding / credits. Leave this at the bottom! */}
         <Grid.Row columns={1}>
           <Grid.Column>

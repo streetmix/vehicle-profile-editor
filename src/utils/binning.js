@@ -1,3 +1,4 @@
+import { parse, parser } from 'mathjs'
 import find from 'lodash/find'
 import { convertUnits } from './conversions'
 import { ATTR_TYPE_DEPENDENT } from '../constants'
@@ -16,14 +17,54 @@ export function mapAttributeValuesToLevel (attributes) {
       typeof attribute === 'object' ? attribute.value : attribute
     )
 
+    // Bail if not a number
+    if (Number.isNaN(inputValue)) {
+      return obj
+    }
+
     // Convert to units if they don't match; if no conversion method is found, log it but use default
-    let value = inputValue
+    // TODO: also use mathjs to do units conversion
+    let normalizedValue = inputValue
     if (
       (typeof attribute === 'object'
         ? attribute.units
         : definition.defaultUnit) !== definition.defaultUnit
     ) {
-      value = convertUnits(inputValue, attribute.units, definition.defaultUnit)
+      normalizedValue = convertUnits(
+        inputValue,
+        attribute.units,
+        definition.defaultUnit
+      )
+    }
+
+    // Run calculation (using mathjs package to calculate) if `calc` is defined
+    // Otherwise the input value passes through as-is
+    let value
+    if (definition.calc) {
+      const math = parser()
+
+      // Determine what variables (symbols in mathjs) we need to set
+      const tree = parse(definition.calc)
+      const symbols = tree.filter(node => node.isSymbolNode)
+
+      for (let i = 0; i < symbols.length; i++) {
+        const symbol = symbols[i]
+
+        if (symbol.name === 'x') {
+          math.set('x', normalizedValue)
+        } else {
+          const variable = attributes[symbol.name]
+          if (!variable) {
+            console.log(variable, 'not found')
+          }
+          math.set(symbol.name, variable.value)
+        }
+      }
+
+      value = math.evaluate(definition.calc)
+      math.clear()
+    } else {
+      value = normalizedValue
     }
 
     let level = 0

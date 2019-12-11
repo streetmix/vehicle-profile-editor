@@ -35,6 +35,7 @@
     "@types/react-dom": "^16.8.5",
     "@types/react-router-dom": "^5.1.3",
     "lodash": "^4.17.15",
+    "mathjs": "^6.2.5",
     "react": "^16.12.0",
     "react-d3-radar": "^1.0.0-rc6",
     "react-dom": "^16.12.0",
