@@ -5,7 +5,7 @@
 
 function logError (from, to) {
   console.warn(
-    `Unable to fnd a conversion factor from "${from}" to "${to}". Returning the original value.`
+    `Unable to find a conversion factor from "${from}" to "${to}". Returning the original value.`
   )
 }
 
@@ -20,6 +20,12 @@ function logError (from, to) {
  * @returns - new value in the desired unit; or original value if no conversion is found
  */
 export function convertUnits (value, from, to) {
+  // If no original unit is provided, don't log an error, instead,
+  // just pass the value through as-is.
+  if (typeof from === 'undefined' || from === null) {
+    return value
+  }
+
   switch (from) {
     case 'lb': {
       switch (to) {
