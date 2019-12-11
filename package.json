@@ -44,7 +44,7 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",
     "svg-crowbar": "github:louh/svg-crowbar#package",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.3"
   },
   "devDependencies": {
     "husky": "^3.1.0",
