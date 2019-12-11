@@ -53,10 +53,8 @@ export function mapAttributeValuesToLevel (attributes) {
         if (symbol.name === 'x') {
           math.set('x', normalizedValue)
         } else {
-          const variable = attributes[symbol.name]
-          if (!variable) {
-            console.log(variable, 'not found')
-          }
+          // Default to value of 0 if not present
+          const variable = attributes[symbol.name] || { value: 0 }
           math.set(symbol.name, variable.value)
         }
       }

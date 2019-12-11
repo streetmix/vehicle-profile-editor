@@ -17,7 +17,7 @@ function RadarChart ({ values }) {
 
   return (
     <>
-      {renderSummaryPolicyText(summary)}
+      {Object.entries(levels).length > 0 && renderSummaryPolicyText(summary)}
       <Radar
         width={500}
         height={500}
