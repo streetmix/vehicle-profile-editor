@@ -1,16 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  Input,
-  Dropdown,
-  Icon,
-  Modal,
-  Button,
-  Table,
-  Message
-} from 'semantic-ui-react'
+import { Input, Dropdown } from 'semantic-ui-react'
 import uniqueId from 'lodash/uniqueId'
-import ReactMarkdown from 'react-markdown'
+import InputHelp from './InputHelp'
 import UNITS from '../../data/units.json'
 import './DataInput.css'
 
@@ -38,18 +30,10 @@ DataInput.propTypes = {
 
 function DataInput (props) {
   const { attribute, value, onChange = () => {} } = props
-  const {
-    name,
-    description,
-    definedUnits,
-    defaultUnit,
-    exampleValue,
-    thresholds
-  } = attribute
+  const { name, definedUnits, defaultUnit, exampleValue } = attribute
   const units =
     typeof definedUnits !== 'undefined' ? UNITS[definedUnits] : defaultUnit
 
-  const [isModalOpen, setModalOpen] = useState(false)
   const inputValue = typeof value === 'object' ? value.value : value
   const unitsValue =
     (typeof value === 'object' && value.units) ||
@@ -69,14 +53,6 @@ function DataInput (props) {
       value: inputValue,
       units: data.value
     })
-  }
-
-  function handleModalOpen (event) {
-    setModalOpen(true)
-  }
-
-  function handleCloseModal (event) {
-    setModalOpen(false)
   }
 
   const unitLabel =
@@ -105,87 +81,7 @@ function DataInput (props) {
         placeholder={`example: ${exampleValue}`}
         onChange={handleInputChange}
       />
-      <div className="input-help">
-        <Icon circular color="teal" name="help" onClick={handleModalOpen} />
-        <Modal
-          open={isModalOpen}
-          onClose={handleCloseModal}
-          size="tiny"
-          closeIcon
-        >
-          <Modal.Header>
-            <Icon
-              circular
-              color="teal"
-              name="help"
-              size="tiny"
-              style={{
-                position: 'relative',
-                top: '-3px',
-                marginRight: '1em'
-              }}
-            />
-            {name}
-          </Modal.Header>
-          <Modal.Content>
-            <Modal.Description>
-              {description ? (
-                // Markdown is used to parse links in descriptions
-                // We may gradually relax `allowedTypes` as time goes on,
-                // but for now, keep it to only the bare minimum needed
-                <ReactMarkdown
-                  source={description}
-                  unwrapDisallowed
-                  linkTarget={(url, text, title) => '_blank'}
-                  allowedTypes={['root', 'text', 'paragraph', 'link']}
-                />
-              ) : (
-                <p>No information is available for this attribute.</p>
-              )}
-            </Modal.Description>
-            {thresholds && (
-              <>
-                <h4>Thresholds</h4>
-                <Table attached="top" compact>
-                  <Table.Header>
-                    <Table.Row>
-                      <Table.HeaderCell>Level</Table.HeaderCell>
-                      <Table.HeaderCell>Minimum</Table.HeaderCell>
-                      <Table.HeaderCell>Maximum</Table.HeaderCell>
-                    </Table.Row>
-                  </Table.Header>
-                  <Table.Body>
-                    {thresholds.map((row, index) => (
-                      <Table.Row key={index}>
-                        <Table.Cell>{index + 1}</Table.Cell>
-                        <Table.Cell>
-                          {row[0]} {defaultUnit}
-                        </Table.Cell>
-                        <Table.Cell>
-                          {(index !== 3 && `${row[1]} ${defaultUnit}`) || '∞'}
-                        </Table.Cell>
-                      </Table.Row>
-                    ))}
-                  </Table.Body>
-                </Table>
-                <Message info size="tiny" attached="bottom">
-                  <p>
-                    <strong>Note:</strong> The thresholds used for this
-                    attribute are based on literature and expert feedback
-                    collected by NUMO. A future version of this platform will
-                    include the ability to adjust these thresholds.
-                  </p>
-                </Message>
-              </>
-            )}
-          </Modal.Content>
-          <Modal.Actions>
-            <Button color="green" onClick={handleCloseModal}>
-              OK
-            </Button>
-          </Modal.Actions>
-        </Modal>
-      </div>
+      <InputHelp attribute={attribute} />
     </div>
   )
 }
