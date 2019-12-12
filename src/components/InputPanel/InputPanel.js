@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
-  Grid,
   Header,
   Dropdown,
   Button,
@@ -117,8 +116,6 @@ function InputPanel ({
     setValues(vehicle.attributes)
     setSelectedVehicle(vehicle)
 
-    console.log(vehicle)
-
     // Reset error state.
     setSuccess('')
     setError('')
@@ -137,13 +134,36 @@ function InputPanel ({
   return (
     <div className="box">
       <Header as="h3" dividing>
-        Vehicle attributes
+        Input vehicle attributes
       </Header>
 
       <p>
         Please choose from the drop-down menu at the bottom or input specific
         vehicle attributes.
       </p>
+
+      <div className="input-row">
+        <Dropdown
+          className="icon"
+          id="presets"
+          placeholder={
+            isLoadingProfiles
+              ? 'Retrieving profiles...'
+              : 'Select pre-loaded vehicle'
+          }
+          fluid
+          search
+          selection
+          value=""
+          loading={isLoadingProfiles}
+          // options={VEHICLE_PROFILES}
+          options={vehicles.map(item => ({
+            text: item.text,
+            value: item.key
+          }))}
+          onChange={handleDropdownChange}
+        />
+      </div>
 
       <div className="input-row">
         <label htmlFor="input-name">Vehicle name (optional)</label>
@@ -157,55 +177,38 @@ function InputPanel ({
 
       <Attributes values={values} sendValues={sendValues} />
 
-      <Grid style={{ marginTop: '1em' }}>
-        <Grid.Row columns={2}>
-          <Grid.Column>
-            <Button
-              fluid
-              color="teal"
-              icon
-              labelPosition="left"
-              onClick={handleSaveProfile}
-              disabled={pending || (selectedVehicle && !selectedVehicle.text)}
-            >
-              <Icon name="save" />
-              {pending ? 'Saving ...' : 'Save profile'}
-            </Button>
-            {/*
-              <Button
-                primary
-                basic
-                icon
-                labelPosition="left"
-                onClick={updateToApi}
-              >
-                <Icon name="download" />
-                Save as new vehicle
-              </Button>
-            */}
-          </Grid.Column>
-          <Grid.Column>
-            <Dropdown
-              className="icon"
-              id="presets"
-              placeholder={
-                isLoadingProfiles ? 'Retrieving profiles...' : 'Load profile'
-              }
-              fluid
-              search
-              selection
-              value=""
-              loading={isLoadingProfiles}
-              // options={VEHICLE_PROFILES}
-              options={vehicles.map(item => ({
-                text: item.text,
-                value: item.key
-              }))}
-              onChange={handleDropdownChange}
-            />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <Button
+        fluid
+        color="green"
+        icon
+        labelPosition="left"
+        onClick={handleSaveProfile}
+        disabled={pending || (selectedVehicle && !selectedVehicle.text)}
+      >
+        {pending ? (
+          <>
+            <Icon loading name="spinner" />
+            Saving ...
+          </>
+        ) : (
+          <>
+            <Icon name="save" />
+            Save profile
+          </>
+        )}
+      </Button>
+      {/*
+        <Button
+          primary
+          basic
+          icon
+          labelPosition="left"
+          onClick={updateToApi}
+        >
+          <Icon name="download" />
+          Save as new vehicle
+        </Button>
+      */}
 
       {error && <Message error>{error}</Message>}
       {success && <Message success>{success}</Message>}
