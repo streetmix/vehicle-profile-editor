@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Message } from 'semantic-ui-react'
-import { calculateSummaryIndicator } from './utils/summary'
+import { calculateSummaryIndicator } from '../../utils/summary'
 
 SummaryPolicy.propTypes = {
   levels: PropTypes.objectOf(PropTypes.number)
@@ -10,6 +10,11 @@ SummaryPolicy.propTypes = {
 function SummaryPolicy ({ levels }) {
   const summary = calculateSummaryIndicator(levels)
   let message = null
+
+  // Render nothing if there's no summary
+  if (summary === null) {
+    return null
+  }
 
   if (summary >= 3) {
     message = (
@@ -34,7 +39,7 @@ function SummaryPolicy ({ levels }) {
         </p>
       </Message>
     )
-  } else if (summary >= 0 && summary <= 2.2) {
+  } else if (summary <= 2.2) {
     message = (
       <Message positive>
         <Message.Header>

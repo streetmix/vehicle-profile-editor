@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import {
   Grid,
   Dropdown,
@@ -8,12 +8,11 @@ import {
   Input,
   Header,
   Divider,
-  Message,
-  Image
+  Message
 } from 'semantic-ui-react'
 import find from 'lodash/find'
 import DataInput from './DataInput'
-import RadarChart from './RadarChart'
+import ResultPanel from './components/ResultPanel/ResultPanel'
 import Footer from './Footer'
 import { fetchData, saveData } from './utils/gsheets'
 import ATTRIBUTES from './data/attributes_numo.json'
@@ -39,29 +38,6 @@ function getNewVehicleId () {
     Math.random()
       .toString(36)
       .substr(2, 9)
-  )
-}
-
-VehicleImage.propTypes = {
-  vehicle: PropTypes.object
-}
-
-function VehicleImage ({ vehicle }) {
-  if (!vehicle.image) return null
-
-  return (
-    <Image
-      src={`/images/${vehicle.image}`}
-      alt={`Image: ${vehicle.text}`}
-      bordered
-      fluid
-      rounded
-      style={{
-        padding: '20px',
-        maxHeight: '150px',
-        marginBottom: '1em'
-      }}
-    />
   )
 }
 
@@ -250,10 +226,7 @@ function App () {
             </div>
           </Grid.Column>
           <Grid.Column width={7}>
-            <div className="box">
-              <VehicleImage vehicle={selectedVehicle} />
-              <RadarChart values={values} />
-            </div>
+            <ResultPanel vehicle={selectedVehicle} values={values} />
           </Grid.Column>
         </Grid.Row>
 

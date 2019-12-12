@@ -3,21 +3,16 @@ import PropTypes from 'prop-types'
 import { Button, Icon } from 'semantic-ui-react'
 import Radar from 'react-d3-radar'
 import downloadSvg, { downloadPng } from 'svg-crowbar'
-import SummaryPolicy from './SummaryPolicy'
-import { ATTR_TYPE_DEPENDENT } from './constants'
-import { mapAttributeValuesToLevel } from './utils/binning'
-import ATTRIBUTES from './data/attributes_numo.json'
+import { ATTR_TYPE_DEPENDENT } from '../../constants'
+import ATTRIBUTES from '../../data/attributes_numo.json'
 
 RadarChart.propTypes = {
-  values: PropTypes.object
+  levels: PropTypes.objectOf(PropTypes.number)
 }
 
-function RadarChart ({ values }) {
-  const levels = mapAttributeValuesToLevel(values)
-
+function RadarChart ({ levels }) {
   return (
     <>
-      <SummaryPolicy levels={levels} />
       <Radar
         width={500}
         height={500}
