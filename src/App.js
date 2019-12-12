@@ -6,14 +6,14 @@ import {
   Button,
   Icon,
   Input,
-  Header,
   Divider,
   Message
 } from 'semantic-ui-react'
 import find from 'lodash/find'
 import DataInput from './DataInput'
 import ResultPanel from './components/ResultPanel/ResultPanel'
-import Footer from './Footer'
+import Header from './components/Header'
+import Footer from './components/Footer'
 import { fetchData, saveData } from './utils/gsheets'
 import ATTRIBUTES from './data/attributes_numo.json'
 // import VEHICLE_PROFILES from './data/vehicle_profiles.json'
@@ -133,19 +133,7 @@ function App () {
       <Grid stackable>
         <Grid.Row columns={1}>
           <Grid.Column>
-            <Header as="h1">
-              Vehicle profiles
-              <Header.Subheader>
-                A policy guidance tool by NUMO
-              </Header.Subheader>
-            </Header>
-            <p>
-              This platform presents guidance towards the level or
-              sustainability of any (existing or hypothetical) vehicle depending
-              on its attributes. There are pre-loaded values that you can choose
-              to learn the policy implications of existing vehicles, and you can
-              also add characteristics for any other vehicle and get a result.
-            </p>
+            <Header />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row columns={2}>

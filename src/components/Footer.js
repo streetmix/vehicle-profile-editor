@@ -1,6 +1,6 @@
 import React from 'react'
-import numoLogo from './images/logo_numo.png'
-import streetmixLogo from './images/logo_streetmix.svg'
+import numoLogo from '../images/logo_numo.png'
+import streetmixLogo from '../images/logo_streetmix.svg'
 import './Footer.css'
 
 function Footer (props) {
