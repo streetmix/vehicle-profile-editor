@@ -11,7 +11,7 @@ import {
 } from 'semantic-ui-react'
 import uniqueId from 'lodash/uniqueId'
 import ReactMarkdown from 'react-markdown'
-import UNITS from './data/units.json'
+import UNITS from '../../data/units.json'
 import './DataInput.css'
 
 DataInput.propTypes = {

@@ -10,14 +10,6 @@
   margin: 0 auto;
 }
 
-.download-buttons button {
-  width: 100%;
-}
-
-.download-buttons button:not(:last-of-type) {
-  margin-bottom: 0.5em;
-}
-
 /* Override Semantic UI removing the paragraph margin after a Header */
 h1 + p {
   margin-top: 1em;
