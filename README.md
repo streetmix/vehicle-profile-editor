@@ -1,10 +1,49 @@
+# Vehicle profile editor
+
+A proof-of-concept developed jointly by the New Urban Mobility Alliance (NUMO) and Streetmix. This profile editor is simplified version of a guidance framework for policies for new vehicles and services.
+
 ## Attributes
 
-There are two types of attributes: **independent** and **dependent** variables.
+The basis of the framework uses **vehicle attributes**. Attributes are measurable descriptors for any form of vehicle or transportation. The NUMO framework visualizes five main attributes (although many more can exist): weight, speed, footprint (space occupied), emissions, and health (in terms of metabolic activity). This tool is designed to account for any number of attributes, in case policymakers require some flexibility.
 
-**Dependent** variable attributes will be mapped, by thresholds, to a 4-point scale, calculated by a set equation. Dependent variables may use other constant values and independent variables to determine its rating. Attributes must be specifically set to be a dependent variable to be visualized in the radar chart.
+We also separate attributes into two types: **independent** and **dependent** variables.
+
+**Dependent** variable attributes will be mapped, by thresholds, to a 4-point scale, calculated by a set equation. Dependent variables may use other constant values and independent variables (but not other dependent variables) to determine its rating. Attributes must be specifically set to be a dependent variable to be visualized in the radar chart.
 
 **Independent** variable attributes are values that dependent variables require to be calculated. They are not measured and mapped to the radar chart. An example of an independent variable is the vehicle's _maximum capacity_. Some dependent variables, such as the vehicle's _total space occupied_ will be calculated on a per-passenger basis. While _space occupied_ will be visualized, _maximum capacity_ was factored into the calculation and will not be visualized.
+
+### Data structure for attributes
+
+```json
+[
+  {
+    "id": "weight", // identifier used in code
+    "name": "Weight", // display name
+    "type": "DEPENDENT", // whether it is a DEPENDENT or INDEPENDENT variable
+    "description": "Please write the weight of the vehicle when empty. The heavier a vehicle, the greater risk it may pose when in movement. We will add a weight of one driver as 80 kg (160 lb) for our calculations.", // description in help text
+    "definedUnits": "WEIGHT", // (optional) whether this uses predefined unit types
+    "defaultUnit": "kg", // default (preferred) unit for this attribute
+    "exampleValue": 1500, // sample value for UI
+    "calc": "x + 80", // (optional) calculation of this value (see section below)
+    "thresholds": [[0, 100], [100, 500], [500, 4000], [4000]] // values mapped to a 4-point scale
+  },
+  ...
+]
+```
+
+### Calculations
+
+Calculations are equations evaluated by `mathjs` to determine a final value, given an input value. This is used to do any processing to the value before mapping it to a threshold. For instance, the _weight_ attribute only asks for the weight of the vehicle, but the threshold calculation actually applies the average weight of a human driver, resulting in the equation of `x + 80`.
+
+The `x` is always used to mean the input value. If `calc` is not provided, the input value is unchanged (as if the equation was simply `x`).
+
+Calculations can refer to other independent variables. You can use an attribute's `id` as a placeholder. For instance, the _footprint_ (space occupied) attribute is calculated as a per-person area. A vehicle whose footprint is 10 m² with a _capacity_ of 5 has the equation `x / capacity`, resulting in a final calculated value of 2 m². This is then mapped to a threshold.
+
+If the independent variable does not have a value, the calculation will subsitute it with a zero to avoid errors. Note that `mathjs` treats divide-by-zero as equal to `Infinity`.
+
+### Thresholds
+
+Thresholds are an array of minimum and maximum values that define ranges, mapping calculated attribute values to levels. The NUMO framework has a maximum of four levels, but theoretically an attribute's defined thresholds can be any number.
 
 ### Predefined unit types
 

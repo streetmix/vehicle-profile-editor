@@ -20,8 +20,12 @@
         "value": 0,
         "units": "m²"
       },
-      "emissions": 0,
-      "health": 4.61
+      "emissions": {
+        "value": 0
+      },
+      "health": {
+        "value": 4.61
+      }
     }
   },
   {
@@ -45,8 +49,12 @@
         "value": 10,
         "units": "m²"
       },
-      "emissions": 182.4,
-      "health": 1.28
+      "emissions": {
+        "value": 182.4
+      },
+      "health": {
+        "value": 1.28
+      }
     }
   },
   {
@@ -70,8 +78,12 @@
         "value": 10,
         "units": "m²"
       },
-      "emissions": 89.1,
-      "health": 1.28
+      "emissions": {
+        "value": 89.1
+      },
+      "health": {
+        "value": 1.28
+      }
     }
   },
   {
@@ -95,8 +107,12 @@
         "value": 10,
         "units": "m²"
       },
-      "emissions": 141.6,
-      "health": 1.28
+      "emissions": {
+        "value": 141.6
+      },
+      "health": {
+        "value": 1.28
+      }
     }
   },
   {
@@ -120,8 +136,12 @@
         "value": 10,
         "units": "m²"
       },
-      "emissions": 0,
-      "health": 1.28
+      "emissions": {
+        "value": 0
+      },
+      "health": {
+        "value": 1.28
+      }
     }
   },
   {
@@ -145,8 +165,12 @@
         "value": 10,
         "units": "m²"
       },
-      "emissions": 76.9,
-      "health": 1.28
+      "emissions": {
+        "value": 76.9
+      },
+      "health": {
+        "value": 1.28
+      }
     }
   },
   {
@@ -170,8 +194,12 @@
         "value": 10,
         "units": "m²"
       },
-      "emissions": 163.4,
-      "health": 1.28
+      "emissions": {
+        "value": 163.4
+      },
+      "health": {
+        "value": 1.28
+      }
     }
   },
   {
@@ -195,8 +223,12 @@
         "value": 1,
         "units": "m²"
       },
-      "emissions": 0,
-      "health": 6.44
+      "emissions": {
+        "value": 0
+      },
+      "health": {
+        "value": 6.44
+      }
     }
   },
   {
@@ -220,8 +252,12 @@
         "value": 1,
         "units": "m²"
       },
-      "emissions": 0,
-      "health": 4
+      "emissions": {
+        "value": 0
+      },
+      "health": {
+        "value": 4
+      }
     }
   },
   {
@@ -245,8 +281,12 @@
         "value": 0,
         "units": "m²"
       },
-      "emissions": 0,
-      "health": 2
+      "emissions": {
+        "value": 0
+      },
+      "health": {
+        "value": 2
+      }
     }
   },
   {
@@ -270,8 +310,12 @@
         "value": 31.72,
         "units": "m²"
       },
-      "emissions": 2021,
-      "health": 1.67
+      "emissions": {
+        "value": 2021
+      },
+      "health": {
+        "value": 1.67
+      }
     }
   },
   {
@@ -295,8 +339,12 @@
         "value": 31.72,
         "units": "m²"
       },
-      "emissions": 0,
-      "health": 1.67
+      "emissions": {
+        "value": 0
+      },
+      "health": {
+        "value": 1.67
+      }
     }
   },
   {
@@ -319,8 +367,12 @@
         "value": 0,
         "units": "m²"
       },
-      "emissions": 0,
-      "health": 4
+      "emissions": {
+        "value": 0
+      },
+      "health": {
+        "value": 4
+      }
     }
   },
   {
@@ -344,8 +396,12 @@
         "value": 8,
         "units": "m²"
       },
-      "emissions": 0,
-      "health": 1.67
+      "emissions": {
+        "value": 0
+      },
+      "health": {
+        "value": 1.67
+      }
     }
   },
   {
@@ -369,8 +425,12 @@
         "value": 12,
         "units": "m²"
       },
-      "emissions": 0,
-      "health": 1
+      "emissions": {
+        "value": 0
+      },
+      "health": {
+        "value": 1
+      }
     }
   },
   {
@@ -393,8 +453,12 @@
         "value": 80.85,
         "units": "m²"
       },
-      "emissions": 2060,
-      "health": 1.3
+      "emissions": {
+        "value": 2060
+      },
+      "health": {
+        "value": 1.3
+      }
     }
   },
   {
@@ -417,8 +481,12 @@
         "value": 0.354,
         "units": "m²"
       },
-      "emissions": 0,
-      "health": 1
+      "emissions": {
+        "value": 0
+      },
+      "health": {
+        "value": 1
+      }
     }
   },
   {
@@ -441,8 +509,12 @@
         "value": 8.4,
         "units": "m²"
       },
-      "emissions": 0,
-      "health": 1
+      "emissions": {
+        "value": 0
+      },
+      "health": {
+        "value": 1
+      }
     }
   }
 ]
