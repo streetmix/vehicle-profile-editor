@@ -10,12 +10,16 @@ ResultPanel.propTypes = {
     image: PropTypes.string,
     text: PropTypes.string
   }),
-  values: PropTypes.object
+  values: PropTypes.objectOf(
+    PropTypes.shape({
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      units: PropTypes.string
+    })
+  )
 }
 
 function ResultPanel ({ vehicle, values }) {
   const levels = mapAttributeValuesToLevel(values)
-  console.log('need to define', values)
 
   return (
     <div className="box">

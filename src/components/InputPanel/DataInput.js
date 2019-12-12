@@ -17,14 +17,10 @@ DataInput.propTypes = {
       .isRequired,
     thresholds: PropTypes.arrayOf(PropTypes.array)
   }),
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.shape({
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      units: PropTypes.string
-    })
-  ]),
+  value: PropTypes.shape({
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    units: PropTypes.string
+  }),
   onChange: PropTypes.func
 }
 
