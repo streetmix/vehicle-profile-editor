@@ -338,6 +338,7 @@
   {
     "id": "vehicle_g32v57mam",
     "name": "Pogo stick",
+    "image": "pogo_stick_jump.svg",
     "attributes": {
       "capacity": {
         "value": 1
