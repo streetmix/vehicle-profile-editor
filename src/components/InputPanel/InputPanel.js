@@ -10,50 +10,45 @@ import {
 } from 'semantic-ui-react'
 import find from 'lodash/find'
 import DataInput from './DataInput'
+import { getNewVehicleId } from '../../utils/uniqueid'
 import { fetchData, saveData } from '../../utils/gsheets'
 import ATTRIBUTES from '../../data/attributes_numo.json'
 // import VEHICLE_PROFILES from '../../data/vehicle_profiles.json'
 
-function Attributes ({ values, sendValues = () => {} }) {
+function Attributes ({ values = {}, onChange = () => {} }) {
   return ATTRIBUTES.map(attribute => (
     <DataInput
       key={attribute.id}
       attribute={attribute}
       value={values[attribute.id]}
       onChange={value => {
-        sendValues({ ...values, [attribute.id]: value })
+        onChange({ ...values, [attribute.id]: value })
       }}
     />
   ))
 }
 
-function getNewVehicleId () {
-  return (
-    'vehicle_' +
-    Math.random()
-      .toString(36)
-      .substr(2, 9)
-  )
-}
-
 InputPanel.propTypes = {
-  values: PropTypes.object,
-  selectedVehicle: PropTypes.object,
-  setValues: PropTypes.func,
-  setSelectedVehicle: PropTypes.func
+  vehicle: PropTypes.shape({
+    image: PropTypes.string,
+    name: PropTypes.string,
+    attributes: PropTypes.objectOf(
+      PropTypes.shape({
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        units: PropTypes.string
+      })
+    )
+  }),
+  setVehicle: PropTypes.func
 }
 
-function InputPanel ({
-  values,
-  selectedVehicle,
-  setValues,
-  setSelectedVehicle
-}) {
-  const [vehicles, setVehicles] = useState([])
+function InputPanel ({ vehicle, setVehicle }) {
+  // const [profiles, setProfiles] = useState(VEHICLE_PROFILES)
+  const [profiles, setProfiles] = useState([])
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [lastUpdate, setLastUpdate] = useState(new Date().toISOString())
-  const [pending, setPending] = useState(false)
+  const [isSavePending, setSavePending] = useState(false)
   const [isLoadingProfiles, setLoadingProfiles] = useState(false)
 
   useEffect(() => {
@@ -61,8 +56,8 @@ function InputPanel ({
       setLoadingProfiles(true)
 
       try {
-        const vehicles = await fetchData()
-        setVehicles(vehicles)
+        const profiles = await fetchData()
+        setProfiles(profiles)
       } catch (err) {
         setError(err)
       }
@@ -75,26 +70,25 @@ function InputPanel ({
 
   function handleSaveProfile (event) {
     const clone = {
-      ...selectedVehicle,
-      key: getNewVehicleId(),
-      text: `${selectedVehicle.text}`,
-      value: `${selectedVehicle.text}`
+      ...vehicle,
+      id: getNewVehicleId(),
+      name: `${vehicle.name}`
     }
-    setSelectedVehicle(clone)
+    setVehicle(clone)
     saveToApi('POST', clone)
   }
 
   // async function updateToApi () {
-  //   saveToApi('PUT', selectedVehicle)
+  //   saveToApi('PUT', vehicle)
   // }
 
   async function saveToApi (method, vehicle) {
     setSuccess('')
     setError('')
-    setPending(true)
+    setSavePending(true)
 
     try {
-      const result = await saveData('POST', vehicle, values)
+      const result = await saveData('POST', vehicle)
       if (!result) return
       setLastUpdate(new Date().toISOString())
       setSuccess('Saved vehicle to google sheets.')
@@ -102,19 +96,20 @@ function InputPanel ({
       setError('Unable to save vehicle profile.')
     }
 
-    setPending(false)
+    setSavePending(false)
   }
 
-  function sendValues (values) {
-    setValues(values)
+  function handleAttributesChange (attributes) {
+    setVehicle({
+      ...vehicle,
+      attributes
+    })
   }
 
   function handleDropdownChange (event, data) {
-    // const vehicle = find(VEHICLE_PROFILES, { value: data.value })
-    const vehicle = find(vehicles, { key: data.value })
+    const vehicle = find(profiles, { id: data.value })
 
-    setValues(vehicle.attributes)
-    setSelectedVehicle(vehicle)
+    setVehicle(vehicle)
 
     // Reset error state.
     setSuccess('')
@@ -123,12 +118,11 @@ function InputPanel ({
 
   function handleNameChange (event, data) {
     const newVehicle = {
-      ...selectedVehicle,
-      text: event.target.value,
-      value: event.target.value
+      ...vehicle,
+      name: event.target.value
     }
 
-    setSelectedVehicle(newVehicle)
+    setVehicle(newVehicle)
   }
 
   return (
@@ -156,10 +150,10 @@ function InputPanel ({
           selection
           value=""
           loading={isLoadingProfiles}
-          // options={VEHICLE_PROFILES}
-          options={vehicles.map(item => ({
-            text: item.text,
-            value: item.key
+          options={profiles.map(item => ({
+            key: item.id,
+            text: item.name,
+            value: item.id
           }))}
           onChange={handleDropdownChange}
         />
@@ -169,13 +163,16 @@ function InputPanel ({
         <label htmlFor="input-name">Vehicle name (optional)</label>
         <Input
           id="input-name"
-          value={selectedVehicle && selectedVehicle.text}
+          value={vehicle && vehicle.name}
           placeholder="My vehicle"
           onChange={handleNameChange}
         />
       </div>
 
-      <Attributes values={values} sendValues={sendValues} />
+      <Attributes
+        values={vehicle && vehicle.attributes}
+        onChange={handleAttributesChange}
+      />
 
       <Button
         fluid
@@ -183,9 +180,9 @@ function InputPanel ({
         icon
         labelPosition="left"
         onClick={handleSaveProfile}
-        disabled={pending || (selectedVehicle && !selectedVehicle.text)}
+        disabled={isSavePending || (vehicle && !vehicle.name)}
       >
-        {pending ? (
+        {isSavePending ? (
           <>
             <Icon loading name="spinner" />
             Saving ...

@@ -21,23 +21,25 @@ export async function fetchData () {
   return vehicles
 }
 
-export async function saveData (method, data, values) {
+export async function saveData (method, data) {
   if (!data) {
     throw new Error('No data to save')
   }
 
   const vehicle = {
-    key: data.key,
-    text: data.text,
-    value: data.value
+    // These values are validated in this manner on the API
+    // so they can't easily be updated to match the profile definition
+    key: data.id,
+    text: data.name,
+    value: data.name // This property is deprecated but still required by the save-api
   }
 
   const meta = ['id', 'app:edited', 'save', 'del', '_xml']
 
-  Object.keys(values).forEach(attribute => {
+  Object.keys(data.attributes).forEach(attribute => {
     if (meta.includes(attribute)) return
-    vehicle[`attr${attribute}`] = values[attribute].value
-    vehicle[`units${attribute}`] = values[attribute].units || ''
+    vehicle[`attr${attribute}`] = data.attributes[attribute].value
+    vehicle[`units${attribute}`] = data.attributes[attribute].units || ''
   })
 
   return fetch(GSHEET_URL, {
@@ -73,6 +75,9 @@ function mapToVehicleProfile (row) {
   // Return all the attributes, including other properties in the row
   return {
     ...row,
+    // if row doesn't have an ID, use the text as key value
+    id: row.key || row.text,
+    name: row.text,
     attributes
   }
 }

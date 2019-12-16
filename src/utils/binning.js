@@ -5,6 +5,8 @@ import { ATTR_TYPE_DEPENDENT } from '../constants'
 import ATTRIBUTES from '../data/attributes_numo.json'
 
 export function mapAttributeValuesToLevel (attributes) {
+  if (!attributes) return null
+
   const levels = Object.entries(attributes).reduce((obj, [key, attribute]) => {
     const definition = find(ATTRIBUTES, { id: key })
 

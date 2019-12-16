@@ -8,18 +8,18 @@ import { mapAttributeValuesToLevel } from '../../utils/binning'
 ResultPanel.propTypes = {
   vehicle: PropTypes.shape({
     image: PropTypes.string,
-    text: PropTypes.string
-  }),
-  values: PropTypes.objectOf(
-    PropTypes.shape({
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      units: PropTypes.string
-    })
-  )
+    name: PropTypes.string,
+    attributes: PropTypes.objectOf(
+      PropTypes.shape({
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        units: PropTypes.string
+      })
+    )
+  })
 }
 
-function ResultPanel ({ vehicle, values }) {
-  const levels = mapAttributeValuesToLevel(values)
+function ResultPanel ({ vehicle }) {
+  const levels = mapAttributeValuesToLevel(vehicle.attributes)
 
   return (
     <div className="box">

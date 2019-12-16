@@ -14,7 +14,7 @@ We also separate attributes into two types: **independent** and **dependent** va
 
 ### Data structure for attributes
 
-```json
+```js
 [
   {
     "id": "weight", // identifier used in code
@@ -27,6 +27,7 @@ We also separate attributes into two types: **independent** and **dependent** va
     "calc": "x + 80", // (optional) calculation of this value (see section below)
     "thresholds": [[0, 100], [100, 500], [500, 4000], [4000]] // values mapped to a 4-point scale
   },
+  // for more than one attribute, put each attribute object in an array
   ...
 ]
 ```
@@ -53,3 +54,51 @@ These allow for unit conversion.
 - **Weight**
 - **Speed**
 - **Area**
+
+## Profiles
+
+This section describes the data used to give each vehicle a profile.
+
+### Data structure for profiles
+
+```js
+[
+  {
+    "id": "vehicle_y5jmygphz", // unique ID - can be any string, there is no format requirement
+    "name": "Bicycle", // Display name of vehicle
+    // Object of all attributes corresponding to attributes defined above
+    // Each attribute stores a number value and units, in text
+    // It's possible to not have units data (in which case it uses
+    // the attribute's default unit) but specifying the unit is always preferred.
+    // You can attach any amount of attributes, even those that are not
+    // being used by the attribute definitions for measurement
+    "attributes": {
+      "capacity": {
+        "value": 1
+      },
+      "weight": {
+        "value": 10,
+        "units": "kg"
+      },
+      "speed": {
+        "value": 24,
+        "units": "km/h"
+      },
+      "footprint": {
+        "value": 0.789,
+        "units": "m²"
+      },
+      "emissions": {
+        "value": 0
+      },
+      "health": {
+        "value": 6.44
+      }
+    }
+  },
+  // for more than one profile, put each profile object in an array
+  ...
+]
+```
+
+Profiles can store other arbitrary data, since they're just JavaScript objects. For instance, for our case we have an `image` property value so that we can also store a URL to an image for the editor UI.

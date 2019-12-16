@@ -20,13 +20,6 @@ function RadarChart ({ levels }) {
         padding={70}
         domainMax={4}
         highlighted={null}
-        onHover={point => {
-          if (point) {
-            console.log('hovered over a data point')
-          } else {
-            console.log('not over anything')
-          }
-        }}
         data={{
           variables: attributesToChartLabels(ATTRIBUTES),
           sets: [

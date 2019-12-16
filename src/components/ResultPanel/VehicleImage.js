@@ -6,7 +6,7 @@ import './VehicleImage.css'
 VehicleImage.propTypes = {
   vehicle: PropTypes.shape({
     image: PropTypes.string,
-    text: PropTypes.string
+    name: PropTypes.string
   })
 }
 
@@ -16,7 +16,7 @@ function VehicleImage ({ vehicle }) {
   return (
     <Image
       src={`/images/${vehicle.image}`}
-      alt={`Image: ${vehicle.text}`}
+      alt={`Image: ${vehicle.name}`}
       bordered
       fluid
       rounded

@@ -7,8 +7,7 @@ import ResultPanel from './components/ResultPanel/ResultPanel'
 import './App.css'
 
 function App () {
-  const [values, setValues] = useState({})
-  const [selectedVehicle, setSelectedVehicle] = useState({})
+  const [vehicle, setVehicle] = useState({})
 
   return (
     <div className="App">
@@ -21,15 +20,10 @@ function App () {
 
         <Grid.Row columns={2}>
           <Grid.Column width={9}>
-            <InputPanel
-              values={values}
-              selectedVehicle={selectedVehicle}
-              setValues={setValues}
-              setSelectedVehicle={setSelectedVehicle}
-            />
+            <InputPanel vehicle={vehicle} setVehicle={setVehicle} />
           </Grid.Column>
           <Grid.Column width={7}>
-            <ResultPanel vehicle={selectedVehicle} values={values} />
+            <ResultPanel vehicle={vehicle} />
           </Grid.Column>
         </Grid.Row>
 

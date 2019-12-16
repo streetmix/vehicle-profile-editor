@@ -1,8 +1,7 @@
 [
   {
-    "key": "Pedestrian: adult",
-    "text": "Pedestrian: adult",
-    "value": "Pedestrian: adult",
+    "id": "vehicle_c19wi12hc",
+    "name": "Pedestrian: adult",
     "image": "pedestrian1.svg",
     "attributes": {
       "capacity": {
@@ -29,9 +28,8 @@
     }
   },
   {
-    "key": "Automobile: SUV",
-    "text": "Automobile: SUV",
-    "value": "Automobile: SUV",
+    "id": "vehicle_fbxkc2z17",
+    "name": "Automobile: SUV",
     "image": "suv.svg",
     "attributes": {
       "capacity": {
@@ -58,9 +56,8 @@
     }
   },
   {
-    "key": "Automobile: compact",
-    "text": "Automobile: compact",
-    "value": "Automobile: compact",
+    "id": "vehicle_7ydnu0v52",
+    "name": "Automobile: compact",
     "image": "car.svg",
     "attributes": {
       "capacity": {
@@ -87,9 +84,8 @@
     }
   },
   {
-    "key": "Automobile: luxury car",
-    "text": "Automobile: luxury car",
-    "value": "Automobile: luxury car",
+    "id": "vehicle_bk9reidj4",
+    "name": "Automobile: luxury car",
     "image": "car.svg",
     "attributes": {
       "capacity": {
@@ -116,9 +112,8 @@
     }
   },
   {
-    "key": "Automobile: Electric",
-    "text": "Automobile: Electric",
-    "value": "Automobile: Electric",
+    "id": "vehicle_bvyghcf66",
+    "name": "Automobile: Electric",
     "image": "car.svg",
     "attributes": {
       "capacity": {
@@ -145,9 +140,8 @@
     }
   },
   {
-    "key": "Automobile: Hybrid",
-    "text": "Automobile: Hybrid",
-    "value": "Automobile: Hybrid",
+    "id": "vehicle_ggks9qevh",
+    "name": "Automobile: Hybrid",
     "image": "car.svg",
     "attributes": {
       "capacity": {
@@ -174,9 +168,8 @@
     }
   },
   {
-    "key": "Ridesharing",
-    "text": "Ridesharing",
-    "value": "Ridesharing",
+    "id": "vehicle_2vvx5old5",
+    "name": "Ridesharing",
     "image": "tnc.svg",
     "attributes": {
       "capacity": {
@@ -203,9 +196,8 @@
     }
   },
   {
-    "key": "Bicycle",
-    "text": "Bicycle",
-    "value": "Bicycle",
+    "id": "vehicle_rdlxz9v1h",
+    "name": "Bicycle",
     "image": "bicycle.svg",
     "attributes": {
       "capacity": {
@@ -232,9 +224,8 @@
     }
   },
   {
-    "key": "Ebike",
-    "text": "Ebike",
-    "value": "Ebike",
+    "id": "vehicle_no7s6z8bz",
+    "name": "Ebike",
     "image": "e-bike.svg",
     "attributes": {
       "capacity": {
@@ -261,9 +252,8 @@
     }
   },
   {
-    "key": "E-scooter",
-    "text": "E-scooter",
-    "value": "E-scooter",
+    "id": "vehicle_im4gbhyea",
+    "name": "E-scooter",
     "image": "scooter.svg",
     "attributes": {
       "capacity": {
@@ -290,9 +280,8 @@
     }
   },
   {
-    "key": "Bus: Diesel",
-    "text": "Bus: Diesel",
-    "value": "Bus: Diesel",
+    "id": "vehicle_5r4q1mc7l",
+    "name": "Bus: Diesel",
     "image": "local_bus.svg",
     "attributes": {
       "capacity": {
@@ -319,9 +308,8 @@
     }
   },
   {
-    "key": "Bus: Electric",
-    "text": "Bus: Electric",
-    "value": "Bus: Electric",
+    "id": "vehicle_bvn0ahp09",
+    "name": "Bus: Electric",
     "image": "local_bus.svg",
     "attributes": {
       "capacity": {
@@ -348,9 +336,8 @@
     }
   },
   {
-    "key": "Pogo stick",
-    "text": "Pogo stick",
-    "value": "Pogo stick",
+    "id": "vehicle_g32v57mam",
+    "name": "Pogo stick",
     "attributes": {
       "capacity": {
         "value": 1
@@ -376,9 +363,8 @@
     }
   },
   {
-    "key": "Low speed autonomous shuttles (Black Panther)",
-    "text": "Low speed autonomous shuttles (Black Panther)",
-    "value": "Low speed autonomous shuttles (Black Panther)",
+    "id": "vehicle_taon8w1nv",
+    "name": "Low speed autonomous shuttles (Black Panther)",
     "image": "av_shuttle.svg",
     "attributes": {
       "capacity": {
@@ -405,9 +391,8 @@
     }
   },
   {
-    "key": "Aladdin’s magic carpet",
-    "text": "Aladdin’s magic carpet",
-    "value": "Aladdin’s magic carpet",
+    "id": "vehicle_z6hf8vdcl",
+    "name": "Aladdin’s magic carpet",
     "image": "magic_carpet.svg",
     "attributes": {
       "capacity": {
@@ -434,9 +419,8 @@
     }
   },
   {
-    "key": "Mobile lounge at Dulles",
-    "text": "Mobile lounge at Dulles",
-    "value": "Mobile lounge at Dulles",
+    "id": "vehicle_kdg1i77tg",
+    "name": "Mobile lounge at Dulles",
     "attributes": {
       "capacity": {
         "value": 102
@@ -462,9 +446,8 @@
     }
   },
   {
-    "key": "Nimbus 2000 Broomstick",
-    "text": "Nimbus 2000 Broomstick",
-    "value": "Nimbus 2000 Broomstick",
+    "id": "vehicle_aoqm2xnfz",
+    "name": "Nimbus 2000 Broomstick",
     "attributes": {
       "capacity": {
         "value": 1
@@ -490,9 +473,8 @@
     }
   },
   {
-    "key": "Mars Rover",
-    "text": "Mars Rover",
-    "value": "Mars Rover",
+    "id": "vehicle_lex6ioio6",
+    "name": "Mars Rover",
     "attributes": {
       "capacity": {
         "value": 1

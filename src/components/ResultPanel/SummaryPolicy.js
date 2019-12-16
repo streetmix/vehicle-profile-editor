@@ -8,6 +8,8 @@ SummaryPolicy.propTypes = {
 }
 
 function SummaryPolicy ({ levels }) {
+  if (!levels) return null
+
   const summary = calculateSummaryIndicator(levels)
   let message = null
 
