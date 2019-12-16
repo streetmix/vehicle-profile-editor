@@ -40,7 +40,15 @@ The `x` is always used to mean the input value. If `calc` is not provided, the i
 
 Calculations can refer to other independent variables. You can use an attribute's `id` as a placeholder. For instance, the _footprint_ (space occupied) attribute is calculated as a per-person area. A vehicle whose footprint is 10 m² with a _capacity_ of 5 has the equation `x / capacity`, resulting in a final calculated value of 2 m². This is then mapped to a threshold.
 
-If the independent variable does not have a value, the calculation will subsitute it with a zero to avoid errors. Note that `mathjs` treats divide-by-zero as equal to `Infinity`.
+#### Divide-by-zero issues
+
+If any variable does not have a value, the calculation will substitute it with a zero to avoid errors. After substituting all the variables, if the calculation evaluates to having a zero in a divisor, we'll be in a divide-by-zero situation. `mathjs` will not throw an error in this case. If the calculation is any number divided by zero, `mathjs` returns `Infinity`. However, if the calculation evaluates to zero divided by zero, `mathjs` returns `NaN` ("Not a number".)
+
+In NUMO's attributes, two dependent variables (_emissions_ and _space occupied_) are divided evenly between occupants, based on the vehicle's _capacity_ value. It can be possible for a vehicle's capacity to be zero, in which case the emissions and space occupied values become infinity, which results in being mapped to the highest possible threshold. This would be inaccurate, as one would expect the emissions and space occupied to be treated as-is (that is, not divided).
+
+On the flip side, it is also possible for the _emissions_ to be zero. In a zero-divided-by-zero situation, where the result is not a number, this cannot be mapped to a threshold. In our visualization, this is mapped to a threshold level of zero. Since zero is not a valid number for the visualization, its result tells us that something went wrong during the level mapping calculation.
+
+There may be different possible solutions to this problem, but for now, calculations for attributes that can result in a divide-by-zero situation should include a conditional expression that passes through the expected value should any independent value be equal to zero.
 
 ### Thresholds
 
