@@ -66,10 +66,11 @@ function InputHelp ({ attribute }) {
                     <Table.Row key={index}>
                       <Table.Cell>{index + 1}</Table.Cell>
                       <Table.Cell>
+                        {index === 0 ? '≥ ' : '> '}
                         {row[0]} {defaultUnit}
                       </Table.Cell>
                       <Table.Cell>
-                        {(index !== 3 && `${row[1]} ${defaultUnit}`) || '∞'}
+                        {(index !== 3 && `≤ ${row[1]} ${defaultUnit}`) || '∞'}
                       </Table.Cell>
                     </Table.Row>
                   ))}
