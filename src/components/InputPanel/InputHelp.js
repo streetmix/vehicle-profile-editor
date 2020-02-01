@@ -69,7 +69,7 @@ function InputHelp ({ attribute }) {
               <Table attached="top" compact>
                 <Table.Header>
                   <Table.Row>
-                    <Table.HeaderCell>Level</Table.HeaderCell>
+                    <Table.HeaderCell>Threshold</Table.HeaderCell>
                     <Table.HeaderCell>Minimum</Table.HeaderCell>
                     <Table.HeaderCell>Maximum</Table.HeaderCell>
                   </Table.Row>
