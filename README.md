@@ -110,3 +110,18 @@ This section describes the data used to give each vehicle a profile.
 ```
 
 Profiles can store other arbitrary data, since they're just JavaScript objects. For instance, for our case we have an `image` property value so that we can also store a URL to an image for the editor UI.
+
+## Embedding into another site
+
+You can use an `<iframe>`:
+
+```html
+<iframe
+  src="https://vehicle-profile-editor.netlify.com"
+  frameborder="0"
+  width="100%"
+  height="100%"
+></iframe>
+```
+
+This code can be edited make the embedded tool any size you wish.
