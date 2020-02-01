@@ -33,20 +33,7 @@ function InputHelp ({ attribute }) {
         size="tiny"
         closeIcon
       >
-        <Modal.Header>
-          <Icon
-            circular
-            color="teal"
-            name="help"
-            size="tiny"
-            style={{
-              position: 'relative',
-              top: '-3px',
-              marginRight: '1em'
-            }}
-          />
-          {name}
-        </Modal.Header>
+        <Modal.Header>{name}</Modal.Header>
         <Modal.Content>
           <Modal.Description>
             {description ? (
