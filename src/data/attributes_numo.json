@@ -11,7 +11,7 @@
     "id": "weight",
     "name": "Weight",
     "type": "DEPENDENT",
-    "description": "Please write the weight of the vehicle when empty. The heavier a vehicle, the greater risk it may pose when in movement. We will add a weight of one driver as 80 kg (160 lb) for our calculations.",
+    "description": "Please write the weight of the vehicle when empty. The heavier a vehicle, the greater risk it may pose when in movement. We will add a weight of one driver as 80 kg (160 lb) for our calculations.\n\nIf you are looking at a pedestrian, their weight will appear as “zero” since we will add 80 kg to all vehicles for purposes of comparability.",
     "definedUnits": "WEIGHT",
     "defaultUnit": "kg",
     "exampleValue": 1500,
