@@ -41,4 +41,31 @@ describe('binning', () => {
 
     expect(levels).toEqual(null)
   })
+
+  it('returns level 0 for invalid or nonexistent values', () => {
+    const levels = mapAttributeValuesToLevel({
+      capacity: {
+        value: 1
+      },
+      weight: {
+        value: null,
+        units: 'kg'
+      },
+      speed: {
+        units: 'km/h'
+      },
+      footprint: {
+        value: 'nothing',
+        units: 'm²'
+      }
+    })
+
+    expect(levels).toEqual({
+      emissions: 0,
+      footprint: 0,
+      health: 0,
+      speed: 0,
+      weight: 0
+    })
+  })
 })

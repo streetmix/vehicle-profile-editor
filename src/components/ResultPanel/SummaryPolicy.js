@@ -10,6 +10,12 @@ SummaryPolicy.propTypes = {
 function SummaryPolicy ({ levels }) {
   if (!levels) return null
 
+  // Require ALL dependent variables to be set
+  const allValues = Object.values(levels)
+  if (allValues.includes(0)) {
+    return null
+  }
+
   const summary = calculateSummaryIndicator(levels)
   let message = null
 

@@ -1,5 +1,4 @@
 import { parse, parser } from 'mathjs'
-import find from 'lodash/find'
 import { convertUnits } from './conversions'
 import { ATTR_TYPE_DEPENDENT } from '../constants'
 import ATTRIBUTES from '../data/attributes_numo.json'
@@ -7,8 +6,9 @@ import ATTRIBUTES from '../data/attributes_numo.json'
 export function mapAttributeValuesToLevel (attributes) {
   if (!attributes) return null
 
-  const levels = Object.entries(attributes).reduce((obj, [key, attribute]) => {
-    const definition = find(ATTRIBUTES, { id: key })
+  const levels = ATTRIBUTES.reduce((obj, definition) => {
+    const key = definition.id
+    const attribute = attributes[key]
 
     // Only map dependent variables
     if (definition.type !== ATTR_TYPE_DEPENDENT) {
@@ -20,7 +20,9 @@ export function mapAttributeValuesToLevel (attributes) {
     )
 
     // Bail if not a number
+    // Returns level 0
     if (Number.isNaN(inputValue)) {
+      obj[key] = 0
       return obj
     }
 
