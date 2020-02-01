@@ -8,3 +8,33 @@ body {
     padding: 3em !important;
   }
 }
+
+/* Typography overrides to match Streetmix UI */
+.ui.message .header,
+.ui.header,
+.ui.button,
+.ui.modal > .header,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+}
+
+body,
+.ui.input > input {
+  font-family: "Rubik", sans-serif;
+}
+
+.ui.dropdown .menu .active.item,
+.ui.label,
+.ui.table thead th,
+.ui.modal > .header:not(.ui) {
+  font-weight: 500;
+}
+
+strong {
+  font-weight: 500;
+}
