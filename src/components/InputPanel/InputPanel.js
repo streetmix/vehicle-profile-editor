@@ -122,6 +122,12 @@ function InputPanel ({ vehicle, setVehicle }) {
       name: event.target.value
     }
 
+    // Delete the vehicle image on name change so that
+    // edited vehicles don't end up with the wrong image
+    if (Object.prototype.hasOwnProperty.call(newVehicle, 'image')) {
+      delete newVehicle.image
+    }
+
     setVehicle(newVehicle)
   }
 
