@@ -51,7 +51,7 @@
   },
   {
     "id": "health",
-    "name": "Health",
+    "name": "ILL-Health",
     "type": "DEPENDENT",
     "description": "Please input the value of Metabolic Equivalent (MET) associated to the use of your vehicle. MET is the Metabolic equivalent of a person when doing a specific physical activity. If you are not sure, please use as a basis the preset values of other vehicles in our database (or see, for instance, a compendium of reference values [here](https://sites.google.com/site/compendiumofphysicalactivities/home)), and note that cars have a MET value closer to zero and vehicles without any engine are associated with a value closer to 10. Since MET is a unit that increases with the associated level of physical activity, the value that you give us will be inverted (10 minus MET) in order to make it coherent with the rest of the attributes. Greater physical activity has been associated with more health and life expectancy.",
     "defaultUnit": "MET",
