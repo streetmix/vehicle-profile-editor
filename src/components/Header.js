@@ -13,7 +13,13 @@ function AppHeader () {
         hypothetical) depending on its attributes. There are pre-loaded values
         that you can choose to learn the policy implications of existing
         vehicles. You can add customized characteristics, or create new vehicle
-        types as well.
+        types as well.{' '}
+        <a
+          href="https://docs.google.com/document/d/12ScqqGQSCZSE1zgaixuP0Bmj3tuMna_z6HjODMeJiIE/edit#heading=h.7eer7omi37fl"
+          rel="noreferrer"
+        >
+          Learn why this tool exists and how to offer feedback.
+        </a>
       </p>
     </>
   )
