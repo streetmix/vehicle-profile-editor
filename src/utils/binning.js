@@ -69,6 +69,14 @@ export function mapAttributeValuesToLevel (attributes) {
       value = normalizedValue
     }
 
+    // Run min and max boundaries
+    if (typeof definition.max !== 'undefined') {
+      value = Math.min(value, definition.max)
+    }
+    if (typeof definition.min !== 'undefined') {
+      value = Math.max(value, definition.min)
+    }
+
     let level = 0
     if (definition) {
       const thresholds = definition.thresholds
@@ -78,14 +86,15 @@ export function mapAttributeValuesToLevel (attributes) {
           if (value >= thresholds[i][0] && value <= thresholds[i][1]) {
             level = i + 1
           }
-        } else if (i === thresholds.length - 1) {
-          // Last level does not have an upper bound
-          if (value > thresholds[i][0]) {
-            level = i + 1
-          }
         } else {
-          if (value > thresholds[i][0] && value <= thresholds[i][1]) {
-            level = i + 1
+          if (typeof thresholds[i][1] === 'undefined') {
+            if (value > thresholds[i][0]) {
+              level = i + 1
+            }
+          } else {
+            if (value > thresholds[i][0] && value <= thresholds[i][1]) {
+              level = i + 1
+            }
           }
         }
       }

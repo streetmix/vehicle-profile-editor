@@ -68,4 +68,14 @@ describe('binning', () => {
       weight: 0
     })
   })
+
+  it('clamps to min/max values if present', () => {
+    const levels = mapAttributeValuesToLevel({
+      health: {
+        value: 11
+      }
+    })
+
+    expect(levels.health).toEqual(1)
+  })
 })

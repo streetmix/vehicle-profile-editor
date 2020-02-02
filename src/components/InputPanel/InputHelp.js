@@ -70,7 +70,9 @@ function InputHelp ({ attribute }) {
                         {row[0]} {defaultUnit}
                       </Table.Cell>
                       <Table.Cell>
-                        {(index !== 3 && `≤ ${row[1]} ${defaultUnit}`) || '∞'}
+                        {(typeof row[1] !== 'undefined' &&
+                          `≤ ${row[1]} ${defaultUnit}`) ||
+                          '∞'}
                       </Table.Cell>
                     </Table.Row>
                   ))}
