@@ -59,7 +59,8 @@ function InputPanel ({ vehicle, setVehicle }) {
         const profiles = await fetchData()
         setProfiles(profiles)
       } catch (err) {
-        setError(err)
+        console.error(err)
+        setError(err.message)
       }
 
       setLoadingProfiles(false)
@@ -93,6 +94,7 @@ function InputPanel ({ vehicle, setVehicle }) {
       setLastUpdate(new Date().toISOString())
       setSuccess('Saved vehicle to google sheets.')
     } catch (err) {
+      console.error(err)
       setError('Unable to save vehicle profile.')
     }
 
