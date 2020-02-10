@@ -59,7 +59,9 @@ export function mapAttributeValuesToLevel (attributes) {
         } else {
           // Default to value of 0 if not present
           const variable = attributes[symbol.name] || { value: 0 }
-          math.set(symbol.name, variable.value)
+          // Ensure that variable.value is a number, otherwise
+          // math.evaluate() will throw an error. NaN is acceptable
+          math.set(symbol.name, Number.parseFloat(variable.value))
         }
       }
 

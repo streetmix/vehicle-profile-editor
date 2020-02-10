@@ -42,7 +42,7 @@ describe('binning', () => {
     expect(levels).toEqual(null)
   })
 
-  it('returns level 0 for invalid or nonexistent values', () => {
+  it('returns level 0 for invalid or nonexistent dependent variables', () => {
     const levels = mapAttributeValuesToLevel({
       capacity: {
         value: 1
@@ -56,6 +56,29 @@ describe('binning', () => {
       },
       footprint: {
         value: 'nothing',
+        units: 'm²'
+      }
+    })
+
+    expect(levels).toEqual({
+      emissions: 0,
+      footprint: 0,
+      health: 0,
+      speed: 0,
+      weight: 0
+    })
+  })
+
+  it('returns level 0 for invalid independent variables', () => {
+    const levels = mapAttributeValuesToLevel({
+      capacity: {
+        value: 'invalid'
+      },
+      emissions: {
+        value: 30
+      },
+      footprint: {
+        value: 3,
         units: 'm²'
       }
     })
