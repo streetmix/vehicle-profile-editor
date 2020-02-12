@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, Divider } from 'semantic-ui-react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import InputPanel from './components/InputPanel/InputPanel'
 import ResultPanel from './components/ResultPanel/ResultPanel'
+import { encodeURLString, decodeURLString } from './utils/url'
 import './App.css'
 
 function App () {
   const [vehicle, setVehicle] = useState({})
+
+  useEffect(() => {
+    const urlstring = encodeURLString(vehicle)
+    console.log(urlstring)
+    // window.location.search = '?q=' + urlstring
+    console.log(decodeURLString(urlstring))
+  }, [vehicle])
 
   return (
     <div className="App">
