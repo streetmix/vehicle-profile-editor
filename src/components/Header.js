@@ -5,7 +5,7 @@ function AppHeader () {
   return (
     <>
       <Header as="h1">
-        Vehicle profiles
+        Periodic Table of Mobility
         <Header.Subheader>A policy guidance tool by NUMO</Header.Subheader>
       </Header>
       <p>
