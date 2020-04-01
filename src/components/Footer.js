@@ -1,6 +1,6 @@
 import React from 'react'
-import numoLogo from '../images/logo_numo.png'
-import streetmixLogo from '../images/logo_streetmix.svg'
+import { ReactComponent as NUMOLogo } from '../images/logo_numo.svg'
+import { ReactComponent as StreetmixLogo } from '../images/logo_streetmix.svg'
 import './Footer.css'
 
 function Footer (props) {
@@ -13,7 +13,12 @@ function Footer (props) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img src={numoLogo} alt="New Urban Mobility Alliance" />
+          <NUMOLogo
+            style={{
+              height: '2.5em'
+            }}
+          />
+          {/* <img src={numoLogo} alt="" /> */}
         </a>
         and
         <a
@@ -21,14 +26,15 @@ function Footer (props) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img
-            src={streetmixLogo}
-            alt="Streetmix"
+          <StreetmixLogo
             style={{
-              height: '1em',
-              opacity: 0.55
+              height: '1.2em'
             }}
           />
+          {/* <img
+            src={streetmixLogo}
+            alt="Streetmix"
+          /> */}
         </a>
       </p>
     </footer>

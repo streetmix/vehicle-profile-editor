@@ -1,7 +1,7 @@
 footer {
   text-align: center;
   font-size: 0.8em;
-  color: #666;
+  color: rgb(108, 110, 111);
   text-shadow: 0 1px white;
 }
 
@@ -11,10 +11,22 @@ footer {
   }
 }
 
-footer img {
-  vertical-align: middle;
-  margin-left: 0.5em;
-  margin-right: 0.5em;
+footer a,
+footer a:visited,
+footer a:hover,
+footer a:active {
+  color: inherit;
+}
+
+footer svg {
+  height: 1.2em;
+  margin-left: 1em;
+  margin-right: 1em;
   max-height: 2.5em;
-  opacity: 0.65;
+  vertical-align: middle;
+  fill: currentColor;
+}
+
+footer a:last-of-type svg {
+  margin-right: 0;
 }
