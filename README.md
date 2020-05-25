@@ -117,7 +117,7 @@ You can use an `<iframe>`:
 
 ```html
 <iframe
-  src="https://vehicle-profile-editor.netlify.com"
+  src="https://vehicle-profile-editor.netlify.app"
   frameborder="0"
   width="100%"
   height="100%"
