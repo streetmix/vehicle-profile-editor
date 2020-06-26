@@ -1,0 +1,1 @@
+Documentation on how to use the transifex client found in https://docs.transifex.com/client/introduction

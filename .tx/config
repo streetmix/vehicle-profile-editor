@@ -1,0 +1,17 @@
+[main]
+host = https://www.transifex.com
+
+[app-periodic-tablo-of-mobility.translation-json]
+file_filter = public/locales/<lang>/translation.json
+minimum_perc = 0
+source_file = public/locales/en/translation.json
+source_lang = en
+type = KEYVALUEJSON
+
+[app-periodic-tablo-of-mobility.attributes-json]
+file_filter = public/locales/<lang>/attributes.json
+minimum_perc = 0
+source_file = public/locales/en/attributes.json
+source_lang = en
+type = KEYVALUEJSON
+

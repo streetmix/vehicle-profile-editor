@@ -2,12 +2,14 @@ import React from 'react'
 import { ReactComponent as NUMOLogo } from '../images/logo_numo.svg'
 import { ReactComponent as StreetmixLogo } from '../images/logo_streetmix.svg'
 import './Footer.css'
+import { useTranslation } from 'react-i18next'
 
 function Footer (props) {
+  const { t } = useTranslation()
   return (
     <footer>
       <p>
-        A project by
+        {t('footer.part1')}
         <a
           href="https://www.numo.global/"
           target="_blank"
@@ -20,7 +22,7 @@ function Footer (props) {
           />
           {/* <img src={numoLogo} alt="" /> */}
         </a>
-        and
+        {t('footer.and')}
         <a
           href="https://streetmix.net/"
           target="_blank"

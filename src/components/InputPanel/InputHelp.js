@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Icon, Modal, Button, Table, Message } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown'
+import { useTranslation } from 'react-i18next'
 
 InputHelp.propTypes = {
   attribute: PropTypes.shape({
@@ -15,7 +16,7 @@ InputHelp.propTypes = {
 function InputHelp ({ attribute }) {
   const [isModalOpen, setModalOpen] = useState(false)
   const { name, description, defaultUnit, thresholds } = attribute
-
+  const { t } = useTranslation()
   function handleModalOpen (event) {
     setModalOpen(true)
   }
@@ -41,24 +42,30 @@ function InputHelp ({ attribute }) {
               // We may gradually relax `allowedTypes` as time goes on,
               // but for now, keep it to only the bare minimum needed
               <ReactMarkdown
-                source={description}
+                source={t('attributes:' + name + '.description')}
                 unwrapDisallowed
                 linkTarget={(url, text, title) => '_blank'}
                 allowedTypes={['root', 'text', 'paragraph', 'link']}
               />
             ) : (
-              <p>No information is available for this attribute.</p>
+              <p>{t('inputHelp.noDescription')}</p>
             )}
           </Modal.Description>
           {thresholds && (
             <>
-              <h4>Thresholds</h4>
+              <h4>{t('inputHelp.thresholds')}</h4>
               <Table attached="top" compact>
                 <Table.Header>
                   <Table.Row>
-                    <Table.HeaderCell>Threshold</Table.HeaderCell>
-                    <Table.HeaderCell>Minimum</Table.HeaderCell>
-                    <Table.HeaderCell>Maximum</Table.HeaderCell>
+                    <Table.HeaderCell>
+                      {t('inputHelp.threshold')}
+                    </Table.HeaderCell>
+                    <Table.HeaderCell>
+                      {t('inputHelp.minimum')}
+                    </Table.HeaderCell>
+                    <Table.HeaderCell>
+                      {t('inputHelp.maximum')}
+                    </Table.HeaderCell>
                   </Table.Row>
                 </Table.Header>
                 <Table.Body>
@@ -80,10 +87,8 @@ function InputHelp ({ attribute }) {
               </Table>
               <Message info size="tiny" attached="bottom">
                 <p>
-                  <strong>Note:</strong> The thresholds used for this attribute
-                  are based on literature and expert feedback collected by NUMO.
-                  A future version of this platform will include the ability to
-                  adjust these thresholds.
+                  <strong>{t('inputHelp.note')}:</strong>{' '}
+                  {t('inputHelp.noteText')}
                 </p>
               </Message>
             </>

@@ -1,0 +1,50 @@
+{
+  "title": "Tabla Periódica de Movilidad: una herramienta de NUMO para guiar políticas",
+  "description": {
+    "part1": "Traducción en proceso",
+    "part2": "Cambia el idioma entre inglés y español usando los botones localizados arriba.",
+    "image": "Imagen",
+    "downloadPNG": "Descargar imagen (PNG)",
+    "downloadSVG": "Descargar imagen vectorial (SVG)"
+  },
+  "inputPanel": {
+    "part1": "Ingrese atributos vehiculares",
+    "part2": "Por favor elija del menú desplegable en la parte inferior o ingrese atributos específicos de los vehículos.",
+    "part3": "Extrayendo perfiles...",
+    "part4": "Seleccionar vehículo pre-existente",
+    "vehicleName": "Nombre del vehículo (opcional)",
+    "vehicleNamePlaceholder": "Mi vehículo",
+    "savePlaceholder": "Guardando...",
+    "save": "Guardar perfil",
+    "example": "Ejemplo",
+    "savedCorrect": "Vehículo guardado en hoja de datos",
+    "saveFail": "No es posible guardar el perfil vehicular"
+  },
+  "inputHelp": {
+    "noDescription": "No hay información disponible para este atributo",
+    "thresholds": "Umbrales",
+    "threshold": "Umbral",
+    "minimum": "Mínimo",
+    "maximum": "Máximo",
+    "note": "Nota",
+    "noteText": "Los umbrales de este atributo se basan en literatura y retroalimentación de expertos recolectado por NUMO. Una versión futura de estas plataforma incluirá la habilidad de ajustar estos umbrales."
+  },
+  "summary": {
+    "harmfulSum": "Este vehículo puede causar mucho daño",
+    "harmful": "Las políticas deberían orientarse a reducir su riesgo general. Considere asignar menos espacio para éstos y dé preferencia a otros, requerir más datos de los operadores, requerir una licencia para operar, o cobrar tarifas altas por operar.",
+    "lessHarmfulSum": "Este vehículo puede causar daño",
+    "lessHarmful": "Las políticas deben estar orientadas a reducir su riesgo en general. Considere asignar menos espacio para ellos, requerir más datos de operadores o cobrar algunas tarifas por su operación.",
+    "notHarmfulSum": "Este vehículo probablemente no causa daño",
+    "notHarmful": "Las políticas deben orientarse a promover su uso. Considere asignar más espacio a éstos, no requiera muchos datos de los operadores, no requiera una licencia para operar y considere subsidiar su uso."
+  },
+  "header": {
+    "title": "Tabla Periódica de Movilidad",
+    "subtitle": "Una herramienta de NUMO para guiar políticas",
+    "part1": "Esta plataforma ayuda a evaluar el impacto que cualquier vehículo (existente o hipotético) según sus atributos. Hay valores pre-existentes que puede elegir para aprender sobre las implicaciones de políticas de vehículos existentes. Puede agregar características personalizadas o crear vehículos nuevos también.",
+    "link": "Aprenda por qué se creó esta herramienta y cómo dar retroalimentación"
+  },
+  "footer": {
+    "part1": "Un proyecto de",
+    "and": "y"
+  }
+}

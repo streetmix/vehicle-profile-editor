@@ -1,0 +1,1 @@
+tx config mapping -r app-periodic-tablo-of-mobility.attributes-json -f public/locales/en/attributes.json -s en -t KEYVALUEJSON 'public/locales/<lang>/attributes.json'
