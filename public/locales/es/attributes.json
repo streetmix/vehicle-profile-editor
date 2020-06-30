@@ -1,0 +1,26 @@
+{
+  "Maximum capacity": {
+    "name": "Capacidad máxima",
+    "description": "Por favor agregue la capacidad máxima legal del vehículo como ha sido definido por su fábrica (si es humana/peatón, su capacidad es 1). Utilizaremos este atributo como factor del espacio ocupado - huella - y emisiones"
+  },
+  "Weight": {
+    "name": "Peso",
+    "description": "Por favor escriba el peso del vehículo al estar vacío. Mientras más pesado un vehículo, habrá mayor riesgo cuando está en movimiento. Agregaremos el valor de una persona conduciendo (80 kg, 160 lb) para nuestros cálculos.\nSi está viendo el valor de peatón, su peso aparece como \"cero\" pues le agregaremos 80 kg a todos los vehículos para que sean comparables."
+  },
+  "Top speed": {
+    "name": "Velocidad máxima",
+    "description": "Para vehículos fabricados, por favor escriba la velocidad máxima según lo indicado por la fábrica. Si es un vehículo de propulsión humana por favor use como base los valores de peatones o bicicletas en los vehículos existentes en esta plataforma. Mientras más rápido sea un vehículo, más riesgo genera a la salud pública pues incrementa la probabilidad de muertes en un siniestro."
+  },
+  "Space occupied": {
+    "name": "Espacio ocupado",
+    "description": "Por favor ingrese el área de la huella ocupada por el vehículo. Utilizaremos la capacidad máxima que nos entregó arriba para calcular el espacio por pasajero. Dado que las ciudades tienen que ser eficientes en su uso del espacio, si una persona ocupa más área al moverse, requiere más recursos de la ciudad."
+  },
+  "Emissions": {
+    "name": "Emisiones",
+    "description": "Por favor ingrese las emisiones de dióxido de carbono  (CO₂) generadas por este vehículo según sus especificaciones técnicas del fabricante. Utilizaremos la capacidad máxima que nos entregó para calcular las emisiones por pasajero. Un viaje de altas emisiones genera salud (e impactos generales) negativa en una ciudad y el mundo."
+  },
+  "ILL-Health": {
+    "name": "NO-Salud",
+    "description": "Por favor ingrese el valor de equivalente metabólico (MET) asociado al uso del vehículo. MET es el equivalente metabólico de una persona cuando realiza una actividad física. Si no está segura, use como base los valores prestablecidos de otros vehículos en la base de datos (o vea, por ejemplo, un compendi de valores de referencia [aquí](https://sites.google.com/site/compendiumofphysicalactivities/home)), y note que los automóviles tienen un valor MET más cercano a cero y los vehículos sin motor alguno están asociados a un valor cercano a 10. Dado que el MET es una unidad que se incrementa con el nivel asociado de actividad física, invertiremos (10 menos MET) el valor que ud ingrese para hacerlo coherente con el resto de los atributos. La mayor actividad física ha sido asociada con más salud y expectativa de vida."
+  }
+}

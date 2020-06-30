@@ -1,0 +1,54 @@
+{
+  "title": "Periodic Table of Mobility: A policy guidance tool by NUMO",
+  "description": {
+    "part1": "Transaltion in progress",
+    "part2": "Switch language between english and spanish using buttons above.",
+    "image": "Image",
+    "downloadPNG": "Download image (PNG)",
+    "downloadSVG": "Download vector image (SVG)"
+  },
+  "inputPanel": {
+    "part1": "Input vehicle attributes",
+    "part2": "Please choose from the drop-down menu at the bottom or input specific vehicle attributes.",
+    "part3": "Retrieving profiles...",
+    "part4": "Select pre-loaded vehicle",
+    "vehicleName": "Vehicle name (optional)",
+    "vehicleNamePlaceholder": "My vehicle",
+    "savePlaceholder": "Saving ...",
+    "save": "Save profile",
+    "example": "Example",
+    "savedCorrect": "Saved vehicle to google sheets.",
+    "saveFail": "Unable to save vehicle profile."
+  },
+  "inputHelp": {
+    "noDescription": "No information is available for this attribute.",
+    "thresholds": "Thresholds",
+    "threshold": "Threshold",
+    "minimum": "Minimum",
+    "maximum": "Maximum",
+    "note": "Note",
+    "noteText": "The thresholds used for this attribute are based on literature and expert feedback collected by NUMO. A future version of this platform will include the ability toadjust these thresholds."
+  },
+  "summary": {
+    "harmfulSum": "This vehicle may be very harmful",
+    "harmful": "Policies should be aimed at reducing its overall risk. Consider allocating less space for them while giving preference to others, requiring more data from operators, requiring a license to operate, or charging high fees to operate.",
+    "lessHarmfulSum": "This vehicle may be harmful",
+    "lessHarmful": "Policies should be aimed at reducing its overall risk. Consider allocating less space for them, requesting some data from operators, or charging some fees to operate.",
+    "notHarmfulSum": "This vehicle is not likely to be harmful",
+    "notHarmful": "Policies should be aimed at promoting its use. Consider allocating more space to them, don’t request too much data from operators, don’t require a license to operate, and consider subsidizing their usage."
+  },
+  "header": {
+    "title": "Periodic Table of Mobility",
+    "subtitle": "A policy guidance tool by NUMO",
+    "part1": "This platform helps assess the impact of any vehicle (existing or hypothetical) depending on its attributes. There are pre-loaded values that you can choose to learn the policy implications of existing vehicles. You can add customized characteristics, or create new vehicle types as well.",
+    "link": "Learn why this tool exists and how to offer feedback."
+  },
+  "footer": {
+    "part1": "A project by",
+    "and": "and"
+  },
+  "routing": {
+    "profiles": "Vehicle profiles",
+    "results": "Archived results"
+  }
+}

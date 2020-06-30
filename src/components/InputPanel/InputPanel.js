@@ -13,6 +13,7 @@ import DataInput from './DataInput'
 import { getNewVehicleId } from '../../utils/uniqueid'
 import { fetchData, saveData } from '../../utils/gsheets'
 import ATTRIBUTES from '../../data/attributes_numo.json'
+import { useTranslation } from 'react-i18next'
 // import VEHICLE_PROFILES from '../../data/vehicle_profiles.json'
 
 function Attributes ({ values = {}, onChange = () => {} }) {
@@ -50,7 +51,7 @@ function InputPanel ({ vehicle, setVehicle }) {
   const [lastUpdate, setLastUpdate] = useState(new Date().toISOString())
   const [isSavePending, setSavePending] = useState(false)
   const [isLoadingProfiles, setLoadingProfiles] = useState(false)
-
+  const { t } = useTranslation()
   useEffect(() => {
     async function fetchVehicleProfiles () {
       setLoadingProfiles(true)
@@ -92,10 +93,10 @@ function InputPanel ({ vehicle, setVehicle }) {
       const result = await saveData('POST', vehicle)
       if (!result) return
       setLastUpdate(new Date().toISOString())
-      setSuccess('Saved vehicle to google sheets.')
+      setSuccess(t('inputPanel.savedCorrect'))
     } catch (err) {
       console.error(err)
-      setError('Unable to save vehicle profile.')
+      setError(t('inputPanel.saveFail'))
     }
 
     setSavePending(false)
@@ -136,22 +137,17 @@ function InputPanel ({ vehicle, setVehicle }) {
   return (
     <div className="box">
       <Header as="h3" dividing>
-        Input vehicle attributes
+        {t('inputPanel.part1')}
       </Header>
 
-      <p>
-        Please choose from the drop-down menu at the bottom or input specific
-        vehicle attributes.
-      </p>
+      <p>{t('inputPanel.part2')}</p>
 
       <div className="input-row">
         <Dropdown
           className="icon"
           id="presets"
           placeholder={
-            isLoadingProfiles
-              ? 'Retrieving profiles...'
-              : 'Select pre-loaded vehicle'
+            isLoadingProfiles ? t('inputPanel.part3') : t('inputPanel.part4')
           }
           fluid
           search
@@ -168,11 +164,11 @@ function InputPanel ({ vehicle, setVehicle }) {
       </div>
 
       <div className="input-row">
-        <label htmlFor="input-name">Vehicle name (optional)</label>
+        <label htmlFor="input-name">{t('inputPanel.vehicleName')}</label>
         <Input
           id="input-name"
           value={vehicle && vehicle.name}
-          placeholder="My vehicle"
+          placeholder={t('inputPanel.vehicleNamePlaceholder')}
           onChange={handleNameChange}
         />
       </div>
@@ -193,12 +189,12 @@ function InputPanel ({ vehicle, setVehicle }) {
         {isSavePending ? (
           <>
             <Icon loading name="spinner" />
-            Saving ...
+            {t('inputPanel.savePlaceholder')}
           </>
         ) : (
           <>
             <Icon name="save" />
-            Save profile
+            {t('inputPanel.save')}
           </>
         )}
       </Button>
