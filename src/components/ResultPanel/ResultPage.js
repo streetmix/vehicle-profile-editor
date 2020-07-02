@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Header, Dropdown, Message, Grid } from 'semantic-ui-react'
+import { Header, Dropdown, Message, Button, Icon } from 'semantic-ui-react'
 import find from 'lodash/find'
 import { fetchData } from '../../utils/gsheets'
 import { useTranslation } from 'react-i18next'
-import VehicleImage from './VehicleImage'
-import RadarChart from './RadarChart'
 import { mapAttributeValuesToLevel } from '../../utils/binning'
 import ResultOptions from './ResultOptions'
 import { DEFAULT_USE_CASE } from '../../constants'
 import { useCases } from '../../utils/useCase'
+import downloadSvg, { downloadPng } from 'svg-crowbar'
 // import VEHICLE_PROFILES from '../../data/vehicle_profiles.json'
 
 ResultPage.propTypes = {
@@ -64,7 +63,7 @@ function ResultPage ({ vehicle, setVehicle }) {
   }
 
   return (
-    <div className="box">
+    <div className="App">
       <Header as="h3" dividing>
         {t('resultPage.part1')}
       </Header>
@@ -92,7 +91,7 @@ function ResultPage ({ vehicle, setVehicle }) {
         />
       </div>
 
-      <div className="input-row">
+      {/* <div className="input-row">
         <Dropdown
           className="icon"
           id="use"
@@ -111,29 +110,31 @@ function ResultPage ({ vehicle, setVehicle }) {
           }))}
           onChange={handleDropdownChange}
         />
-      </div>
+        </div> */}
 
       {error && <Message error>{error}</Message>}
       {success && <Message success>{success}</Message>}
 
-      <Grid stackable>
-        <Grid.Row columns={2}>
-          <Grid.Column width={9}>
-            <Grid.Row>
-              {vehicle.name}
-              <VehicleImage vehicle={vehicle} />
-            </Grid.Row>
-            <Grid.Row>
-              <ResultOptions levels={levels} useCase={useCase} />
-            </Grid.Row>
-          </Grid.Column>
-          <Grid.Column width={7}>
-            <RadarChart levels={levels} />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <ResultOptions levels={levels} useCase={useCase} vehicle={vehicle} />
+      <div className="download-buttons">
+        <Button icon labelPosition="left" onClick={savePNG} fluid>
+          <Icon name="download" />
+          {t('description.downloadPNG')}
+        </Button>
+        <Button icon labelPosition="left" onClick={saveSVG} fluid>
+          <Icon name="download" />
+          {t('description.downloadSVG')}
+        </Button>
+      </div>
     </div>
   )
+}
+function saveSVG () {
+  downloadSvg(document.querySelector('svg'), 'vehicle_profile')
+}
+
+function savePNG () {
+  downloadPng(document.querySelector('svg'), 'vehicle_profile')
 }
 
 export default ResultPage

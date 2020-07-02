@@ -1,27 +1,33 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Message } from 'semantic-ui-react'
-import { calculateSummaryIndicator } from '../../utils/summary'
-import { calculateDriverLevelRequired } from '../../utils/driversLicence'
-import { useTranslation } from 'react-i18next'
-
+import { Grid, Segment } from 'semantic-ui-react'
+import { calculateDriverLevelRequired } from '../../utils/driversLicense'
+import { calculateOperatingLevelRequired } from '../../utils/operatingLicense'
+import { calculateDataLevelRequired } from '../../utils/dataRequirement'
+import { calculatePriceRequired } from '../../utils/priceToUse'
+import { calculateSpaceRequired } from '../../utils/spaceAllocation'
+import { calculateSubsidyRequired } from '../../utils/subsidy'
+import VehicleImage from './VehicleImage'
+import RadarChart from './RadarChart'
+import SummaryPolicy from './SummaryPolicy'
+import i18n from '../../i18n'
 ResultOptions.propTypes = {
+  vehicle: PropTypes.shape({
+    image: PropTypes.string,
+    name: PropTypes.string,
+    attributes: PropTypes.objectOf(
+      PropTypes.shape({
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        units: PropTypes.string
+      })
+    )
+  }),
   useCase: PropTypes.objectOf(PropTypes.string),
   levels: PropTypes.objectOf(PropTypes.number)
 }
 
-function DriverLicence (level) {
-  const { t } = useTranslation()
-  const values = Object.values(level)
-  const value = values[0]
-  if (value > 1) {
-    return <p>{t('resultOptions.driverLicense')}</p>
-  }
-  return <p>{t('resultOptions.noDriverLicense')}</p>
-}
-
-function ResultOptions ({ levels, useCase }) {
-  const { t } = useTranslation()
+function ResultOptions ({ levels, useCase, vehicle }) {
+  // const { t } = useTranslation()
   if (!levels) return null
 
   // Require ALL dependent variables to be set
@@ -29,42 +35,36 @@ function ResultOptions ({ levels, useCase }) {
   if (allValues.includes(0)) {
     return null
   }
-  const driverLicence = calculateDriverLevelRequired(levels, useCase)
-  const summary = calculateSummaryIndicator(levels)
-  let message = null
-
-  // Render nothing if there's no summary
-  if (summary === null) {
-    return null
-  }
-
-  if (summary >= 3) {
-    message = (
-      <Message negative>
-        <Message.Header>{t('summary.harmfulSum')}</Message.Header>
-        <p>{t('summary.harmful')}</p>
-      </Message>
-    )
-  } else if (summary < 3 && summary > 2.2) {
-    message = (
-      <Message warning>
-        <Message.Header>{t('summary.lessHarmfulSum')}</Message.Header>
-        <p>{t('summary.lessHarmful')}</p>
-      </Message>
-    )
-  } else if (summary <= 2.2) {
-    message = (
-      <Message positive>
-        <Message.Header>{t('summary.notHarmfulSum')}</Message.Header>
-        <p>{t('summary.notHarmful')}</p>
-      </Message>
-    )
-  }
 
   return (
     <div className="box">
-      <DriverLicence level={driverLicence} />
-      {message}
+      <Grid>
+        <Grid.Row columns={3}>
+          <Grid.Column width={6}>
+            {vehicle.name}
+            <VehicleImage vehicle={vehicle} />
+          </Grid.Column>
+          <Grid.Column width={3} />
+          <Grid.Column width={6}>
+            <RadarChart levels={levels} />
+          </Grid.Column>
+        </Grid.Row>
+
+        {calculateDriverLevelRequired(levels, useCase)}
+        {calculateOperatingLevelRequired(levels, useCase)}
+        {calculateDataLevelRequired(levels)}
+        {calculatePriceRequired(levels, useCase)}
+        {calculateSubsidyRequired(levels, useCase)}
+        <Grid.Row>
+          <Grid.Column textAlign="center">
+            <Segment basic textAlign="center">
+              {i18n.t('resultOptions.streetAllocation')}
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+        {calculateSpaceRequired(levels)}
+      </Grid>
+      <SummaryPolicy levels={levels} />
     </div>
   )
 }
