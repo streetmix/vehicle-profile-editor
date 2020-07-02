@@ -6,6 +6,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import InputPanel from './components/InputPanel/InputPanel'
 import ResultPanel from './components/ResultPanel/ResultPanel'
+import ResultPage from './components/ResultPanel/ResultPage'
 import './App.css'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import {
@@ -51,6 +52,7 @@ function Page () {
   )
 }
 function AppRouter () {
+  const [vehicle, setVehicle] = useState({})
   const { t, i18n } = useTranslation()
   const changeLanguage = lng => {
     i18n.changeLanguage(lng)
@@ -101,7 +103,15 @@ function AppRouter () {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/about" />
+          <Route path="/about">
+            <Grid stackable>
+              <Grid.Row columns={1}>
+                <Grid.Column>
+                  <ResultPage vehicle={vehicle} setVehicle={setVehicle} />
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Route>
           <Route path="/users" />
           <Route path="/">
             <Page />

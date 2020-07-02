@@ -7,6 +7,16 @@
     "downloadPNG": "Download image (PNG)",
     "downloadSVG": "Download vector image (SVG)"
   },
+  "resultPage": {
+    "part1": "Select vehicle",
+    "part2": "Please choose from the drop-down menu at the bottom",
+    "part3": "Retrieving use cases...",
+    "part4": "Select pre-loaded use cases"
+  },
+  "resultOptions": {
+    "driverLicense": "Does require drivers licence",
+    "noDriverLicense": "Does not require drivers licence"
+  },
   "inputPanel": {
     "part1": "Input vehicle attributes",
     "part2": "Please choose from the drop-down menu at the bottom or input specific vehicle attributes.",

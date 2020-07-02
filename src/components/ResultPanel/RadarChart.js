@@ -3,11 +3,10 @@ import PropTypes from 'prop-types'
 import { Button, Icon } from 'semantic-ui-react'
 import Radar from 'react-d3-radar'
 import downloadSvg, { downloadPng } from 'svg-crowbar'
-import { ATTR_TYPE_DEPENDENT } from '../../constants'
 import ATTRIBUTES from '../../data/attributes_numo.json'
 import './RadarChart.css'
-import i18n from '../../i18n'
 import { useTranslation } from 'react-i18next'
+import { attributesToChartLabels } from '../../utils/attributesToLabels'
 
 RadarChart.propTypes = {
   levels: PropTypes.objectOf(PropTypes.number)
@@ -46,15 +45,6 @@ function RadarChart ({ levels }) {
       </div>
     </>
   )
-}
-
-function attributesToChartLabels (attributes) {
-  return attributes
-    .filter(attribute => attribute.type === ATTR_TYPE_DEPENDENT)
-    .map(attribute => ({
-      key: attribute.id,
-      label: i18n.t('attributes:' + attribute.name + '.name')
-    }))
 }
 
 function saveSVG () {
