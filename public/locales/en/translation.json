@@ -7,6 +7,30 @@
     "downloadPNG": "Download image (PNG)",
     "downloadSVG": "Download vector image (SVG)"
   },
+  "resultPage": {
+    "part1": "Select vehicle",
+    "part2": "Please choose from the drop-down menu at the bottom",
+    "part3": "Retrieving use cases...",
+    "part4": "Select pre-loaded use cases"
+  },
+  "resultOptions": {
+    "driverLicense": "Drivers licence",
+    "operatingLicense": "Operating license",
+    "dataRequirements": "Data requirements",
+    "dataQuery": "See data requirements",
+    "price": "Price to use",
+    "priceDetails": "See pricing details",
+    "subsidy": "Eligible for subsidy",
+    "formRequest": "Download form to Request",
+    "streetAllocation": "Street allocation allowance",
+    "sidewalk": "On sidewalk",
+    "nextPUDO": "Next to to curb (PUDO)",
+    "nextMove": "Next to curb (move)",
+    "farMove": "Far from curb (move)",
+    "application": "Download aplication",
+    "seeRequirements": "See requirements",
+    "notNecessary": "Not necessary"
+  },
   "inputPanel": {
     "part1": "Input vehicle attributes",
     "part2": "Please choose from the drop-down menu at the bottom or input specific vehicle attributes.",

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import VehicleImage from './VehicleImage'
 import SummaryPolicy from './SummaryPolicy'
-import RadarChart from './RadarChart'
+import RadarChart from './RadarChart_old'
 import { mapAttributeValuesToLevel } from '../../utils/binning'
 
 ResultPanel.propTypes = {
