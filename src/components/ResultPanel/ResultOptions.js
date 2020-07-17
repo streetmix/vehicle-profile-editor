@@ -28,6 +28,7 @@ ResultOptions.propTypes = {
 
 function ResultOptions ({ levels, useCase, vehicle }) {
   // const { t } = useTranslation()
+
   if (!levels) return null
 
   // Require ALL dependent variables to be set
@@ -65,6 +66,7 @@ function ResultOptions ({ levels, useCase, vehicle }) {
         {calculateSpaceAllocation(levels)}
       </Grid>
       <SummaryPolicy levels={levels} />
+
     </div>
   )
 }

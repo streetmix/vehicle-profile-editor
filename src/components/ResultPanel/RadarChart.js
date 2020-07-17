@@ -4,7 +4,9 @@ import Radar from 'react-d3-radar'
 import ATTRIBUTES from '../../data/attributes_numo.json'
 import './RadarChart.css'
 import { attributesToChartLabels } from '../../utils/attributesToLabels'
+
 import { useTranslation } from 'react-i18next'
+import { attributesToChartLabels } from '../../utils/attributesToLabels'
 
 RadarChart.propTypes = {
   levels: PropTypes.objectOf(PropTypes.number)
