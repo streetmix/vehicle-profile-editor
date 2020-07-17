@@ -1,5 +1,5 @@
 import React, { Suspense, useState } from 'react'
-import { Grid, Divider } from 'semantic-ui-react'
+import { Grid, Divider, Dropdown } from 'semantic-ui-react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import InputPanel from './components/InputPanel/InputPanel'
@@ -7,14 +7,27 @@ import ResultPanel from './components/ResultPanel/ResultPanel'
 import ResultPage from './components/ResultPanel/ResultPage'
 import './App.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import i18n from './i18n'
+import { useTranslation } from 'react-i18next'
 
 // page uses the hook
 function Page () {
   const [vehicle, setVehicle] = useState({})
-  i18n.changeLanguage('eng')
+  const { t, i18n } = useTranslation()
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng)
+  }
   return (
     <div className="App">
+      <Dropdown item text={t('language')}>
+        <Dropdown.Menu>
+          <Dropdown.Item onClick={() => changeLanguage('en')}>
+            English
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => changeLanguage('es')}>
+            Español
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
       <Grid stackable>
         <Grid.Row columns={1}>
           <Grid.Column>

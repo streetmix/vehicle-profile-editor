@@ -1,8 +1,9 @@
 {
   "title": "Periodic Table of Mobility: A policy guidance tool by NUMO",
+  "language": "Language",
   "description": {
-    "part1": "Transaltion in progress",
-    "part2": "Switch language between english and spanish using buttons above.",
+    "part1": "Translation in progress",
+    "part2": "Switch language between English and Spanish using buttons above.",
     "image": "Image",
     "downloadPNG": "Download image (PNG)",
     "downloadSVG": "Download vector image (SVG)"
@@ -14,22 +15,25 @@
     "part4": "Select pre-loaded use cases"
   },
   "resultOptions": {
-    "driverLicense": "Driver's license",
+    "driverLicense": "Driver license",
     "operatingLicense": "Operating license",
     "dataRequirements": "Data requirements",
     "dataQuery": "See data requirements",
     "price": "Price to use",
     "priceDetails": "See pricing details",
     "subsidy": "Eligible for subsidy",
-    "formRequest": "Download form to Request",
+    "formRequest": "Download form ATLANTIS2 to request",
     "streetAllocation": "Street allocation allowance",
     "sidewalk": "On sidewalk",
     "nextPUDO": "Next to to curb (PUDO)",
     "nextMove": "Next to curb (move)",
     "farMove": "Far from curb (move)",
-    "application": "Download aplication",
+    "application": "Download application",
     "seeRequirements": "See requirements",
-    "notNecessary": "Not necessary"
+    "notNecessary": "Not necessary",
+    "none": "None",
+    "loose": "Loose",
+    "strict": "Strict"
   },
   "inputPanel": {
     "part1": "Input vehicle attributes",
@@ -51,7 +55,7 @@
     "minimum": "Minimum",
     "maximum": "Maximum",
     "note": "Note",
-    "noteText": "The thresholds used for this attribute are based on literature and expert feedback collected by NUMO. A future version of this platform will include the ability toadjust these thresholds."
+    "noteText": "The thresholds used for this attribute are based on literature and expert feedback collected by NUMO. A future version of this platform will include the ability to adjust these thresholds."
   },
   "summary": {
     "harmfulSum": "This vehicle may be very harmful",
@@ -60,6 +64,21 @@
     "lessHarmful": "Policies should be aimed at reducing its overall risk. Consider allocating less space for them, requesting some data from operators, or charging some fees to operate.",
     "notHarmfulSum": "This vehicle is not likely to be harmful",
     "notHarmful": "Policies should be aimed at promoting its use. Consider allocating more space to them, don’t request too much data from operators, don’t require a license to operate, and consider subsidizing their usage."
+  },
+  "city": {
+    "title": "Please describe your social goals",
+    "subtitle": "Social goals are helpful to provide recomendations towards transport policies",
+    "pregoals": "Pre-load goals",
+    "defgoals": "Define your own goals (below)",
+    "placeholder1": "Name for goal group",
+    "placeholder2": "Describe your social goals in terms of the main policies you have at the noational, local level and specific policies for transportation.",
+    "part1": "Please rank your priorities for improvement acording to current city policies:",
+    "environment": "Environment",
+    "publicHealth": "Public health",
+    "equity": "Equity",
+    "joyfulness": "Joyfulness",
+    "personalSafety": "Personal safety",
+    "goal1": "Sustainable development goals"
   },
   "header": {
     "title": "Periodic Table of Mobility",
@@ -73,6 +92,7 @@
   },
   "routing": {
     "profiles": "Vehicle profiles",
-    "results": "Archived results"
+    "results": "Policy recommendation",
+    "city": "City priorities"
   }
 }

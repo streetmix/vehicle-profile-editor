@@ -1,8 +1,9 @@
 {
   "title": "Tabla Periódica de Movilidad: una herramienta de NUMO para guiar políticas",
+  "language": "Idioma",
   "description": {
-    "part1": "Traducción en proceso",
-    "part2": "Cambia el idioma entre inglés y español usando los botones localizados arriba.",
+    "part1": "Traducción en progreso",
+    "part2": "Cambie su idioma entre inglés y español usando los botones de arriba",
     "image": "Imagen",
     "downloadPNG": "Descargar imagen (PNG)",
     "downloadSVG": "Descargar imagen vectorial (SVG)"
@@ -14,22 +15,22 @@
     "part4": "Seleccione ejemplos pre-definidos"
   },
   "resultOptions": {
-    "driverLicense": "Drivers licence",
-    "operatingLicense": "Operating license",
-    "dataRequirements": "Data requirements",
-    "dataQuery": "See data requirements",
-    "price": "Price to use",
-    "priceDetails": "See pricing details",
-    "subsidy": "Eligible for subsidy",
-    "formRequest": "Download form to Request",
-    "streetAllocation": "Street allocation allowance",
-    "sidewalk": "On sidewalk",
-    "nextPUDO": "Next to to curb (PUDO)",
-    "nextMove": "Next to curb (move)",
-    "farMove": "Far from curb (move)",
-    "application": "Download aplication",
-    "seeRequirements": "See requirements",
-    "notNecessary": "Not necessary"
+    "driverLicense": "Licencia de conducción",
+    "operatingLicense": "Licencia de operación",
+    "dataRequirements": "Requisitos de datos",
+    "dataQuery": "Ver requisitos de datos",
+    "price": "Precio por usar",
+    "priceDetails": "Ver detalles de preciación",
+    "subsidy": "Clasifica para subsidio",
+    "formRequest": "Descargue el formulario ATLANTIS2 para solicitar",
+    "streetAllocation": "Autorización de espacio en vías",
+    "sidewalk": "Sobre la acera",
+    "nextPUDO": "Al lado del bordillo (dejar y recoger)",
+    "nextMove": "Al lado del bordillo (mover)",
+    "farMove": "Lejos del bordillo (mover)",
+    "application": "Descargar aplicación",
+    "seeRequirements": "Ver requisitos",
+    "notNecessary": "No es necesario"
   },
   "inputPanel": {
     "part1": "Ingrese atributos vehiculares",
@@ -51,7 +52,7 @@
     "minimum": "Mínimo",
     "maximum": "Máximo",
     "note": "Nota",
-    "noteText": "Los umbrales de este atributo se basan en literatura y retroalimentación de expertos recolectado por NUMO. Una versión futura de estas plataforma incluirá la habilidad de ajustar estos umbrales."
+    "noteText": "Los umbrales de este atributo se basan en literatura y retroalimentación de expertos recolectada por NUMO. Una versión futura de estas plataforma incluirá la habilidad de ajustar estos umbrales."
   },
   "summary": {
     "harmfulSum": "Este vehículo puede causar mucho daño",
@@ -73,6 +74,6 @@
   },
   "routing": {
     "profiles": "Perfiles vehiculares",
-    "results": "Resultados archivados"
+    "results": "Recomendación de política"
   }
 }
