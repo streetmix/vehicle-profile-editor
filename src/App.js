@@ -1,22 +1,12 @@
 import React, { Suspense, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Grid, Divider } from 'semantic-ui-react'
-import { ReactComponent as NUMOLogo } from './images/logo_numo.svg'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import InputPanel from './components/InputPanel/InputPanel'
 import ResultPanel from './components/ResultPanel/ResultPanel'
 import ResultPage from './components/ResultPanel/ResultPage'
 import './App.css'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import {
-  Navbar,
-  Nav,
-  NavDropdown,
-  Form,
-  FormControl,
-  Button
-} from 'react-bootstrap'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 // page uses the hook
 function Page () {
@@ -53,53 +43,9 @@ function Page () {
 }
 function AppRouter () {
   const [vehicle, setVehicle] = useState({})
-  const { t, i18n } = useTranslation()
-  const changeLanguage = lng => {
-    i18n.changeLanguage(lng)
-  }
   return (
     <Router>
       <div>
-        <Navbar bg="ligt" expand="lg">
-          <Navbar.Brand href="/">
-            <NUMOLogo
-              style={{
-                height: '2.5em'
-              }}
-            />
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <Nav.Link>
-                <Link to="/">{t('routing.profiles')}</Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/about">{t('routing.results')}</Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/users">Users</Link>
-              </Nav.Link>
-              <NavDropdown title="Language" id="basic-nav-dropdown">
-                <NavDropdown.Item onClick={() => changeLanguage('en')}>
-                  en
-                </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => changeLanguage('es')}>
-                  es
-                </NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-            <Form inline>
-              <FormControl
-                type="text"
-                placeholder="Search"
-                className="mr-sm-2"
-              />
-              <Button variant="outline-success">Search</Button>
-            </Form>
-          </Navbar.Collapse>
-        </Navbar>
-
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
