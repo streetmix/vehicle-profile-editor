@@ -7,6 +7,30 @@
     "downloadPNG": "Descargar imagen (PNG)",
     "downloadSVG": "Descargar imagen vectorial (SVG)"
   },
+  "resultPage": {
+    "part1": "Seleccione un vehículo",
+    "part2": "Por favor elija del menú desplegable abajo",
+    "part3": "Recuperando ejemplos...",
+    "part4": "Seleccione ejemplos pre-definidos"
+  },
+  "resultOptions": {
+    "driverLicense": "Drivers licence",
+    "operatingLicense": "Operating license",
+    "dataRequirements": "Data requirements",
+    "dataQuery": "See data requirements",
+    "price": "Price to use",
+    "priceDetails": "See pricing details",
+    "subsidy": "Eligible for subsidy",
+    "formRequest": "Download form to Request",
+    "streetAllocation": "Street allocation allowance",
+    "sidewalk": "On sidewalk",
+    "nextPUDO": "Next to to curb (PUDO)",
+    "nextMove": "Next to curb (move)",
+    "farMove": "Far from curb (move)",
+    "application": "Download aplication",
+    "seeRequirements": "See requirements",
+    "notNecessary": "Not necessary"
+  },
   "inputPanel": {
     "part1": "Ingrese atributos vehiculares",
     "part2": "Por favor elija del menú desplegable en la parte inferior o ingrese atributos específicos de los vehículos.",
@@ -46,5 +70,9 @@
   "footer": {
     "part1": "Un proyecto de",
     "and": "y"
+  },
+  "routing": {
+    "profiles": "Perfiles vehiculares",
+    "results": "Resultados archivados"
   }
 }

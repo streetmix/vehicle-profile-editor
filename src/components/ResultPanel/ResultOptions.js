@@ -5,7 +5,7 @@ import { calculateDriverLevelRequired } from '../../utils/driversLicense'
 import { calculateOperatingLevelRequired } from '../../utils/operatingLicense'
 import { calculateDataLevelRequired } from '../../utils/dataRequirement'
 import { calculatePriceRequired } from '../../utils/priceToUse'
-import { calculateSpaceRequired } from '../../utils/spaceAllocation'
+import { calculateSpaceAllocation } from '../../utils/spaceAllocation'
 import { calculateSubsidyRequired } from '../../utils/subsidy'
 import VehicleImage from './VehicleImage'
 import RadarChart from './RadarChart'
@@ -62,7 +62,7 @@ function ResultOptions ({ levels, useCase, vehicle }) {
             </Segment>
           </Grid.Column>
         </Grid.Row>
-        {calculateSpaceRequired(levels)}
+        {calculateSpaceAllocation(levels)}
       </Grid>
       <SummaryPolicy levels={levels} />
     </div>

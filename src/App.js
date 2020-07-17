@@ -80,7 +80,7 @@ function AppRouter () {
               <Nav.Link>
                 <Link to="/users">Users</Link>
               </Nav.Link>
-              <NavDropdown title="Locale" id="basic-nav-dropdown">
+              <NavDropdown title="Language" id="basic-nav-dropdown">
                 <NavDropdown.Item onClick={() => changeLanguage('en')}>
                   en
                 </NavDropdown.Item>

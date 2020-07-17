@@ -9,7 +9,7 @@
 import React from 'react'
 import i18n from '../i18n'
 import { Grid, Segment } from 'semantic-ui-react'
-export function calculateSpaceRequired (levels) {
+export function calculateSpaceAllocation (levels) {
   const array = Object.values(levels).filter(Number.isFinite)
   const keys = Object.keys(levels)
   let counter = 0
@@ -136,7 +136,7 @@ export function calculateSpaceRequired (levels) {
           </Segment>
         </Grid.Column>
         <Grid.Column textAlign="center">
-          <Segment basic disabled textAlign="center">
+          <Segment basic textAlign="center">
             {i18n.t('resultOptions.nextPUDO')}
           </Segment>
         </Grid.Column>
