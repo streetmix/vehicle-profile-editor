@@ -7,11 +7,12 @@ import ResultPanel from './components/ResultPanel/ResultPanel'
 import ResultPage from './components/ResultPanel/ResultPage'
 import './App.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import i18n from './i18n'
 
 // page uses the hook
 function Page () {
   const [vehicle, setVehicle] = useState({})
-
+  i18n.changeLanguage('eng')
   return (
     <div className="App">
       <Grid stackable>
