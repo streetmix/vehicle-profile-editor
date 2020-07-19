@@ -6,7 +6,6 @@ import * as serviceWorker from './serviceWorker'
 import 'semantic-ui-css/semantic.min.css'
 import './index.css'
 import './i18n'
-import 'bootstrap/dist/css/bootstrap.min.css'
 Sentry.init({
   dsn: 'https://9bb4132c927040928b7a43610c1bd2f4@sentry.io/1813605'
 })
