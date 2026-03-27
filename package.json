@@ -46,7 +46,7 @@
     "react-i18next": "^11.5.1",
     "react-markdown": "^4.3.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.0",
+    "react-scripts": "5.0.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",
     "svg-crowbar": "github:louh/svg-crowbar#package",
